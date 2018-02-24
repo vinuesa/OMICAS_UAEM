@@ -11,7 +11,7 @@
 
 <meta name="author" content="Pablo Vinuesa" />
 
-<meta name="date" content="2018-02-23" />
+<meta name="date" content="2018-02-24" />
 
 <title>Prácticas del Tema 1: Introducción al biocómputo en sistemas GNU/Linux</title>
 
@@ -36,7 +36,7 @@ if (window.hljs) {
   hljs.configure({languages: []});
   hljs.initHighlightingOnLoad();
   if (document.readyState && document.readyState === "complete") {
-    window.setTimeout(function() { hljs.initHighlightingOnLoad(); }, 0);
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
   }
 }
 </script>
@@ -121,7 +121,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">Prácticas del Tema 1: Introducción al biocómputo en sistemas GNU/Linux</h1>
 <h4 class="author"><em>Pablo Vinuesa</em></h4>
-<h4 class="date"><em>2018-02-23</em></h4>
+<h4 class="date"><em>2018-02-24</em></h4>
 
 </div>
 
@@ -129,7 +129,7 @@ $(document).ready(function () {
 <ul>
 <li><a href="#tema-1.-introduccion-al-biocomputo-en-sistemas-gnulinux"><span class="toc-section-number">1</span> Tema 1. Introducción al biocómputo en sistemas GNU/Linux</a><ul>
 <li><a href="#exploremos-el-sistema-en-el-que-estamos-trabajando"><span class="toc-section-number">1.1</span> Exploremos el sistema en el que estamos trabajando</a><ul>
-<li><a href="#ssh-establecer-sesion-remota-encriptada-segura-via-ssh-al-servidor-ivory"><span class="toc-section-number">1.1.1</span> <strong>ssh</strong> establecer sesion remota encriptada (segura) via ssh al servidor ivory</a></li>
+<li><a href="#ssh-establecer-sesion-remota-encriptada-segura-via-ssh-al-servidor-chichen"><span class="toc-section-number">1.1.1</span> <strong>ssh</strong> establecer sesion remota encriptada (segura) via ssh al servidor chichen</a></li>
 <li><a href="#hostname-muestra-el-nombre-del-host-la-maquina-a-la-que-estoy-conectado-y-la-ip"><span class="toc-section-number">1.1.2</span> <strong>hostname</strong> muestra el nombre del host (la máquina a la que estoy conectado) y la IP</a></li>
 <li><a href="#uname-muestra-el-sistema-operativo-del-host"><span class="toc-section-number">1.1.3</span> <strong>uname</strong> muestra el sistema operativo del host</a></li>
 <li><a href="#variables-de-ambiente-home-path-user"><span class="toc-section-number">1.1.4</span> Variables de ambiente: $HOME $PATH $USER</a></li>
@@ -184,20 +184,20 @@ $(document).ready(function () {
 
 <div id="tema-1.-introduccion-al-biocomputo-en-sistemas-gnulinux" class="section level1">
 <h1><span class="header-section-number">1</span> Tema 1. Introducción al biocómputo en sistemas GNU/Linux</h1>
-<p>Este apunte fue creado para el módulo de Genómica del Curso de OMICAS UAEM por <a href="http://www.ccg.unan.mx/~vinuesa/">Pablo Vinuesa, CCG-UNAM</a></p>
-<p>version: 2018-02-23</p>
+<p>Este apunte fue creado para el [m]ódulo de Genómica del Curso de OMICAS UAEM](<a href="https://vinuesa.github.io/intro2phyloinfo/" class="uri">https://vinuesa.github.io/intro2phyloinfo/</a>) por <a href="http://www.ccg.unan.mx/~vinuesa/">Pablo Vinuesa, CCG-UNAM</a>.</p>
+<p>version: 2018-02-24</p>
 <p>Una vez que domines los comandos básicos que se presentarán seguidamente, recomiendo revisar tutoriales mucho más detallados y completos como los siguientes:</p>
 <ul>
-<li><p><a href="https://tiswww.case.edu/php/chet/bash/bashref.html">Bash Reference Manual</a></p></li>
-<li><p><a href="http://tldp.org/LDP/abs/html/">Advanced Bash Scripting Guide</a></p></li>
+<li><a href="https://tiswww.case.edu/php/chet/bash/bashref.html">Bash Reference Manual</a></li>
+<li><a href="http://tldp.org/LDP/abs/html/">Advanced Bash Scripting Guide</a></li>
 </ul>
 <hr />
 <div id="exploremos-el-sistema-en-el-que-estamos-trabajando" class="section level2">
 <h2><span class="header-section-number">1.1</span> Exploremos el sistema en el que estamos trabajando</h2>
-<div id="ssh-establecer-sesion-remota-encriptada-segura-via-ssh-al-servidor-ivory" class="section level3">
-<h3><span class="header-section-number">1.1.1</span> <strong>ssh</strong> establecer sesion remota encriptada (segura) via ssh al servidor ivory</h3>
+<div id="ssh-establecer-sesion-remota-encriptada-segura-via-ssh-al-servidor-chichen" class="section level3">
+<h3><span class="header-section-number">1.1.1</span> <strong>ssh</strong> establecer sesion remota encriptada (segura) via ssh al servidor chichen</h3>
 <p>Abre un terminal y ejecuta el comando mostrado abajo</p>
-<pre><code>ssh -X $USER 132.248.220.19</code></pre>
+<pre><code>ssh -X $USER@***.***.***.** # la IP se dará a conocer en el salón de clases</code></pre>
 </div>
 <div id="hostname-muestra-el-nombre-del-host-la-maquina-a-la-que-estoy-conectado-y-la-ip" class="section level3">
 <h3><span class="header-section-number">1.1.2</span> <strong>hostname</strong> muestra el nombre del host (la máquina a la que estoy conectado) y la IP</h3>
@@ -220,7 +220,7 @@ echo &quot;$USER&quot;</code></pre>
 <pre><code>## vinuesa</code></pre>
 <pre class="bash"><code># imprime el contenido de la variable de ambiente $PATH
 echo &quot;$PATH&quot;</code></pre>
-<pre><code>## /home/vinuesa/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/lib/jvm/java-8-oracle/bin:/usr/lib/jvm/java-8-oracle/db/bin:/usr/lib/jvm/java-8-oracle/jre/bin:/home/vinuesa/bin:/usr/local/biotools/bin:/usr/local/biotools/dna2pep-1.1:/usr/local/biotools/readseqd:/usr/local/biotools/phylip3.67/exe:/usr/local/genome/bin:/usr/local/genome/lib:/home/vinuesa/src/rnammer1.2:/home/vinuesa/src/signalp-4.1:/home/vinuesa/software_dwnld/get_homologues-x86_64-20180103:/opt/cuda/bin:/home/vinuesa/src/apache-ant-1.9.7</code></pre>
+<pre><code>## /home/vinuesa/Software_downloads/apache-ant-1.9.6:/usr/lib/jvm/java-8-oracle/jre/bin/java:/home/vinuesa/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/local/biotools/bin:/usr/local/biotools/bin/Snap:/usr/local/biotools/phylip-3.69/exe:/usr/local/biotools/FigTree.v1.2.3:/usr/local/biotools/dna2pep-1.1:/usr/local/biotools/arb/bin:/usr/local/genome/bin:/usr/local/genome/lib:/usr/local/biotools/BLOCKS3.7_software/blimps3.7/blimps-3.7/bin/linux:/home/vinuesa/Software_downloads/rnammer-1.2:/home/vinuesa/Software_downloads/signalp-4.1:/home/vinuesa/Software_downloads/graphlan:/home/vinuesa/Software_downloads/prokka-1.8/bin:/home/vinuesa/Software_downloads/CompGenomics/mugsy_x86-64-v1r2.2:/home/vinuesa/Software_downloads/CompGenomics/MUMmer3.23:/home/vinuesa/Software_downloads/genome_Assembly/GapFiller_v1-11_linux-x86_64:/home/vinuesa/Software_downloads/barrnap-0.3:/home/vinuesa/Software_downloads/circos/current/bin:/usr/local/Bioperl_Scripts:/home/vinuesa/Software_downloads/guidance.v1.01/www/Guidance:/home/vinuesa/Software_downloads/GenePred_GenomeAnnot/AutoFACT/scripts:/home/vinuesa/Software_downloads/get_homologues-x86_64-20171023:/home/vinuesa/Software_downloads/CompGenomics/mugsy_x86-64-v1r2.2:/home/vinuesa/Software_downloads/CompGenomics/mugsy_x86-64-v1r2.2/mapping:/home/vinuesa/Software_downloads/CompGenomics/cgview_comparison_tool/scripts:/usr/bin</code></pre>
 </div>
 </div>
 <div id="exploracion-el-sistema-de-archivos" class="section level2">
@@ -243,14 +243,20 @@ ls -a</code></pre>
 <pre class="bash"><code>ls /</code></pre>
 <pre><code>## bin
 ## boot
+## build
 ## cdrom
+## C:\nppdf32Log\debuglog.txt
+## core
 ## dev
 ## etc
 ## home
 ## initrd.img
 ## initrd.img.old
 ## lib
+## lib32
 ## lib64
+## libnss3.so
+## libx32
 ## lost+found
 ## media
 ## mnt
@@ -272,6 +278,7 @@ ls -a</code></pre>
 <h3><span class="header-section-number">1.2.3</span> Veamos el contenido del directorio /bin usando el comodín ’*’</h3>
 <pre class="bash"><code>ls /bin/* | head -20</code></pre>
 <pre><code>## /bin/bash
+## /bin/bsd-csh
 ## /bin/bunzip2
 ## /bin/busybox
 ## /bin/bzcat
@@ -289,54 +296,53 @@ ls -a</code></pre>
 ## /bin/chacl
 ## /bin/chgrp
 ## /bin/chmod
-## /bin/chown
-## /bin/chvt</code></pre>
+## /bin/chown</code></pre>
 <pre class="bash"><code># idem, pero con detalles de permisos etc de los archivos contenidos en /bin
 
 ls -l /bin/* | head -20 </code></pre>
-<pre><code>## -rwxr-xr-x 1 root root 1037528 may 16  2017 /bin/bash
-## -rwxr-xr-x 1 root root   31288 may 20  2015 /bin/bunzip2
-## -rwxr-xr-x 1 root root 1964536 ago 19  2015 /bin/busybox
-## -rwxr-xr-x 1 root root   31288 may 20  2015 /bin/bzcat
-## lrwxrwxrwx 1 root root       6 jun  5  2017 /bin/bzcmp -&gt; bzdiff
-## -rwxr-xr-x 1 root root    2140 may 20  2015 /bin/bzdiff
-## lrwxrwxrwx 1 root root       6 jun  5  2017 /bin/bzegrep -&gt; bzgrep
-## -rwxr-xr-x 1 root root    4877 may 20  2015 /bin/bzexe
-## lrwxrwxrwx 1 root root       6 jun  5  2017 /bin/bzfgrep -&gt; bzgrep
-## -rwxr-xr-x 1 root root    3642 may 20  2015 /bin/bzgrep
-## -rwxr-xr-x 1 root root   31288 may 20  2015 /bin/bzip2
-## -rwxr-xr-x 1 root root   14616 may 20  2015 /bin/bzip2recover
-## lrwxrwxrwx 1 root root       6 jun  5  2017 /bin/bzless -&gt; bzmore
-## -rwxr-xr-x 1 root root    1297 may 20  2015 /bin/bzmore
-## -rwxr-xr-x 1 root root   52080 mar  2  2017 /bin/cat
-## -rwxr-xr-x 1 root root   14752 feb  7  2016 /bin/chacl
-## -rwxr-xr-x 1 root root   60272 mar  2  2017 /bin/chgrp
-## -rwxr-xr-x 1 root root   56112 mar  2  2017 /bin/chmod
-## -rwxr-xr-x 1 root root   64368 mar  2  2017 /bin/chown
-## -rwxr-xr-x 1 root root   10536 sep 22  2016 /bin/chvt</code></pre>
+<pre><code>## -rwxr-xr-x 1 root root 1037528 May 16  2017 /bin/bash
+## -rwxr-xr-x 1 root root  150792 Aug 21  2014 /bin/bsd-csh
+## -rwxr-xr-x 3 root root   31288 May 20  2015 /bin/bunzip2
+## -rwxr-xr-x 1 root root 1964536 Aug 19  2015 /bin/busybox
+## -rwxr-xr-x 3 root root   31288 May 20  2015 /bin/bzcat
+## lrwxrwxrwx 1 root root       6 May 20  2015 /bin/bzcmp -&gt; bzdiff
+## -rwxr-xr-x 1 root root    2140 May 20  2015 /bin/bzdiff
+## lrwxrwxrwx 1 root root       6 May 20  2015 /bin/bzegrep -&gt; bzgrep
+## -rwxr-xr-x 1 root root    4877 May 20  2015 /bin/bzexe
+## lrwxrwxrwx 1 root root       6 May 20  2015 /bin/bzfgrep -&gt; bzgrep
+## -rwxr-xr-x 1 root root    3642 May 20  2015 /bin/bzgrep
+## -rwxr-xr-x 3 root root   31288 May 20  2015 /bin/bzip2
+## -rwxr-xr-x 1 root root   14616 May 20  2015 /bin/bzip2recover
+## lrwxrwxrwx 1 root root       6 May 20  2015 /bin/bzless -&gt; bzmore
+## -rwxr-xr-x 1 root root    1297 May 20  2015 /bin/bzmore
+## -rwxr-xr-x 1 root root   52080 Mar  2  2017 /bin/cat
+## -rwxr-xr-x 1 root root   14752 Feb  7  2016 /bin/chacl
+## -rwxr-xr-x 1 root root   60272 Mar  2  2017 /bin/chgrp
+## -rwxr-xr-x 1 root root   56112 Mar  2  2017 /bin/chmod
+## -rwxr-xr-x 1 root root   64368 Mar  2  2017 /bin/chown</code></pre>
 <pre class="bash"><code># idem, pero ordenando los archivos por fechas de modificacion (-t), listando los mas recientes al final (-r), es decir, en orden reverso
 ls -ltr /bin/* | head -20
 </code></pre>
-<pre><code>## -rwxr-xr-x 1 root root   31248 dic  3  2012 /bin/nc.openbsd
-## -rwxr-xr-x 1 root root      89 abr 26  2014 /bin/red
-## -rwxr-xr-x 1 root root   51512 abr 26  2014 /bin/ed
-## -rwsr-xr-x 1 root root   44680 may  7  2014 /bin/ping6
-## -rwsr-xr-x 1 root root   44168 may  7  2014 /bin/ping
-## -rwxr-xr-x 1 root root  119624 jun 30  2014 /bin/netstat
-## -rwxr-xr-x 1 root root    5047 oct 27  2014 /bin/znew
-## -rwxr-xr-x 1 root root    1910 oct 27  2014 /bin/zmore
-## -rwxr-xr-x 1 root root    2037 oct 27  2014 /bin/zless
-## -rwxr-xr-x 1 root root    5938 oct 27  2014 /bin/zgrep
-## -rwxr-xr-x 1 root root    2131 oct 27  2014 /bin/zforce
-## -rwxr-xr-x 1 root root     140 oct 27  2014 /bin/zfgrep
-## -rwxr-xr-x 1 root root     140 oct 27  2014 /bin/zegrep
-## -rwxr-xr-x 1 root root    5764 oct 27  2014 /bin/zdiff
-## -rwxr-xr-x 1 root root    1777 oct 27  2014 /bin/zcmp
-## -rwxr-xr-x 1 root root    1937 oct 27  2014 /bin/zcat
-## -rwxr-xr-x 1 root root    2301 oct 27  2014 /bin/uncompress
-## -rwxr-xr-x 1 root root    5927 oct 27  2014 /bin/gzexe
-## -rwxr-xr-x 1 root root    2301 oct 27  2014 /bin/gunzip
-## -rwxr-xr-x 1 root root   98240 oct 27  2014 /bin/gzip</code></pre>
+<pre><code>## lrwxrwxrwx 1 root root      20 Oct 16  2011 /bin/mt -&gt; /etc/alternatives/mt
+## lrwxrwxrwx 1 root root      24 Oct 16  2011 /bin/netcat -&gt; /etc/alternatives/netcat
+## lrwxrwxrwx 1 root root      20 Oct 16  2011 /bin/nc -&gt; /etc/alternatives/nc
+## lrwxrwxrwx 1 root root      21 Sep 21  2012 /bin/csh -&gt; /etc/alternatives/csh
+## -rwxr-xr-x 1 root root   31248 Dec  3  2012 /bin/nc.openbsd
+## -rwxr-xr-x 1 root root      89 Apr 26  2014 /bin/red
+## -rwxr-xr-x 1 root root   51512 Apr 26  2014 /bin/ed
+## -rwsr-xr-x 1 root root   44680 May  7  2014 /bin/ping6
+## -rwsr-xr-x 1 root root   44168 May  7  2014 /bin/ping
+## -rwxr-xr-x 1 root root  119624 Jun 30  2014 /bin/netstat
+## -rwxr-xr-x 1 root root  150792 Aug 21  2014 /bin/bsd-csh
+## -rwxr-xr-x 1 root root    5047 Oct 27  2014 /bin/znew
+## -rwxr-xr-x 1 root root    1910 Oct 27  2014 /bin/zmore
+## -rwxr-xr-x 1 root root    2037 Oct 27  2014 /bin/zless
+## -rwxr-xr-x 1 root root    5938 Oct 27  2014 /bin/zgrep
+## -rwxr-xr-x 1 root root    2131 Oct 27  2014 /bin/zforce
+## -rwxr-xr-x 1 root root     140 Oct 27  2014 /bin/zfgrep
+## -rwxr-xr-x 1 root root     140 Oct 27  2014 /bin/zegrep
+## -rwxr-xr-x 1 root root    5764 Oct 27  2014 /bin/zdiff
+## -rwxr-xr-x 1 root root    1777 Oct 27  2014 /bin/zcmp</code></pre>
 </div>
 <div id="expansion-de-caracteres-con-y" class="section level3">
 <h3><span class="header-section-number">1.2.4</span> expansión de caracteres con * y ?</h3>
@@ -345,6 +351,7 @@ ls /bin/b*
 ls /bin/c*
 </code></pre>
 <pre><code>## /bin/bash
+## /bin/bsd-csh
 ## /bin/bunzip2
 ## /bin/busybox
 ## /bin/bzcat
@@ -365,12 +372,14 @@ ls /bin/c*
 ## /bin/chown
 ## /bin/chvt
 ## /bin/cp
-## /bin/cpio</code></pre>
+## /bin/cpio
+## /bin/csh</code></pre>
 <pre class="bash"><code># lista los archivos en /bin que empiezan por la letra c seguida de uno o dos caracteres más
 ls /bin/c?
 ls /bin/c??</code></pre>
 <pre><code>## /bin/cp
-## /bin/cat</code></pre>
+## /bin/cat
+## /bin/csh</code></pre>
 <!-- ### >>> AVANZADO -->
 <!--  ahora con un bucle for, con la sintaxis: [for ALIAS in LIST; do YOUR_CODE; done] -->
 <!-- for letter in b c d e f; do echo ">>> $letter"; ls /bin/${letter}*; echo '--------------'; done -->
@@ -436,36 +445,35 @@ fi
 <li>comprueba los <strong>permisos</strong> del nuevo directorio</li>
 </ul>
 <pre class="bash"><code>ls -l</code></pre>
-<pre><code>## total 2812
-## -rw-rw-r-- 1 vinuesa vinuesa      78 feb 23 11:18 administration.cmds
-## -rw-rw-r-- 1 vinuesa vinuesa     492 feb 23 11:18 Batch.cmds
-## -rw-rw-r-- 1 vinuesa vinuesa      75 feb 23 11:18 Category.cmds
-## -rw-rw-r-- 1 vinuesa vinuesa    2835 feb 23 11:18 C.cmds
-## -rw-rw-r-- 1 vinuesa vinuesa    1814 feb 23 11:18 Filesystem.cmds
-## -rw-rw-r-- 1 vinuesa vinuesa    1814 feb 23 12:15 Filesystem_commands.tab
-## -rw-rw-r-- 1 vinuesa vinuesa      54 feb 23 11:18 FORTRAN77.cmds
-## -rw-rw-r-- 1 vinuesa vinuesa    2346 feb 23 11:18 grep
-## drwxrwxr-x 3 vinuesa vinuesa    4096 feb 23 11:20 intro2genomics
-## drwxrwxr-x 2 vinuesa vinuesa    4096 feb 23 12:00 intro2linux
-## -rw-rw-r-- 1 vinuesa vinuesa 1598266 feb 23 11:18 intro_biocomputo_Linux_pt1.odp
-## -rw-rw-r-- 1 vinuesa vinuesa   10193 feb 23 11:18 linux_commands.tab
-## -rw-rw-r-- 1 vinuesa vinuesa    1705 feb 23 11:18 linux_very_basic_commands_table.csv
-## -rw-rw-r-- 1 vinuesa vinuesa    1042 feb 23 11:18 management.cmds
-## -rw-rw-r-- 1 vinuesa vinuesa    2133 feb 23 11:18 Misc.cmds
-## -rw-rw-r-- 1 vinuesa vinuesa     215 feb 23 11:18 Network.cmds
-## -rw-rw-r-- 1 vinuesa vinuesa    1138 feb 23 11:18 Process.cmds
-## -rw-rw-r-- 1 vinuesa vinuesa    2000 feb 23 11:18 processing.cmds
-## -rw-rw-r-- 1 vinuesa vinuesa      81 feb 23 11:18 programming (Case Conflict).cmds
-## -rw-rw-r-- 1 vinuesa vinuesa    1735 feb 23 11:18 programming.cmds
-## -rw-rw-r-- 1 vinuesa vinuesa     528 feb 23 11:18 SCCS.cmds
-## -rw-rw-r-- 1 vinuesa vinuesa    1038 feb 23 11:18 Shell.cmds
-## -rw-rw-r-- 1 vinuesa vinuesa    1394 feb 23 11:18 System.cmds
-## -rw-rw-r-- 1 vinuesa vinuesa    2000 feb 23 11:18 Text.cmds
-## -rw-rw-r-- 1 vinuesa vinuesa     567 feb 23 11:18 utilities.cmds
-## -rw-rw-r-- 1 vinuesa vinuesa    6047 feb 23 11:18 working_with_linux_commands.code
-## -rw-rw-r-- 1 vinuesa vinuesa  781253 feb 23 12:05 working_with_linux_commands.html
-## -rw-rw-r-- 1 vinuesa vinuesa  247861 feb 23 12:15 working_with_linux_commands.pdf
-## -rw-rw-r-- 1 vinuesa vinuesa   11782 feb 23 12:15 working_with_linux_commands.Rmd</code></pre>
+<pre><code>## total 1256
+## -rw-rw-r-- 1 vinuesa vinuesa     78 Feb 23 11:18 administration.cmds
+## -rw-rw-r-- 1 vinuesa vinuesa    492 Feb 23 11:18 Batch.cmds
+## -rw-rw-r-- 1 vinuesa vinuesa     75 Feb 23 11:18 Category.cmds
+## -rw-rw-r-- 1 vinuesa vinuesa   2835 Feb 23 11:18 C.cmds
+## -rw-rw-r-- 1 vinuesa vinuesa   1814 Feb 23 11:18 Filesystem.cmds
+## -rw-rw-r-- 1 vinuesa vinuesa   1814 Feb 24 12:24 Filesystem_commands.tab
+## -rw-rw-r-- 1 vinuesa vinuesa     54 Feb 23 11:18 FORTRAN77.cmds
+## -rw-rw-r-- 1 vinuesa vinuesa   2346 Feb 23 11:18 grep
+## drwxrwxr-x 3 vinuesa vinuesa   4096 Feb 24 12:24 intro2genomics
+## drwxrwxr-x 2 vinuesa vinuesa   4096 Feb 24 12:24 intro2linux
+## -rw-rw-r-- 1 vinuesa vinuesa  10193 Feb 23 11:18 linux_commands.tab
+## -rw-rw-r-- 1 vinuesa vinuesa   1705 Feb 23 11:18 linux_very_basic_commands_table.csv
+## -rw-rw-r-- 1 vinuesa vinuesa   1042 Feb 23 11:18 management.cmds
+## -rw-rw-r-- 1 vinuesa vinuesa   2133 Feb 23 11:18 Misc.cmds
+## -rw-rw-r-- 1 vinuesa vinuesa    215 Feb 23 11:18 Network.cmds
+## -rw-rw-r-- 1 vinuesa vinuesa   1138 Feb 23 11:18 Process.cmds
+## -rw-rw-r-- 1 vinuesa vinuesa   2000 Feb 23 11:18 processing.cmds
+## -rw-rw-r-- 1 vinuesa vinuesa     81 Feb 23 11:18 programming (Case Conflict).cmds
+## -rw-rw-r-- 1 vinuesa vinuesa   1735 Feb 23 11:18 programming.cmds
+## -rw-rw-r-- 1 vinuesa vinuesa    528 Feb 23 11:18 SCCS.cmds
+## -rw-rw-r-- 1 vinuesa vinuesa   1038 Feb 23 11:18 Shell.cmds
+## -rw-rw-r-- 1 vinuesa vinuesa   1394 Feb 23 11:18 System.cmds
+## -rw-rw-r-- 1 vinuesa vinuesa   2000 Feb 23 11:18 Text.cmds
+## -rw-rw-r-- 1 vinuesa vinuesa    567 Feb 23 11:18 utilities.cmds
+## -rw-rw-r-- 1 vinuesa vinuesa   6047 Feb 23 11:18 working_with_linux_commands.code
+## -rw-rw-r-- 1 vinuesa vinuesa 783624 Feb 24 12:24 working_with_linux_commands.html
+## -rw-rw-r-- 1 vinuesa vinuesa 247861 Feb 23 12:15 working_with_linux_commands.pdf
+## -rw-rw-r-- 1 vinuesa vinuesa  11981 Feb 24 12:24 working_with_linux_commands.Rmd</code></pre>
 <ul>
 <li>generemos un subdirectorio por debajo del que acabamos de crear:</li>
 </ul>
@@ -493,6 +501,9 @@ cp /home/vinuesa/cursos/intro2genomics/sesion1_linux/data/linux_basic_commands.t
 </ul>
 <pre><code># Noten el punto '.' y cp -r (recursively), necesario para copiar directorios completos
 cp -r /home/vinuesa/cursos/intro2genomics/sesion1_linux/data . </code></pre>
+<ul>
+<li>ejercicio: cómo veo los contenidos del directorio data que acabo de copiar a mi directorio actual?</li>
+</ul>
 <div id="generar-un-directorio-mover-un-archivo-a-un-directorio-y-borrar-un-directorio-rm--rf-recursively-and-force" class="section level3">
 <h3><span class="header-section-number">1.5.1</span> generar un directorio, mover un archivo a un directorio, y borrar un directorio (rm -rf; recursively and force)</h3>
 <pre class="bash"><code>mkdir borrame
@@ -654,7 +665,7 @@ cut -f2 linux_commands.tab | sort | uniq -c
 <h3><span class="header-section-number">1.8.3</span> <strong>man</strong> despliega el manual de cada comando</h3>
 <pre class="bash"><code># mira las opciones de cut y sort en la manpage
 man cut | head -30</code></pre>
-<pre><code>## CUT(1)                                                                              User Commands                                                                              CUT(1)
+<pre><code>## CUT(1)                                                                             User Commands                                                                             CUT(1)
 ## 
 ## NAME
 ##        cut - remove sections from each line of files
@@ -685,7 +696,7 @@ man cut | head -30</code></pre>
 ## 
 ##        --complement</code></pre>
 <pre class="bash"><code>man sort | head -20</code></pre>
-<pre><code>## SORT(1)                                                                             User Commands                                                                             SORT(1)
+<pre><code>## SORT(1)                                                                            User Commands                                                                            SORT(1)
 ## 
 ## NAME
 ##        sort - sort lines of text files
@@ -733,6 +744,7 @@ ls /bin/b*
 ls /bin/c*
 </code></pre>
 <pre><code>## /bin/bash
+## /bin/bsd-csh
 ## /bin/bunzip2
 ## /bin/busybox
 ## /bin/bzcat
@@ -753,12 +765,14 @@ ls /bin/c*
 ## /bin/chown
 ## /bin/chvt
 ## /bin/cp
-## /bin/cpio</code></pre>
+## /bin/cpio
+## /bin/csh</code></pre>
 <pre class="bash"><code># lista los archivos en /bin que empiezan por la letra c seguida de uno o dos caracteres más
 ls /bin/c?
 ls /bin/c??</code></pre>
 <pre><code>## /bin/cp
-## /bin/cat</code></pre>
+## /bin/cat
+## /bin/csh</code></pre>
 <!-- ### >>> AVANZADO -->
 <!--  ahora con un bucle for, con la sintaxis: [for ALIAS in LIST; do YOUR_CODE; done] -->
 <!-- for letter in b c d e f; do echo ">>> $letter"; ls /bin/${letter}*; echo '--------------'; done -->
