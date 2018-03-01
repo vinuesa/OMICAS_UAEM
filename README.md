@@ -31,7 +31,7 @@ Las clases se imparten en el sal&oacute;n 3 de la [LCG-UNAM](http://www.lcg.unam
 El  m&oacute;dulo consta de tres temas. Cada uno tiene su bloque de teor&iacute;a y pr&aacute;cticas asociadas:
 
 1. Introducci&oacute;n al bioc&oacute;mputo en sistemas GNU/Linux [presentaci&oacute;n - PDF](https://github.com/vinuesa/intro2phyloinfo/tree/master/docs/Intro2biocomputo_sistemas_en_sistemas_UNIX-Linux.pdf)
-2. Gen&oacute;mica comparativa y pan-gen&oacute;mica
+2. Gen&oacute;mica comparativa y pan-gen&oacute;mica [presentaci&oacute;n - PDF](https://github.com/vinuesa/intro2phyloinfo/tree/master/docs/introduccion_a_la_pangenomica_microbiana_OMICAS-UAEM_Mar18.pdf)
  + prácticas con [GET_HOMOLOGUES](https://github.com/eead-csic-compbio/get_homologues)
 3. Filogen&oacute;mica y estructura filogenética del pan-genoma
  +  prácticas con [GET_PHYLOMARKERS](https://github.com/vinuesa/get_phylomarkers)
