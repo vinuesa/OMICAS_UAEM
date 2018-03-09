@@ -42,7 +42,7 @@ Creative Commons](https://creativecommons.org/).
 ### Tema 1: Introducci&oacute;n al bioc&oacute;mputo en sistemas GNU/Linux (23-02-2018)
 
 Dado que generalmente el trabajo en genómica se realiza en servidores UNIX o GNU/Linux de alto rendimiento, 
-es esencial familiarizarse con este ambiente de cómputo al inicio de la formación académica. 
+es esencial familiarizarse con este ambiente de c&oacute;mputo al inicio de la formaci&oacute;n acad&eacute;mica. 
 En consecuencia:
 
 - todas las prácticas asociadas a este módulo se realizan en un servidor GNU/Linux
@@ -56,4 +56,5 @@ En consecuencia:
 - [pr&aacute;ctica2 - html](https://vinuesa.github.io/intro2phyloinfo/practica2_parseo_fastas/)
 - [pr&aacute;ctica2 - pdf](https://github.com/vinuesa/intro2phyloinfo/tree/master/docs/practica2_parseo_fastas/ejercicio_parseo_fastas_ENTREZ.pdf)
 
-
+#### Pr&aacute;ctica 3. Introducci&oacute;n a la inferencia filogen&oacute;mica usando GET_PHYLOMARKERS
+- [pr&aacute;ctica1 - html](https://vinuesa.github.io/get_phylomarkers/)
