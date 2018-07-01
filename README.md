@@ -30,8 +30,8 @@ Las clases se imparten en el sal&oacute;n 3 de la [LCG-UNAM](http://www.lcg.unam
 
 El  m&oacute;dulo consta de tres temas. Cada uno tiene su bloque de teor&iacute;a y pr&aacute;cticas asociadas:
 
-1. Introducci&oacute;n al bioc&oacute;mputo en sistemas GNU/Linux [presentaci&oacute;n - PDF](https://github.com/vinuesa/intro2phyloinfo/tree/master/docs/Intro2biocomputo_sistemas_en_sistemas_UNIX-Linux.pdf)
-2. Gen&oacute;mica comparativa y pan-gen&oacute;mica [presentaci&oacute;n - PDF](https://github.com/vinuesa/intro2phyloinfo/tree/master/docs/introduccion_a_la_pangenomica_microbiana_OMICAS-UAEM_Mar18.pdf)
+1. Introducci&oacute;n al bioc&oacute;mputo en sistemas GNU/Linux [presentaci&oacute;n - PDF](https://github.com/vinuesa/OMICAS_UAEM/tree/master/docs/Intro2biocomputo_sistemas_en_sistemas_UNIX-Linux.pdf)
+2. Gen&oacute;mica comparativa y pan-gen&oacute;mica [presentaci&oacute;n - PDF](https://github.com/vinuesa/OMICAS_UAEM/tree/master/docs/introduccion_a_la_pangenomica_microbiana_OMICAS-UAEM_Mar18.pdf)
  + prácticas con [GET_HOMOLOGUES](https://github.com/eead-csic-compbio/get_homologues) [tutorial html](http://eead-csic-compbio.github.io/get_homologues/manual/manual.html)
 3. Filogen&oacute;mica y estructura filogenética del pan-genoma
  +  prácticas con [GET_PHYLOMARKERS](https://github.com/vinuesa/get_phylomarkers)
@@ -49,12 +49,12 @@ En consecuencia:
 - iniciamos el módulo aprendiendo Linux
 
 #### Pr&aacute;ctica 1. Primer contacto con un sistema GNU/Linux
-- [pr&aacute;ctica1 - html](https://vinuesa.github.io/intro2phyloinfo/intro2linux/)
-- [pr&aacute;ctica1 - pdf](https://github.com/vinuesa/intro2phyloinfo/tree/master/docs/intro2linux/working_with_linux_commands.pdf)
+- [pr&aacute;ctica1 - html](https://vinuesa.github.io/OMICAS_UAEM/intro2linux/)
+- [pr&aacute;ctica1 - pdf](https://github.com/vinuesa/OMICAS_UAEM/tree/master/docs/intro2linux/working_with_linux_commands.pdf)
 
 #### Pr&aacute;ctica 2. Descarga de secuencias en formato FASTA de GenBank usando el sistema ENTREZ y parseo de los archivos usando herrramientas de filtrado
-- [pr&aacute;ctica2 - html](https://vinuesa.github.io/intro2phyloinfo/practica2_parseo_fastas/)
-- [pr&aacute;ctica2 - pdf](https://github.com/vinuesa/intro2phyloinfo/tree/master/docs/practica2_parseo_fastas/ejercicio_parseo_fastas_ENTREZ.pdf)
+- [pr&aacute;ctica2 - html](https://vinuesa.github.io/OMICAS_UAEM/practica2_parseo_fastas/)
+- [pr&aacute;ctica2 - pdf](https://github.com/vinuesa/OMICAS_UAEM/tree/master/docs/practica2_parseo_fastas/ejercicio_parseo_fastas_ENTREZ.pdf)
 
 #### Pr&aacute;ctica 3. Introducci&oacute;n a la inferencia filogen&oacute;mica usando GET_PHYLOMARKERS
 - [pr&aacute;ctica1 - html](https://vinuesa.github.io/get_phylomarkers/)
