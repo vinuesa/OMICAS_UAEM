@@ -2,8 +2,10 @@
 
 ## Ediciones del m&oacute;dulo de Gen&oacute;mica
 
-1. Octubre-Noviembre 2017
-1. Febrero-Marzo 2018
+- 1a. Octubre-Noviembre 2017
+- 2a. Febrero-Marzo 2018
+- 3a. Octubre-Noviembre 2018
+- 4a. Febrero-Marzo 2019
 
 Esta es la segunda edición impartida, pero la primera con el matrial did&aacute;ctico 
 distributido p&uacute;blicamente a trav&eacute;s de GitHub.
@@ -22,7 +24,7 @@ integran la genómica y la bioinformática con la biología y genética molecula
 la evolución y emergencia de patógenos oportunistas a partir de microbios ambientales.
 
 ### ¿Dónde se dan las clases?
-Las clases se imparten en el sal&oacute;n 3 de la [LCG-UNAM](http://www.lcg.unam.mx), de 13 a 16 hrs, en los d&iacute;as indicados abajo.
+Las clases se imparten en el sal&oacute;n 3 de la [LCG-UNAM](http://www.lcg.unam.mx), de 14 a 18 hrs, en los d&iacute;as indicados abajo.
 
 ***
 
@@ -39,7 +41,7 @@ El  m&oacute;dulo consta de tres temas. Cada uno tiene su bloque de teor&iacute;
 Desde este sitio se distribuyen los materiales did&aacute;cticos bajo la [licencia de
 Creative Commons](https://creativecommons.org/).
 
-### Tema 1: Introducci&oacute;n al bioc&oacute;mputo en sistemas GNU/Linux (23-02-2018)
+### Tema 1: Introducci&oacute;n al bioc&oacute;mputo en sistemas GNU/Linux (22-02-2019)
 
 Dado que generalmente el trabajo en genómica se realiza en servidores UNIX o GNU/Linux de alto rendimiento, 
 es esencial familiarizarse con este ambiente de c&oacute;mputo al inicio de la formaci&oacute;n acad&eacute;mica. 
@@ -56,5 +58,13 @@ En consecuencia:
 - [pr&aacute;ctica2 - html](https://vinuesa.github.io/OMICAS_UAEM/practica2_parseo_fastas/)
 - [pr&aacute;ctica2 - pdf](https://github.com/vinuesa/OMICAS_UAEM/tree/master/docs/practica2_parseo_fastas/ejercicio_parseo_fastas_ENTREZ.pdf)
 
+
+### Tema 2:  Cómputo de homólogos a escala genómica y análisis de pan-genomas microbianos con GET_HOMOLOGUES (01-03-2019)
+
+#### Pr&aacute;ctica 2. Introducci&oacute;n a la pangenómica microbiana usando GET_HOMOLOGUES
+- [pr&aacute;ctica1 GET_HOMOLOGUES - html](https://vinuesa.github.io/get_phylomarkers/)
+
+### Tema 3: Aplicaciones de Filogenómica en el análisis evolutivo de fenotipos (resistencia, virulencia) y estima de filogenias genómicas con GET_PHYLOMARKERS (08-03-2019)
+
 #### Pr&aacute;ctica 3. Introducci&oacute;n a la inferencia filogen&oacute;mica usando GET_PHYLOMARKERS
-- [pr&aacute;ctica1 - html](https://vinuesa.github.io/get_phylomarkers/)
+- [pr&aacute;ctica2 GET_PHYLOMARKERS - html](https://vinuesa.github.io/get_phylomarkers/)
