@@ -11,7 +11,7 @@
 
 <meta name="author" content="Pablo Vinuesa" />
 
-<meta name="date" content="2018-02-24" />
+<meta name="date" content="2019-02-21" />
 
 <title>Prácticas del Tema 1: Introducción al biocómputo en sistemas GNU/Linux</title>
 
@@ -92,8 +92,14 @@ img {
 .tabbed-pane {
   padding-top: 12px;
 }
+.html-widget {
+  margin-bottom: 20px;
+}
 button.code-folding-btn:focus {
   outline: none;
+}
+summary {
+  display: list-item;
 }
 </style>
 
@@ -102,14 +108,74 @@ button.code-folding-btn:focus {
 <div class="container-fluid main-container">
 
 <!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
 <script>
 $(document).ready(function () {
   window.buildTabsets("TOC");
 });
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
 </script>
 
 <!-- code folding -->
-
 
 
 
@@ -121,7 +187,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">Prácticas del Tema 1: Introducción al biocómputo en sistemas GNU/Linux</h1>
 <h4 class="author"><em>Pablo Vinuesa</em></h4>
-<h4 class="date"><em>2018-02-24</em></h4>
+<h4 class="date"><em>2019-02-21</em></h4>
 
 </div>
 
@@ -129,7 +195,7 @@ $(document).ready(function () {
 <ul>
 <li><a href="#tema-1.-introduccion-al-biocomputo-en-sistemas-gnulinux"><span class="toc-section-number">1</span> Tema 1. Introducción al biocómputo en sistemas GNU/Linux</a><ul>
 <li><a href="#exploremos-el-sistema-en-el-que-estamos-trabajando"><span class="toc-section-number">1.1</span> Exploremos el sistema en el que estamos trabajando</a><ul>
-<li><a href="#ssh-establecer-sesion-remota-encriptada-segura-via-ssh-al-servidor-chichen"><span class="toc-section-number">1.1.1</span> <strong>ssh</strong> establecer sesion remota encriptada (segura) via ssh al servidor chichen</a></li>
+<li><a href="#ssh-establecer-sesion-remota-encriptada-segura-via-ssh-al-servidor-chichen"><span class="toc-section-number">1.1.1</span> <strong>ssh</strong> establecer sesion remota encriptada (segura) via ssh al servidor <em>chichen</em></a></li>
 <li><a href="#hostname-muestra-el-nombre-del-host-la-maquina-a-la-que-estoy-conectado-y-la-ip"><span class="toc-section-number">1.1.2</span> <strong>hostname</strong> muestra el nombre del host (la máquina a la que estoy conectado) y la IP</a></li>
 <li><a href="#uname-muestra-el-sistema-operativo-del-host"><span class="toc-section-number">1.1.3</span> <strong>uname</strong> muestra el sistema operativo del host</a></li>
 <li><a href="#variables-de-ambiente-home-path-user"><span class="toc-section-number">1.1.4</span> Variables de ambiente: $HOME $PATH $USER</a></li>
@@ -184,18 +250,18 @@ $(document).ready(function () {
 
 <div id="tema-1.-introduccion-al-biocomputo-en-sistemas-gnulinux" class="section level1">
 <h1><span class="header-section-number">1</span> Tema 1. Introducción al biocómputo en sistemas GNU/Linux</h1>
-<p>Este apunte fue creado para el [m]ódulo de Genómica del Curso de OMICAS UAEM](<a href="https://vinuesa.github.io/intro2phyloinfo/" class="uri">https://vinuesa.github.io/intro2phyloinfo/</a>) por <a href="http://www.ccg.unan.mx/~vinuesa/">Pablo Vinuesa, CCG-UNAM</a>.</p>
-<p>version: 2018-02-24</p>
+<p>Este apunte fue creado para el <a href="https://vinuesa.github.io/intro2phyloinfo/">módulo de Genómica del Curso de OMICAS UAEM-UNAM</a> por <a href="http://www.ccg.unan.mx/~vinuesa/">Pablo Vinuesa, CCG-UNAM</a></p>
+<p>version: 2019-02-21</p>
 <p>Una vez que domines los comandos básicos que se presentarán seguidamente, recomiendo revisar tutoriales mucho más detallados y completos como los siguientes:</p>
 <ul>
-<li><a href="https://tiswww.case.edu/php/chet/bash/bashref.html">Bash Reference Manual</a></li>
-<li><a href="http://tldp.org/LDP/abs/html/">Advanced Bash Scripting Guide</a></li>
+<li><p><a href="https://tiswww.case.edu/php/chet/bash/bashref.html">Bash Reference Manual</a></p></li>
+<li><p><a href="http://tldp.org/LDP/abs/html/">Advanced Bash Scripting Guide</a></p></li>
 </ul>
 <hr />
 <div id="exploremos-el-sistema-en-el-que-estamos-trabajando" class="section level2">
 <h2><span class="header-section-number">1.1</span> Exploremos el sistema en el que estamos trabajando</h2>
 <div id="ssh-establecer-sesion-remota-encriptada-segura-via-ssh-al-servidor-chichen" class="section level3">
-<h3><span class="header-section-number">1.1.1</span> <strong>ssh</strong> establecer sesion remota encriptada (segura) via ssh al servidor chichen</h3>
+<h3><span class="header-section-number">1.1.1</span> <strong>ssh</strong> establecer sesion remota encriptada (segura) via ssh al servidor <em>chichen</em></h3>
 <p>Abre un terminal y ejecuta el comando mostrado abajo</p>
 <pre><code>ssh -X $USER@***.***.***.** # la IP se dará a conocer en el salón de clases</code></pre>
 </div>
@@ -220,7 +286,7 @@ echo &quot;$USER&quot;</code></pre>
 <pre><code>## vinuesa</code></pre>
 <pre class="bash"><code># imprime el contenido de la variable de ambiente $PATH
 echo &quot;$PATH&quot;</code></pre>
-<pre><code>## /home/vinuesa/Software_downloads/apache-ant-1.9.6:/usr/lib/jvm/java-8-oracle/jre/bin/java:/home/vinuesa/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/local/biotools/bin:/usr/local/biotools/bin/Snap:/usr/local/biotools/phylip-3.69/exe:/usr/local/biotools/FigTree.v1.2.3:/usr/local/biotools/dna2pep-1.1:/usr/local/biotools/arb/bin:/usr/local/genome/bin:/usr/local/genome/lib:/usr/local/biotools/BLOCKS3.7_software/blimps3.7/blimps-3.7/bin/linux:/home/vinuesa/Software_downloads/rnammer-1.2:/home/vinuesa/Software_downloads/signalp-4.1:/home/vinuesa/Software_downloads/graphlan:/home/vinuesa/Software_downloads/prokka-1.8/bin:/home/vinuesa/Software_downloads/CompGenomics/mugsy_x86-64-v1r2.2:/home/vinuesa/Software_downloads/CompGenomics/MUMmer3.23:/home/vinuesa/Software_downloads/genome_Assembly/GapFiller_v1-11_linux-x86_64:/home/vinuesa/Software_downloads/barrnap-0.3:/home/vinuesa/Software_downloads/circos/current/bin:/usr/local/Bioperl_Scripts:/home/vinuesa/Software_downloads/guidance.v1.01/www/Guidance:/home/vinuesa/Software_downloads/GenePred_GenomeAnnot/AutoFACT/scripts:/home/vinuesa/Software_downloads/get_homologues-x86_64-20171023:/home/vinuesa/Software_downloads/CompGenomics/mugsy_x86-64-v1r2.2:/home/vinuesa/Software_downloads/CompGenomics/mugsy_x86-64-v1r2.2/mapping:/home/vinuesa/Software_downloads/CompGenomics/cgview_comparison_tool/scripts:/usr/bin</code></pre>
+<pre><code>## /home/vinuesa/anaconda_ete/bin:/home/vinuesa/Software_downloads/apache-ant-1.9.6:/usr/lib/jvm/java-8-oracle/:/home/vinuesa/anaconda_ete/bin:/home/vinuesa/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/lib/jvm/java-9-oracle/bin:/usr/lib/jvm/java-9-oracle/db/bin:/usr/local/biotools/bin:/usr/local/biotools/bin/Snap:/usr/local/biotools/phylip-3.69/exe:/usr/local/biotools/FigTree.v1.2.3:/usr/local/biotools/dna2pep-1.1:/usr/local/biotools/arb/bin:/usr/local/genome/bin:/usr/local/genome/lib:/usr/local/biotools/BLOCKS3.7_software/blimps3.7/blimps-3.7/bin/linux:/home/vinuesa/Software_downloads/rnammer-1.2:/home/vinuesa/Software_downloads/signalp-4.1:/home/vinuesa/Software_downloads/graphlan:/home/vinuesa/Software_downloads/prokka-1.8/bin:/home/vinuesa/Software_downloads/CompGenomics/mugsy_x86-64-v1r2.2:/home/vinuesa/Software_downloads/CompGenomics/MUMmer3.23:/home/vinuesa/Software_downloads/barrnap-0.3:/home/vinuesa/Software_downloads/circos/current/bin:/usr/local/Bioperl_Scripts:/home/vinuesa/Software_downloads/guidance.v1.01/www/Guidance:/home/vinuesa/edirect:/home/vinuesa/Software_downloads/get_homologues-x86_64-20171023:/home/vinuesa/Software_downloads/CompGenomics/mugsy_x86-64-v1r2.2:/home/vinuesa/Software_downloads/CompGenomics/mugsy_x86-64-v1r2.2/mapping:/home/vinuesa/Software_downloads/CompGenomics/cgview_comparison_tool/scripts:/usr/bin</code></pre>
 </div>
 </div>
 <div id="exploracion-el-sistema-de-archivos" class="section level2">
@@ -249,6 +315,7 @@ ls -a</code></pre>
 ## core
 ## dev
 ## etc
+## export
 ## home
 ## initrd.img
 ## initrd.img.old
@@ -256,7 +323,6 @@ ls -a</code></pre>
 ## lib32
 ## lib64
 ## libnss3.so
-## libx32
 ## lost+found
 ## media
 ## mnt
@@ -278,6 +344,7 @@ ls -a</code></pre>
 <h3><span class="header-section-number">1.2.3</span> Veamos el contenido del directorio /bin usando el comodín ’*’</h3>
 <pre class="bash"><code>ls /bin/* | head -20</code></pre>
 <pre><code>## /bin/bash
+## /bin/brltty
 ## /bin/bsd-csh
 ## /bin/bunzip2
 ## /bin/busybox
@@ -295,31 +362,30 @@ ls -a</code></pre>
 ## /bin/cat
 ## /bin/chacl
 ## /bin/chgrp
-## /bin/chmod
-## /bin/chown</code></pre>
+## /bin/chmod</code></pre>
 <pre class="bash"><code># idem, pero con detalles de permisos etc de los archivos contenidos en /bin
 
 ls -l /bin/* | head -20 </code></pre>
-<pre><code>## -rwxr-xr-x 1 root root 1037528 May 16  2017 /bin/bash
-## -rwxr-xr-x 1 root root  150792 Aug 21  2014 /bin/bsd-csh
-## -rwxr-xr-x 3 root root   31288 May 20  2015 /bin/bunzip2
-## -rwxr-xr-x 1 root root 1964536 Aug 19  2015 /bin/busybox
-## -rwxr-xr-x 3 root root   31288 May 20  2015 /bin/bzcat
-## lrwxrwxrwx 1 root root       6 May 20  2015 /bin/bzcmp -&gt; bzdiff
-## -rwxr-xr-x 1 root root    2140 May 20  2015 /bin/bzdiff
-## lrwxrwxrwx 1 root root       6 May 20  2015 /bin/bzegrep -&gt; bzgrep
-## -rwxr-xr-x 1 root root    4877 May 20  2015 /bin/bzexe
-## lrwxrwxrwx 1 root root       6 May 20  2015 /bin/bzfgrep -&gt; bzgrep
-## -rwxr-xr-x 1 root root    3642 May 20  2015 /bin/bzgrep
-## -rwxr-xr-x 3 root root   31288 May 20  2015 /bin/bzip2
-## -rwxr-xr-x 1 root root   14616 May 20  2015 /bin/bzip2recover
-## lrwxrwxrwx 1 root root       6 May 20  2015 /bin/bzless -&gt; bzmore
-## -rwxr-xr-x 1 root root    1297 May 20  2015 /bin/bzmore
-## -rwxr-xr-x 1 root root   52080 Mar  2  2017 /bin/cat
-## -rwxr-xr-x 1 root root   14752 Feb  7  2016 /bin/chacl
-## -rwxr-xr-x 1 root root   60272 Mar  2  2017 /bin/chgrp
-## -rwxr-xr-x 1 root root   56112 Mar  2  2017 /bin/chmod
-## -rwxr-xr-x 1 root root   64368 Mar  2  2017 /bin/chown</code></pre>
+<pre><code>## -rwxr-xr-x 1 root root 1113504 Apr  4  2018 /bin/bash
+## -rwxr-xr-x 1 root root  748968 Aug 29 02:57 /bin/brltty
+## -rwxr-xr-x 1 root root  170456 Aug 28  2017 /bin/bsd-csh
+## -rwxr-xr-x 3 root root   34888 Jan 29  2017 /bin/bunzip2
+## -rwxr-xr-x 1 root root 2022480 Dec 12  2017 /bin/busybox
+## -rwxr-xr-x 3 root root   34888 Jan 29  2017 /bin/bzcat
+## lrwxrwxrwx 1 root root       6 Jan 29  2017 /bin/bzcmp -&gt; bzdiff
+## -rwxr-xr-x 1 root root    2140 Jan 29  2017 /bin/bzdiff
+## lrwxrwxrwx 1 root root       6 Jan 29  2017 /bin/bzegrep -&gt; bzgrep
+## -rwxr-xr-x 1 root root    4877 Jan 29  2017 /bin/bzexe
+## lrwxrwxrwx 1 root root       6 Jan 29  2017 /bin/bzfgrep -&gt; bzgrep
+## -rwxr-xr-x 1 root root    3642 Jan 29  2017 /bin/bzgrep
+## -rwxr-xr-x 3 root root   34888 Jan 29  2017 /bin/bzip2
+## -rwxr-xr-x 1 root root   14328 Jan 29  2017 /bin/bzip2recover
+## lrwxrwxrwx 1 root root       6 Jan 29  2017 /bin/bzless -&gt; bzmore
+## -rwxr-xr-x 1 root root    1297 Jan 29  2017 /bin/bzmore
+## -rwxr-xr-x 1 root root   35064 Jan 18  2018 /bin/cat
+## -rwxr-xr-x 1 root root   14328 Apr 21  2017 /bin/chacl
+## -rwxr-xr-x 1 root root   63672 Jan 18  2018 /bin/chgrp
+## -rwxr-xr-x 1 root root   59608 Jan 18  2018 /bin/chmod</code></pre>
 <pre class="bash"><code># idem, pero ordenando los archivos por fechas de modificacion (-t), listando los mas recientes al final (-r), es decir, en orden reverso
 ls -ltr /bin/* | head -20
 </code></pre>
@@ -327,22 +393,22 @@ ls -ltr /bin/* | head -20
 ## lrwxrwxrwx 1 root root      24 Oct 16  2011 /bin/netcat -&gt; /etc/alternatives/netcat
 ## lrwxrwxrwx 1 root root      20 Oct 16  2011 /bin/nc -&gt; /etc/alternatives/nc
 ## lrwxrwxrwx 1 root root      21 Sep 21  2012 /bin/csh -&gt; /etc/alternatives/csh
-## -rwxr-xr-x 1 root root   31248 Dec  3  2012 /bin/nc.openbsd
-## -rwxr-xr-x 1 root root      89 Apr 26  2014 /bin/red
-## -rwxr-xr-x 1 root root   51512 Apr 26  2014 /bin/ed
-## -rwsr-xr-x 1 root root   44680 May  7  2014 /bin/ping6
-## -rwsr-xr-x 1 root root   44168 May  7  2014 /bin/ping
-## -rwxr-xr-x 1 root root  119624 Jun 30  2014 /bin/netstat
-## -rwxr-xr-x 1 root root  150792 Aug 21  2014 /bin/bsd-csh
-## -rwxr-xr-x 1 root root    5047 Oct 27  2014 /bin/znew
-## -rwxr-xr-x 1 root root    1910 Oct 27  2014 /bin/zmore
-## -rwxr-xr-x 1 root root    2037 Oct 27  2014 /bin/zless
-## -rwxr-xr-x 1 root root    5938 Oct 27  2014 /bin/zgrep
-## -rwxr-xr-x 1 root root    2131 Oct 27  2014 /bin/zforce
-## -rwxr-xr-x 1 root root     140 Oct 27  2014 /bin/zfgrep
-## -rwxr-xr-x 1 root root     140 Oct 27  2014 /bin/zegrep
-## -rwxr-xr-x 1 root root    5764 Oct 27  2014 /bin/zdiff
-## -rwxr-xr-x 1 root root    1777 Oct 27  2014 /bin/zcmp</code></pre>
+## -rwxr-xr-x 1 root root    9045 Feb 24  2015 /bin/usb_printerid
+## -rwxr-xr-x 1 root root      89 Apr 26  2016 /bin/red
+## -rwxr-xr-x 1 root root   51512 Apr 26  2016 /bin/ed
+## lrwxrwxrwx 1 root root       4 Jul 28  2016 /bin/sh.distrib -&gt; dash
+## -rwxr-xr-x 1 root root   14328 Aug 11  2016 /bin/ulockmgr_server
+## -rwsr-xr-x 1 root root   30800 Aug 11  2016 /bin/fusermount
+## -rwxr-xr-x 1 root root  154192 Jan  9  2017 /bin/netstat
+## -rwxr-xr-x 1 root root    1297 Jan 29  2017 /bin/bzmore
+## lrwxrwxrwx 1 root root       6 Jan 29  2017 /bin/bzless -&gt; bzmore
+## -rwxr-xr-x 1 root root   14328 Jan 29  2017 /bin/bzip2recover
+## -rwxr-xr-x 3 root root   34888 Jan 29  2017 /bin/bzip2
+## -rwxr-xr-x 1 root root    3642 Jan 29  2017 /bin/bzgrep
+## lrwxrwxrwx 1 root root       6 Jan 29  2017 /bin/bzfgrep -&gt; bzgrep
+## -rwxr-xr-x 1 root root    4877 Jan 29  2017 /bin/bzexe
+## lrwxrwxrwx 1 root root       6 Jan 29  2017 /bin/bzegrep -&gt; bzgrep
+## -rwxr-xr-x 1 root root    2140 Jan 29  2017 /bin/bzdiff</code></pre>
 </div>
 <div id="expansion-de-caracteres-con-y" class="section level3">
 <h3><span class="header-section-number">1.2.4</span> expansión de caracteres con * y ?</h3>
@@ -351,6 +417,7 @@ ls /bin/b*
 ls /bin/c*
 </code></pre>
 <pre><code>## /bin/bash
+## /bin/brltty
 ## /bin/bsd-csh
 ## /bin/bunzip2
 ## /bin/busybox
@@ -392,7 +459,7 @@ ls /bin/c??</code></pre>
 <div id="de-nuevo-donde-estoy" class="section level3">
 <h3><span class="header-section-number">1.3.1</span> de nuevo, donde estoy?</h3>
 <pre class="bash"><code>pwd </code></pre>
-<pre><code>## /home/vinuesa/Dropbox/move/OMICAS_UAEM_genomica/clase1/intro2linux</code></pre>
+<pre><code>## /home/vinuesa/GitHub/intro2phyloinfo_OMICAS_UAEM/docs/intro2linux</code></pre>
 </div>
 <div id="sube-un-directorio-usando-ruta-relativa" class="section level3">
 <h3><span class="header-section-number">1.3.2</span> sube un directorio usando RUTA RELATIVA</h3>
@@ -403,7 +470,7 @@ ls /bin/c??</code></pre>
 <div id="donde-estoy" class="section level3">
 <h3><span class="header-section-number">1.3.3</span> donde estoy?</h3>
 <pre class="bash"><code>pwd </code></pre>
-<pre><code>## /home/vinuesa/Dropbox/move/OMICAS_UAEM_genomica/clase1/intro2linux</code></pre>
+<pre><code>## /home/vinuesa/GitHub/intro2phyloinfo_OMICAS_UAEM/docs/intro2linux</code></pre>
 </div>
 <div id="regresa-a-tu-home" class="section level3">
 <h3><span class="header-section-number">1.3.4</span> regresa a tu home</h3>
@@ -437,7 +504,6 @@ else
     mkdir intro2genomics
 fi
 </code></pre>
-<pre><code>## found dir intro2genomics</code></pre>
 </div>
 <div id="ls--l-lista-los-permisos-de-archivos-y-directorios" class="section level3">
 <h3><span class="header-section-number">1.4.2</span> ls -l lista los permisos de archivos y directorios</h3>
@@ -445,35 +511,32 @@ fi
 <li>comprueba los <strong>permisos</strong> del nuevo directorio</li>
 </ul>
 <pre class="bash"><code>ls -l</code></pre>
-<pre><code>## total 1256
-## -rw-rw-r-- 1 vinuesa vinuesa     78 Feb 23 11:18 administration.cmds
-## -rw-rw-r-- 1 vinuesa vinuesa    492 Feb 23 11:18 Batch.cmds
-## -rw-rw-r-- 1 vinuesa vinuesa     75 Feb 23 11:18 Category.cmds
-## -rw-rw-r-- 1 vinuesa vinuesa   2835 Feb 23 11:18 C.cmds
-## -rw-rw-r-- 1 vinuesa vinuesa   1814 Feb 23 11:18 Filesystem.cmds
-## -rw-rw-r-- 1 vinuesa vinuesa   1814 Feb 24 12:24 Filesystem_commands.tab
-## -rw-rw-r-- 1 vinuesa vinuesa     54 Feb 23 11:18 FORTRAN77.cmds
-## -rw-rw-r-- 1 vinuesa vinuesa   2346 Feb 23 11:18 grep
-## drwxrwxr-x 3 vinuesa vinuesa   4096 Feb 24 12:24 intro2genomics
-## drwxrwxr-x 2 vinuesa vinuesa   4096 Feb 24 12:24 intro2linux
-## -rw-rw-r-- 1 vinuesa vinuesa  10193 Feb 23 11:18 linux_commands.tab
-## -rw-rw-r-- 1 vinuesa vinuesa   1705 Feb 23 11:18 linux_very_basic_commands_table.csv
-## -rw-rw-r-- 1 vinuesa vinuesa   1042 Feb 23 11:18 management.cmds
-## -rw-rw-r-- 1 vinuesa vinuesa   2133 Feb 23 11:18 Misc.cmds
-## -rw-rw-r-- 1 vinuesa vinuesa    215 Feb 23 11:18 Network.cmds
-## -rw-rw-r-- 1 vinuesa vinuesa   1138 Feb 23 11:18 Process.cmds
-## -rw-rw-r-- 1 vinuesa vinuesa   2000 Feb 23 11:18 processing.cmds
-## -rw-rw-r-- 1 vinuesa vinuesa     81 Feb 23 11:18 programming (Case Conflict).cmds
-## -rw-rw-r-- 1 vinuesa vinuesa   1735 Feb 23 11:18 programming.cmds
-## -rw-rw-r-- 1 vinuesa vinuesa    528 Feb 23 11:18 SCCS.cmds
-## -rw-rw-r-- 1 vinuesa vinuesa   1038 Feb 23 11:18 Shell.cmds
-## -rw-rw-r-- 1 vinuesa vinuesa   1394 Feb 23 11:18 System.cmds
-## -rw-rw-r-- 1 vinuesa vinuesa   2000 Feb 23 11:18 Text.cmds
-## -rw-rw-r-- 1 vinuesa vinuesa    567 Feb 23 11:18 utilities.cmds
-## -rw-rw-r-- 1 vinuesa vinuesa   6047 Feb 23 11:18 working_with_linux_commands.code
-## -rw-rw-r-- 1 vinuesa vinuesa 783624 Feb 24 12:24 working_with_linux_commands.html
-## -rw-rw-r-- 1 vinuesa vinuesa 247861 Feb 23 12:15 working_with_linux_commands.pdf
-## -rw-rw-r-- 1 vinuesa vinuesa  11981 Feb 24 12:24 working_with_linux_commands.Rmd</code></pre>
+<pre><code>## total 1136
+## -rw-rw-r-- 1 vinuesa vinuesa     78 Feb 24  2018 administration.cmds
+## -rw-rw-r-- 1 vinuesa vinuesa    492 Feb 24  2018 Batch.cmds
+## -rw-rw-r-- 1 vinuesa vinuesa     75 Feb 24  2018 Category.cmds
+## -rw-rw-r-- 1 vinuesa vinuesa   2835 Feb 24  2018 C.cmds
+## -rw-rw-r-- 1 vinuesa vinuesa   1814 Feb 24  2018 Filesystem.cmds
+## -rw-rw-r-- 1 vinuesa vinuesa   1814 Feb 24  2018 Filesystem_commands.tab
+## -rw-rw-r-- 1 vinuesa vinuesa     54 Feb 24  2018 FORTRAN77.cmds
+## -rw-rw-r-- 1 vinuesa vinuesa 783824 Feb 24  2018 index.html
+## -rw-rw-r-- 1 vinuesa vinuesa  10193 Feb 24  2018 linux_commands.tab
+## -rw-rw-r-- 1 vinuesa vinuesa   1705 Feb 24  2018 linux_very_basic_commands_table.csv
+## -rw-rw-r-- 1 vinuesa vinuesa   1042 Feb 24  2018 management.cmds
+## -rw-rw-r-- 1 vinuesa vinuesa   2133 Feb 24  2018 Misc.cmds
+## -rw-rw-r-- 1 vinuesa vinuesa    215 Feb 24  2018 Network.cmds
+## -rw-rw-r-- 1 vinuesa vinuesa   1138 Feb 24  2018 Process.cmds
+## -rw-rw-r-- 1 vinuesa vinuesa   2000 Feb 24  2018 processing.cmds
+## -rw-rw-r-- 1 vinuesa vinuesa     81 Feb 24  2018 programming (Case Conflict).cmds
+## -rw-rw-r-- 1 vinuesa vinuesa   1735 Feb 24  2018 programming.cmds
+## -rw-rw-r-- 1 vinuesa vinuesa    528 Feb 24  2018 SCCS.cmds
+## -rw-rw-r-- 1 vinuesa vinuesa   1038 Feb 24  2018 Shell.cmds
+## -rw-rw-r-- 1 vinuesa vinuesa   1394 Feb 24  2018 System.cmds
+## -rw-rw-r-- 1 vinuesa vinuesa   2000 Feb 24  2018 Text.cmds
+## -rw-rw-r-- 1 vinuesa vinuesa    567 Feb 24  2018 utilities.cmds
+## -rw-rw-r-- 1 vinuesa vinuesa   6047 Feb 24  2018 working_with_linux_commands.code
+## -rw-rw-r-- 1 vinuesa vinuesa 248899 Feb 24  2018 working_with_linux_commands.pdf
+## -rw-rw-r-- 1 vinuesa vinuesa  11974 Feb 21 22:16 working_with_linux_commands.Rmd</code></pre>
 <ul>
 <li>generemos un subdirectorio por debajo del que acabamos de crear:</li>
 </ul>
@@ -744,6 +807,7 @@ ls /bin/b*
 ls /bin/c*
 </code></pre>
 <pre><code>## /bin/bash
+## /bin/brltty
 ## /bin/bsd-csh
 ## /bin/bunzip2
 ## /bin/busybox
@@ -888,7 +952,6 @@ else
      mkdir intro2linux &amp;&amp; cd intro2linux
 fi
 </code></pre>
-<pre><code>## dir intro2linux exists, will move into it</code></pre>
 </div>
 <div id="bucles-for" class="section level3">
 <h3><span class="header-section-number">1.9.3</span> bucles for</h3>
@@ -896,14 +959,13 @@ fi
 #              para generar archivos que contengan solo los comandos de las diferentes categorias
 #              nombrando a los archivos por estas
 
-for type in $(cut -f2 linux_basic_commands.tab | sort -u); do 
-   grep &quot;$type&quot; linux_basic_commands.tab &gt; ${type}.cmds
+for type in $(cut -f2 linux_commands.tab | sort -u); do 
+   grep &quot;$type&quot; linux_commands.tab &gt; ${type}.cmds
 done
 
 
 # o en una línea for type in $(cut -f2 linux_basic_commands.tab | sort -u); do grep &quot;$type&quot; linux_basic_commands.tab &gt; ${type}.cmds; done
 </code></pre>
-<pre><code>## cut: linux_basic_commands.tab: No such file or directory</code></pre>
 <p>veamos el resultado de ejecutar el bucle anterior:</p>
 <pre class="bash"><code>ls *cmds</code></pre>
 <pre><code>## administration.cmds
@@ -919,6 +981,7 @@ done
 ## processing.cmds
 ## programming (Case Conflict).cmds
 ## programming.cmds
+## Programming.cmds
 ## SCCS.cmds
 ## Shell.cmds
 ## System.cmds
