@@ -11,7 +11,7 @@
 
 <meta name="author" content="Pablo Vinuesa" />
 
-<meta name="date" content="2018-02-23" />
+<meta name="date" content="2019-02-21" />
 
 <title>Ejercicio de parseo de archivos FASTA</title>
 
@@ -36,7 +36,7 @@ if (window.hljs) {
   hljs.configure({languages: []});
   hljs.initHighlightingOnLoad();
   if (document.readyState && document.readyState === "complete") {
-    window.setTimeout(function() { hljs.initHighlightingOnLoad(); }, 0);
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
   }
 }
 </script>
@@ -92,8 +92,14 @@ img {
 .tabbed-pane {
   padding-top: 12px;
 }
+.html-widget {
+  margin-bottom: 20px;
+}
 button.code-folding-btn:focus {
   outline: none;
+}
+summary {
+  display: list-item;
 }
 </style>
 
@@ -102,14 +108,74 @@ button.code-folding-btn:focus {
 <div class="container-fluid main-container">
 
 <!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
 <script>
 $(document).ready(function () {
   window.buildTabsets("TOC");
 });
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
 </script>
 
 <!-- code folding -->
-
 
 
 
@@ -121,7 +187,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">Ejercicio de parseo de archivos FASTA</h1>
 <h4 class="author"><em>Pablo Vinuesa</em></h4>
-<h4 class="date"><em>2018-02-23</em></h4>
+<h4 class="date"><em>2019-02-21</em></h4>
 
 </div>
 
@@ -141,7 +207,7 @@ $(document).ready(function () {
 
 <div id="presentacion" class="section level1">
 <h1><span class="header-section-number">1</span> Presentación</h1>
-<p>Este código corresponde a unas prácticas escritas por <a href="http://www.ccg.unam.mx/~vinuesa/">Pablo Vinuesa</a> para el manual de Bioinformática y Sistemática Molecular de la Facultad de Ciencias - UNAM, Abril 2015.</p>
+<p>Este código corresponde a unas prácticas escritas por <a href="http://www.ccg.unam.mx/~vinuesa/">Pablo Vinuesa</a> para el manual de <a href="https://tienda.fciencias.unam.mx/es/home/279-sistematica-molecular-y-bioinformatica-guia-practica.html">Sistemática Molecular y Bioinformática</a> de la Facultad de Ciencias - UNAM, Abril 2018.</p>
 <p>Para correr los ejercicios, asegúrate de tener el archivo recA_Bradyrhizobium_vinuesa.fna en el directorio actual de trabajo.</p>
 <div id="busqueda-y-descarga-de-secuencias-en-genbank-usando-el-sistema-entrez" class="section level2">
 <h2><span class="header-section-number">1.1</span> Búsqueda y descarga de secuencias en GenBank usando el sistema ENTREZ</h2>
@@ -165,38 +231,274 @@ cd sesion1_parseo_fastas
 <li>¿Cuántas secuencias hay en el archivo recA_Bradyrhizobium_vinuesa.fna?</li>
 </ol>
 <pre class="bash"><code>grep -c '&gt;' recA_Bradyrhizobium_vinuesa.fna </code></pre>
-<pre><code>## 117</code></pre>
+<pre><code>## 125</code></pre>
 <ol start="2" style="list-style-type: decimal">
 <li>Veamos las 5 primeras lineas de cabeceras fasta usando <strong>grep</strong> y <strong>head</strong></li>
 </ol>
 <pre class="bash"><code> grep '&gt;' recA_Bradyrhizobium_vinuesa.fna | head -5</code></pre>
-<pre><code>## &gt;gi|145926563|gb|EF190191.1| Bradyrhizobium japonicum strain X6-9 RNA polymerase beta subunit (rpoB) gene, partial cds
-## &gt;gi|145926559|gb|EF190189.1| Bradyrhizobium elkanii strain USDA 94 RNA polymerase beta subunit (rpoB) gene, partial cds
-## &gt;gi|145926555|gb|EF190187.1| Bradyrhizobium elkanii strain USDA 46 RNA polymerase beta subunit (rpoB) gene, partial cds
-## &gt;gi|145926551|gb|EF190185.1| Bradyrhizobium yuanmingense strain TAL760 RNA polymerase beta subunit (rpoB) gene, partial cds
-## &gt;gi|145926547|gb|EF190183.1| Bradyrhizobium japonicum strain Nep1 RNA polymerase beta subunit (rpoB) gene, partial cds</code></pre>
+<pre><code>## &gt;gi|190612137|[B.liaoningense_strain_ViHaR5]
+## &gt;gi|190612135|[B.liaoningense_strain_ViHaR4]
+## &gt;gi|190612133|[B.liaoningense_strain_ViHaR3]
+## &gt;gi|190612131|[B.liaoningense_strain_ViHaR2]
+## &gt;gi|190612129|[B.liaoningense_strain_ViHaR1]</code></pre>
 <ol start="3" style="list-style-type: decimal">
 <li>Cuenta el numero de generos y especies que contiene el archivo FASTA</li>
 </ol>
 <pre class="bash"><code>grep '&gt;' recA_Bradyrhizobium_vinuesa.fna | cut -d' ' -f3 | sort | uniq -c</code></pre>
-<pre><code>##      12 canariense
-##      18 elkanii
-##       3 genosp.
-##      28 japonicum
-##      15 liaoningense
-##       9 sp.
-##      32 yuanmingense</code></pre>
+<pre><code>##       1 &gt;gi|190611979|[B.yuanmingense_strain_BuCeG2]
+##       1 &gt;gi|190611981|[B.yuanmingense_strain_BuCeG3]
+##       1 &gt;gi|190611983|[B.yuanmingense_strain_BuCeG4]
+##       1 &gt;gi|190611985|[B.sp._BuCeR1]
+##       1 &gt;gi|190611987|[B.sp._BuCeR2]
+##       1 &gt;gi|190611989|[B.yuanmingense_strain_BuCeR3]
+##       1 &gt;gi|190611991|[B.yuanmingense_strain_BuCeR4]
+##       1 &gt;gi|190611993|[B.yuanmingense_strain_BuCeR5]
+##       1 &gt;gi|190611995|[B.elkanii_strain_BuMiN1]
+##       1 &gt;gi|190611997|[B.elkanii_strain_BuMiN2]
+##       1 &gt;gi|190611999|[B.elkanii_strain_BuMiN3]
+##       1 &gt;gi|190612001|[B.elkanii_strain_BuMiN4]
+##       1 &gt;gi|190612003|[B.liaoningense_strain_BuMiN6]
+##       1 &gt;gi|190612005|[B.elkanii_strain_BuMiT1]
+##       1 &gt;gi|190612007|[B.sp._BuMiT10]
+##       1 &gt;gi|190612009|[B.liaoningense_strain_BuMiT3]
+##       1 &gt;gi|190612011|[B.liaoningense_strain_BuMiT4]
+##       1 &gt;gi|190612013|[B.liaoningense_strain_BuMiT5]
+##       1 &gt;gi|190612015|[B.elkanii_strain_BuMiT6]
+##       1 &gt;gi|190612017|[B.elkanii_strain_BuMiT7]
+##       1 &gt;gi|190612019|[B.elkanii_strain_BuMiT8]
+##       1 &gt;gi|190612021|[B.elkanii_strain_BuMiT9]
+##       1 &gt;gi|190612023|[B.elkanii_strain_BuNoG1]
+##       1 &gt;gi|190612025|[B.elkanii_strain_BuNoG4]
+##       1 &gt;gi|190612027|[B.sp._BuNoG5]
+##       1 &gt;gi|190612029|[B.elkanii_strain_BuNoR1]
+##       1 &gt;gi|190612031|[B.elkanii_strain_BuNoR2]
+##       1 &gt;gi|190612033|[B.elkanii_strain_BuNoR3]
+##       1 &gt;gi|190612035|[B.elkanii_strain_BuNoR4]
+##       1 &gt;gi|190612037|[B.yuanmingense_strain_InBu02]
+##       1 &gt;gi|190612039|[B.yuanmingense_strain_InIn01]
+##       1 &gt;gi|190612041|[B.yuanmingense_strain_InIn02]
+##       1 &gt;gi|190612043|[B.yuanmingense_strain_InIn03]
+##       1 &gt;gi|190612045|[B.yuanmingense_strain_InIn04]
+##       1 &gt;gi|190612047|[B.yuanmingense_strain_InIn05]
+##       1 &gt;gi|190612049|[B.yuanmingense_strain_InIn08]
+##       1 &gt;gi|190612051|[B.yuanmingense_strain_InIn09]
+##       1 &gt;gi|190612053|[B.yuanmingense_strain_InIn10]
+##       1 &gt;gi|190612055|[B.yuanmingense_strain_InJa01]
+##       1 &gt;gi|190612057|[B.yuanmingense_strain_InJa02]
+##       1 &gt;gi|190612059|[B.yuanmingense_strain_InJa03]
+##       1 &gt;gi|190612061|[B.yuanmingense_strain_InJa04]
+##       1 &gt;gi|190612063|[B.yuanmingense_strain_InJa05]
+##       1 &gt;gi|190612065|[B.yuanmingense_strain_InJa06]
+##       1 &gt;gi|190612067|[B.yuanmingense_strain_InJa07]
+##       1 &gt;gi|190612069|[B.yuanmingense_strain_InJa08]
+##       1 &gt;gi|190612071|[B.yuanmingense_strain_InJa09]
+##       1 &gt;gi|190612073|[B.yuanmingense_strain_InKo01]
+##       1 &gt;gi|190612075|[B.yuanmingense_strain_InKo02]
+##       1 &gt;gi|190612077|[B.yuanmingense_strain_InRo02]
+##       1 &gt;gi|190612079|[B.japonicum_strain_NeMa01]
+##       1 &gt;gi|190612081|[B.japonicum_strain_NeMa02]
+##       1 &gt;gi|190612083|[B.japonicum_strain_NeMa10]
+##       1 &gt;gi|190612085|[B.japonicum_strain_NeMa11]
+##       1 &gt;gi|190612087|[B.japonicum_strain_NeMa12]
+##       1 &gt;gi|190612089|[B.japonicum_strain_NeMa16]
+##       1 &gt;gi|190612091|[B.japonicum_strain_NeRa01]
+##       1 &gt;gi|190612093|[B.japonicum_strain_NeRa02]
+##       1 &gt;gi|190612095|[B.japonicum_strain_NeRa03]
+##       1 &gt;gi|190612097|[B.japonicum_strain_NeRa04]
+##       1 &gt;gi|190612099|[B.japonicum_strain_NeRa05]
+##       1 &gt;gi|190612101|[B.japonicum_strain_NeRa06]
+##       1 &gt;gi|190612103|[B.japonicum_strain_NeRa07]
+##       1 &gt;gi|190612105|[B.japonicum_strain_NeRa08]
+##       1 &gt;gi|190612107|[B.japonicum_strain_NeRa11]
+##       1 &gt;gi|190612109|[B.japonicum_strain_NeRa12]
+##       1 &gt;gi|190612111|[B.japonicum_strain_NeRa14]
+##       1 &gt;gi|190612113|[B.japonicum_strain_NeRa15]
+##       1 &gt;gi|190612115|[B.japonicum_strain_NeRa16]
+##       1 &gt;gi|190612117|[B.liaoningense_strain_ViHaG3]
+##       1 &gt;gi|190612119|[B.yuanmingense_strain_ViHaG4]
+##       1 &gt;gi|190612121|[B.yuanmingense_strain_ViHaG5]
+##       1 &gt;gi|190612123|[B.liaoningense_strain_ViHaG6]
+##       1 &gt;gi|190612125|[B.liaoningense_strain_ViHaG7]
+##       1 &gt;gi|190612127|[B.liaoningense_strain_ViHaG8]
+##       1 &gt;gi|190612129|[B.liaoningense_strain_ViHaR1]
+##       1 &gt;gi|190612131|[B.liaoningense_strain_ViHaR2]
+##       1 &gt;gi|190612133|[B.liaoningense_strain_ViHaR3]
+##       1 &gt;gi|190612135|[B.liaoningense_strain_ViHaR4]
+##       1 &gt;gi|190612137|[B.liaoningense_strain_ViHaR5]
+##       1 &gt;gi|50982176|[B.genosp._alpha_bv._genistearum_strain_BC-C1]
+##       1 &gt;gi|50982178|[B.canariense_bv._genistearum_strain_BC-C2]
+##       1 &gt;gi|50982180|[B.canariense_bv._genistearum_strain_BC-P5]
+##       1 &gt;gi|50982182|[B.genosp._beta_strain_BC-P6]
+##       1 &gt;gi|50982184|[B.japonicum_bv._genistearum_strain_BC-P14]
+##       1 &gt;gi|50982186|[B.canariense_bv._genistearum_strain_BC-P22]
+##       1 &gt;gi|50982188|[B.canariense_bv._genistearum_strain_BC-MAM1]
+##       1 &gt;gi|50982190|[B.canariense_bv._genistearum_strain_BC-MAM5]
+##       1 &gt;gi|50982192|[B.canariense_bv._genistearum_strain_BES-1]
+##       1 &gt;gi|50982194|[B.canariense_bv._genistearum_strain_BES-2]
+##       1 &gt;gi|50982196|[B.canariense_bv._genistearum_strain_BC0-1]
+##       1 &gt;gi|50982198|[B.genosp._beta_strain_BRE-1]
+##       1 &gt;gi|50982200|[B.canariense_bv._genistearum_strain_BRE-4]
+##       1 &gt;gi|50982202|[B.canariense_bv._genistearum_strain_BTA-1]
+##       1 &gt;gi|50982204|[B.genosp._beta_strain_BC-MK6]
+##       1 &gt;gi|50982206|[B.japonicum_bv._glycinearum_strain_DSMZ30131]
+##       1 &gt;gi|50982208|[B.japonicum_bv._glycinearum_strain_X3-1]
+##       1 &gt;gi|50982210|[B.japonicum_bv._glycinearum_strain_X6-9]
+##       1 &gt;gi|50982212|[B.japonicum_bv._genistearum_strain_BGA-1]
+##       1 &gt;gi|50982214|[B.japonicum_bv._genistearum_strain_BLup-MR1]
+##       1 &gt;gi|50982216|[B.japonicum_bv._genistearum_strain_FN13]
+##       1 &gt;gi|50982218|[B.sp._CICS70]
+##       1 &gt;gi|50982220|[B.japonicum_bv._glycinearum_strain_USDA122]
+##       1 &gt;gi|50982222|[B.japonicum_bv._glycinearum_strain_Nep1]
+##       1 &gt;gi|50982224|[B.liaoningense_bv._glycinearum_strain_LMG18230]
+##       1 &gt;gi|50982226|[B.yuanmingense_strain_TAL760]
+##       1 &gt;gi|50982228|[B.yuanmingense_strain_CCBAU_10071]
+##       1 &gt;gi|50982230|[B.genosp._alpha_strain_CIAT3101]
+##       1 &gt;gi|50982232|[B.elkanii_strain_USDA76]
+##       1 &gt;gi|50982234|[B.elkanii_strain_USDA94]
+##       1 &gt;gi|50982236|[B.sp._BTAi1]
+##       1 &gt;gi|50982238|[B.sp._IRBG127]
+##       1 &gt;gi|50982240|[B.sp._IRBG231]
+##       1 &gt;gi|50982242|[B.yuanmingense_strain_LMTR28]
+##       1 &gt;gi|50982244|[B.liaoningense_strain_Spr3-7]
+##       1 &gt;gi|50982246|[B.elkanii_strain_USDA46]
+##       1 &gt;gi|50982248|[B.canariense_strain_ISLU16]
+##       1 &gt;gi|52550802|[B.canariense_strain_BC-P24]
+##       1 &gt;gi|52550804|[B.canariense_strain_BC-MAM2]
+##       1 &gt;gi|52550806|[B.canariense_strain_BC-MAM6]
+##       1 &gt;gi|52550808|[B.canariense_strain_BC-MAM8]
+##       1 &gt;gi|52550810|[B.canariense_strain_BC-MAM9]
+##       1 &gt;gi|52550812|[B.canariense_strain_BC-MAM11]
+##       1 &gt;gi|52550814|[B.canariense_strain_BC-MAM12]
+##       1 &gt;gi|52550816|[B.genosp._beta_strain_BC-MK1]</code></pre>
 <ol start="4" style="list-style-type: decimal">
 <li>Imprime una lista ordenada de mayor a menor, del numero de especies que contiene el archivo FASTA</li>
 </ol>
 <pre class="bash"><code>grep '&gt;' recA_Bradyrhizobium_vinuesa.fna | cut -d' ' -f2,3 | sort | uniq -c | sort -nrk1</code></pre>
-<pre><code>##      32 Bradyrhizobium yuanmingense
-##      28 Bradyrhizobium japonicum
-##      18 Bradyrhizobium elkanii
-##      15 Bradyrhizobium liaoningense
-##      12 Bradyrhizobium canariense
-##       9 Bradyrhizobium sp.
-##       3 Bradyrhizobium genosp.</code></pre>
+<pre><code>##       1 &gt;gi|52550816|[B.genosp._beta_strain_BC-MK1]
+##       1 &gt;gi|52550814|[B.canariense_strain_BC-MAM12]
+##       1 &gt;gi|52550812|[B.canariense_strain_BC-MAM11]
+##       1 &gt;gi|52550810|[B.canariense_strain_BC-MAM9]
+##       1 &gt;gi|52550808|[B.canariense_strain_BC-MAM8]
+##       1 &gt;gi|52550806|[B.canariense_strain_BC-MAM6]
+##       1 &gt;gi|52550804|[B.canariense_strain_BC-MAM2]
+##       1 &gt;gi|52550802|[B.canariense_strain_BC-P24]
+##       1 &gt;gi|50982248|[B.canariense_strain_ISLU16]
+##       1 &gt;gi|50982246|[B.elkanii_strain_USDA46]
+##       1 &gt;gi|50982244|[B.liaoningense_strain_Spr3-7]
+##       1 &gt;gi|50982242|[B.yuanmingense_strain_LMTR28]
+##       1 &gt;gi|50982240|[B.sp._IRBG231]
+##       1 &gt;gi|50982238|[B.sp._IRBG127]
+##       1 &gt;gi|50982236|[B.sp._BTAi1]
+##       1 &gt;gi|50982234|[B.elkanii_strain_USDA94]
+##       1 &gt;gi|50982232|[B.elkanii_strain_USDA76]
+##       1 &gt;gi|50982230|[B.genosp._alpha_strain_CIAT3101]
+##       1 &gt;gi|50982228|[B.yuanmingense_strain_CCBAU_10071]
+##       1 &gt;gi|50982226|[B.yuanmingense_strain_TAL760]
+##       1 &gt;gi|50982224|[B.liaoningense_bv._glycinearum_strain_LMG18230]
+##       1 &gt;gi|50982222|[B.japonicum_bv._glycinearum_strain_Nep1]
+##       1 &gt;gi|50982220|[B.japonicum_bv._glycinearum_strain_USDA122]
+##       1 &gt;gi|50982218|[B.sp._CICS70]
+##       1 &gt;gi|50982216|[B.japonicum_bv._genistearum_strain_FN13]
+##       1 &gt;gi|50982214|[B.japonicum_bv._genistearum_strain_BLup-MR1]
+##       1 &gt;gi|50982212|[B.japonicum_bv._genistearum_strain_BGA-1]
+##       1 &gt;gi|50982210|[B.japonicum_bv._glycinearum_strain_X6-9]
+##       1 &gt;gi|50982208|[B.japonicum_bv._glycinearum_strain_X3-1]
+##       1 &gt;gi|50982206|[B.japonicum_bv._glycinearum_strain_DSMZ30131]
+##       1 &gt;gi|50982204|[B.genosp._beta_strain_BC-MK6]
+##       1 &gt;gi|50982202|[B.canariense_bv._genistearum_strain_BTA-1]
+##       1 &gt;gi|50982200|[B.canariense_bv._genistearum_strain_BRE-4]
+##       1 &gt;gi|50982198|[B.genosp._beta_strain_BRE-1]
+##       1 &gt;gi|50982196|[B.canariense_bv._genistearum_strain_BC0-1]
+##       1 &gt;gi|50982194|[B.canariense_bv._genistearum_strain_BES-2]
+##       1 &gt;gi|50982192|[B.canariense_bv._genistearum_strain_BES-1]
+##       1 &gt;gi|50982190|[B.canariense_bv._genistearum_strain_BC-MAM5]
+##       1 &gt;gi|50982188|[B.canariense_bv._genistearum_strain_BC-MAM1]
+##       1 &gt;gi|50982186|[B.canariense_bv._genistearum_strain_BC-P22]
+##       1 &gt;gi|50982184|[B.japonicum_bv._genistearum_strain_BC-P14]
+##       1 &gt;gi|50982182|[B.genosp._beta_strain_BC-P6]
+##       1 &gt;gi|50982180|[B.canariense_bv._genistearum_strain_BC-P5]
+##       1 &gt;gi|50982178|[B.canariense_bv._genistearum_strain_BC-C2]
+##       1 &gt;gi|50982176|[B.genosp._alpha_bv._genistearum_strain_BC-C1]
+##       1 &gt;gi|190612137|[B.liaoningense_strain_ViHaR5]
+##       1 &gt;gi|190612135|[B.liaoningense_strain_ViHaR4]
+##       1 &gt;gi|190612133|[B.liaoningense_strain_ViHaR3]
+##       1 &gt;gi|190612131|[B.liaoningense_strain_ViHaR2]
+##       1 &gt;gi|190612129|[B.liaoningense_strain_ViHaR1]
+##       1 &gt;gi|190612127|[B.liaoningense_strain_ViHaG8]
+##       1 &gt;gi|190612125|[B.liaoningense_strain_ViHaG7]
+##       1 &gt;gi|190612123|[B.liaoningense_strain_ViHaG6]
+##       1 &gt;gi|190612121|[B.yuanmingense_strain_ViHaG5]
+##       1 &gt;gi|190612119|[B.yuanmingense_strain_ViHaG4]
+##       1 &gt;gi|190612117|[B.liaoningense_strain_ViHaG3]
+##       1 &gt;gi|190612115|[B.japonicum_strain_NeRa16]
+##       1 &gt;gi|190612113|[B.japonicum_strain_NeRa15]
+##       1 &gt;gi|190612111|[B.japonicum_strain_NeRa14]
+##       1 &gt;gi|190612109|[B.japonicum_strain_NeRa12]
+##       1 &gt;gi|190612107|[B.japonicum_strain_NeRa11]
+##       1 &gt;gi|190612105|[B.japonicum_strain_NeRa08]
+##       1 &gt;gi|190612103|[B.japonicum_strain_NeRa07]
+##       1 &gt;gi|190612101|[B.japonicum_strain_NeRa06]
+##       1 &gt;gi|190612099|[B.japonicum_strain_NeRa05]
+##       1 &gt;gi|190612097|[B.japonicum_strain_NeRa04]
+##       1 &gt;gi|190612095|[B.japonicum_strain_NeRa03]
+##       1 &gt;gi|190612093|[B.japonicum_strain_NeRa02]
+##       1 &gt;gi|190612091|[B.japonicum_strain_NeRa01]
+##       1 &gt;gi|190612089|[B.japonicum_strain_NeMa16]
+##       1 &gt;gi|190612087|[B.japonicum_strain_NeMa12]
+##       1 &gt;gi|190612085|[B.japonicum_strain_NeMa11]
+##       1 &gt;gi|190612083|[B.japonicum_strain_NeMa10]
+##       1 &gt;gi|190612081|[B.japonicum_strain_NeMa02]
+##       1 &gt;gi|190612079|[B.japonicum_strain_NeMa01]
+##       1 &gt;gi|190612077|[B.yuanmingense_strain_InRo02]
+##       1 &gt;gi|190612075|[B.yuanmingense_strain_InKo02]
+##       1 &gt;gi|190612073|[B.yuanmingense_strain_InKo01]
+##       1 &gt;gi|190612071|[B.yuanmingense_strain_InJa09]
+##       1 &gt;gi|190612069|[B.yuanmingense_strain_InJa08]
+##       1 &gt;gi|190612067|[B.yuanmingense_strain_InJa07]
+##       1 &gt;gi|190612065|[B.yuanmingense_strain_InJa06]
+##       1 &gt;gi|190612063|[B.yuanmingense_strain_InJa05]
+##       1 &gt;gi|190612061|[B.yuanmingense_strain_InJa04]
+##       1 &gt;gi|190612059|[B.yuanmingense_strain_InJa03]
+##       1 &gt;gi|190612057|[B.yuanmingense_strain_InJa02]
+##       1 &gt;gi|190612055|[B.yuanmingense_strain_InJa01]
+##       1 &gt;gi|190612053|[B.yuanmingense_strain_InIn10]
+##       1 &gt;gi|190612051|[B.yuanmingense_strain_InIn09]
+##       1 &gt;gi|190612049|[B.yuanmingense_strain_InIn08]
+##       1 &gt;gi|190612047|[B.yuanmingense_strain_InIn05]
+##       1 &gt;gi|190612045|[B.yuanmingense_strain_InIn04]
+##       1 &gt;gi|190612043|[B.yuanmingense_strain_InIn03]
+##       1 &gt;gi|190612041|[B.yuanmingense_strain_InIn02]
+##       1 &gt;gi|190612039|[B.yuanmingense_strain_InIn01]
+##       1 &gt;gi|190612037|[B.yuanmingense_strain_InBu02]
+##       1 &gt;gi|190612035|[B.elkanii_strain_BuNoR4]
+##       1 &gt;gi|190612033|[B.elkanii_strain_BuNoR3]
+##       1 &gt;gi|190612031|[B.elkanii_strain_BuNoR2]
+##       1 &gt;gi|190612029|[B.elkanii_strain_BuNoR1]
+##       1 &gt;gi|190612027|[B.sp._BuNoG5]
+##       1 &gt;gi|190612025|[B.elkanii_strain_BuNoG4]
+##       1 &gt;gi|190612023|[B.elkanii_strain_BuNoG1]
+##       1 &gt;gi|190612021|[B.elkanii_strain_BuMiT9]
+##       1 &gt;gi|190612019|[B.elkanii_strain_BuMiT8]
+##       1 &gt;gi|190612017|[B.elkanii_strain_BuMiT7]
+##       1 &gt;gi|190612015|[B.elkanii_strain_BuMiT6]
+##       1 &gt;gi|190612013|[B.liaoningense_strain_BuMiT5]
+##       1 &gt;gi|190612011|[B.liaoningense_strain_BuMiT4]
+##       1 &gt;gi|190612009|[B.liaoningense_strain_BuMiT3]
+##       1 &gt;gi|190612007|[B.sp._BuMiT10]
+##       1 &gt;gi|190612005|[B.elkanii_strain_BuMiT1]
+##       1 &gt;gi|190612003|[B.liaoningense_strain_BuMiN6]
+##       1 &gt;gi|190612001|[B.elkanii_strain_BuMiN4]
+##       1 &gt;gi|190611999|[B.elkanii_strain_BuMiN3]
+##       1 &gt;gi|190611997|[B.elkanii_strain_BuMiN2]
+##       1 &gt;gi|190611995|[B.elkanii_strain_BuMiN1]
+##       1 &gt;gi|190611993|[B.yuanmingense_strain_BuCeR5]
+##       1 &gt;gi|190611991|[B.yuanmingense_strain_BuCeR4]
+##       1 &gt;gi|190611989|[B.yuanmingense_strain_BuCeR3]
+##       1 &gt;gi|190611987|[B.sp._BuCeR2]
+##       1 &gt;gi|190611985|[B.sp._BuCeR1]
+##       1 &gt;gi|190611983|[B.yuanmingense_strain_BuCeG4]
+##       1 &gt;gi|190611981|[B.yuanmingense_strain_BuCeG3]
+##       1 &gt;gi|190611979|[B.yuanmingense_strain_BuCeG2]</code></pre>
 </div>
 <div id="edicion-de-las-cabeceras-fasta-mediante-herramientas-de-filtrado-de-unix" class="section level3">
 <h3><span class="header-section-number">1.2.3</span> Edición de las cabeceras FASTA mediante herramientas de filtrado de UNIX</h3>
@@ -205,16 +507,16 @@ cd sesion1_parseo_fastas
 </ol>
 <pre class="bash"><code># grep '&gt;' recA_Bradyrhizobium_vinuesa.fna | less # para verlas por página 
 grep '&gt;' recA_Bradyrhizobium_vinuesa.fna  | head # para no hacer muy extensa la salida</code></pre>
-<pre><code>## &gt;gi|145926563|gb|EF190191.1| Bradyrhizobium japonicum strain X6-9 RNA polymerase beta subunit (rpoB) gene, partial cds
-## &gt;gi|145926559|gb|EF190189.1| Bradyrhizobium elkanii strain USDA 94 RNA polymerase beta subunit (rpoB) gene, partial cds
-## &gt;gi|145926555|gb|EF190187.1| Bradyrhizobium elkanii strain USDA 46 RNA polymerase beta subunit (rpoB) gene, partial cds
-## &gt;gi|145926551|gb|EF190185.1| Bradyrhizobium yuanmingense strain TAL760 RNA polymerase beta subunit (rpoB) gene, partial cds
-## &gt;gi|145926547|gb|EF190183.1| Bradyrhizobium japonicum strain Nep1 RNA polymerase beta subunit (rpoB) gene, partial cds
-## &gt;gi|145926543|gb|EF190181.1| Bradyrhizobium liaoningense strain LMG 18230 RNA polymerase beta subunit (rpoB) gene, partial cds
-## &gt;gi|145926539|gb|EF190179.1| Bradyrhizobium sp. IRBG 131 RNA polymerase beta subunit (rpoB) gene, partial cds
-## &gt;gi|145926535|gb|EF190177.1| Bradyrhizobium japonicum strain FN13 RNA polymerase beta subunit (rpoB) gene, partial cds
-## &gt;gi|145926531|gb|EF190175.1| Bradyrhizobium sp. CIAT 3101 RNA polymerase beta subunit (rpoB) gene, partial cds
-## &gt;gi|145926527|gb|EF190173.1| Bradyrhizobium sp. BTAi1 RNA polymerase beta subunit (rpoB) gene, partial cds</code></pre>
+<pre><code>## &gt;gi|190612137|[B.liaoningense_strain_ViHaR5]
+## &gt;gi|190612135|[B.liaoningense_strain_ViHaR4]
+## &gt;gi|190612133|[B.liaoningense_strain_ViHaR3]
+## &gt;gi|190612131|[B.liaoningense_strain_ViHaR2]
+## &gt;gi|190612129|[B.liaoningense_strain_ViHaR1]
+## &gt;gi|190612127|[B.liaoningense_strain_ViHaG8]
+## &gt;gi|190612125|[B.liaoningense_strain_ViHaG7]
+## &gt;gi|190612123|[B.liaoningense_strain_ViHaG6]
+## &gt;gi|190612121|[B.yuanmingense_strain_ViHaG5]
+## &gt;gi|190612119|[B.yuanmingense_strain_ViHaG4]</code></pre>
 <ol start="6" style="list-style-type: decimal">
 <li>simplifiquemos las cabeceras FASTA usando el comando <strong>sed</strong> (stream editor)</li>
 </ol>
@@ -222,11 +524,11 @@ grep '&gt;' recA_Bradyrhizobium_vinuesa.fna  | head # para no hacer muy extensa 
 <p>Es decir vamos a: - reducir Bradyrhizobium a ‘B.’ - eliminar ‘RNA poly …’ y reemplazarlo por ‘]’ - eliminar ‘genosp.’ - sustituir espacios por guiones bajos</p>
 <p>Noten el uso de expresiones regulares como ’.*‘y’[[:space:]]’</p>
 <pre class="bash"><code>sed 's/ Bra/ [Bra/; s/|gb.*| /|/; s/Bradyrhizobium /B./; s/genosp\. //; s/ RNA.*/]/; s/[[:space:]]/_/g;' recA_Bradyrhizobium_vinuesa.fna | grep '&gt;' | head -5</code></pre>
-<pre><code>## &gt;gi|145926563|[B.japonicum_strain_X6-9]
-## &gt;gi|145926559|[B.elkanii_strain_USDA_94]
-## &gt;gi|145926555|[B.elkanii_strain_USDA_46]
-## &gt;gi|145926551|[B.yuanmingense_strain_TAL760]
-## &gt;gi|145926547|[B.japonicum_strain_Nep1]</code></pre>
+<pre><code>## &gt;gi|190612137|[B.liaoningense_strain_ViHaR5]
+## &gt;gi|190612135|[B.liaoningense_strain_ViHaR4]
+## &gt;gi|190612133|[B.liaoningense_strain_ViHaR3]
+## &gt;gi|190612131|[B.liaoningense_strain_ViHaR2]
+## &gt;gi|190612129|[B.liaoningense_strain_ViHaR1]</code></pre>
 <ol start="8" style="list-style-type: decimal">
 <li>Cuando estamos satisfechos con el resultado, guardamos la salida del comando en un archivo usando ‘&gt;’ para redirigir el flujo de STDOUT a un archivo de texto</li>
 </ol>
@@ -242,35 +544,35 @@ grep '&gt;' recA_Bradyrhizobium_vinuesa.fna  | head # para no hacer muy extensa 
 <pre class="bash"><code>perl -pe 'unless(/^&gt;/){s/\n//g}; if(/&gt;/){s/\n/\t/g}; s/&gt;/\n&gt;/' recA_Bradyrhizobium_vinuesa.fnaed | head
 </code></pre>
 <pre><code>## 
-## &gt;gi|145926563|[B._japonicum_strain_X6-9] TCGGGCAAGCTGCTGTTCGCCGCCCGCGTCATCCCGTATCGCGGCTCCTGGCTCGACATCGAGTTCGACGCCAAGGACATCGTCTATGCGCGTATCGACCGCCGCCGCAAGATTCCGGTAACGTCGCTGATGTTCGCGCTCGGCCTCGACGGCGAGGCGATCCTGTCCACGTTCTACAAGAAGATTCTCTACAAGCGGACCAAGGAAGGCTGGCGCGTTCCGTTCGACGCCAACCGTTTCCGCGGCTACTCGACCATCAACGACCTGATCGACGCCGACACCGGCAAGGTCGTGCTCGAGGCCGGCAAGAAGCTCACCGTGCGCGGTGCGCGTCAGATGCAGGAGAAGGGCCTGAAGGCGCTGCGGCTGTCCGATGAGGAACTCGTTGGCAACTATCTCGCCGAGGACCTCGTCAACCCGAAGACGGGCGAGATCCACGCGGAGGCCGGTGAAGAGATCACCGACAAGTCGATGAAGGCCCTCAACGAGCAGGGCTACAAGGAGCTGCCGCTGCTCGACATCGACCACGTCAATGTCGGCGCCTACATCCGCAACACGCTCTCGGCCGACAAGAACATGACGCGCGAGGACGCGCTGTTCGACATCTACCGCGTGATGCGTCCGGGCGAGCCGCCGACGCTGGATTCGGCGCAGGCGATGTTCCAGTCGCTGTTCTTCGACGCCGAGCGCTACGACCTGTCCGCGGTCGGCCGCGTCAAGATGAACATGCGCCTCGACCTCGATGCGCCCGATACCCAGCGTACGCTGCGC
-## &gt;gi|145926559|[B._elkanii_strain_USDA_94]    TCCGGCAAGCTGCTGTTTGCCGCGCGCGTGATTCCGTATCGCGGTTCCTGGCTCGACATCGAGTTCGACGCCAAGGACATCGTGTTCGCGCGCATCGACCGTCGCCGCAAGCTGCCCGTGACCTCGCTGATGTACGCGCTCGGTCTCGACGGCGAGCAGATCCTGTCGACCTTCTACAAGAAGATCACCTACAAGCGGACCAAGGACGGATGGCGCGTGCCGTTCGACGCCAACCGCTTCCGCGGCTATTCGACCGTCAACGACCTGATCGACGCCGACACCGGCAAGGTGGTGCTCGAGGCCGGCAAGAAGCTGACCGTGCGCCAGGCGCGCCAGCTTCAGGAGAAGGGCCTGAAGGCGCTGCGCATGTCGGACGAGGAACTCGTCGGCAACTATCTCGCCGAGGATCTCGTCAACCCGAAGACCGGTGAGATCTACGCCGAAGCCGGCGAGGAGATCACCGAGAAGTCGCTCAAGGTGCTGAACGAGCAGGGCTACAAGGACCTGCCGCTGCTCGACATCGACCACGTCAATGTCGGCGCCTATATCCGCAACACGCTGTCGGCCGACAAGAACATGACGCGTGAGGACGCGCTGTTCGACATCTACCGCGTGATGCGTCCGGGCGAGCCGCCGACGCTGGATTCGGCGCAGGCGATGTTCCAGTCGCTGTTCTTCGATGCCGAGCGCTACGACCTCTCCGCGGTCGGCCGCGTCAAGATGAACATGCGCCTCGAGCTCGATGCGCCCGATACCCATCGCACGCTGCGC
-## &gt;gi|145926555|[B._elkanii_strain_USDA_46]    TCCGGCAAGCTGCTGTTTGCCGCGCGCGTGATTCCGTATCGCGGTTCCTGGCTCGACATCGAGTTCGACGCCAAGGACATCGTGTTCGCGCGCATCGACCGTCGCCGCAAGCTGCCCGTGACCTCGCTGATGTACGCGCTCGGTCTCGACGGCGAGCAGATCCTGTCGACCTTCTACAAGAAGATCACCTACAAGCGGACCAAGGACGGATGGCGCGTGCCGTTCGACGCCAACCGCTTCCGCGGCTATTCGACCGTCAACGACCTGATCGACGCCGACACCGGCAAGGTGGTGCTCGAGGCCGGCAAGAAGCTGACCGTGCGCCAGGCGCGCCAGCTTCAGGAGAAGGGCCTGAAGGCGCTGCGCATGTCGGACGAGGAGCTCGTCGGCAACTATCTCGCCGAGGATCTCGTCAACCCGAAGACCGGTGAGATCTACGCCGAAGCCAGCGAGGAGATCACCGAGAAGTCGCTCAAGGTGCTGAACGAGCAGGGCTACAAGGACCTGCCGCTGCTCGACATCGACCACGTCAATGTCGGCGCCTACATCCGCAACACGCTGTCGGCCGACAAGAACATGACGCGCGAGGACGCGCTGTTCGACATCTACCGCGTGATGCGTCCGGGCGAGCCGCCGACGCTGGATTCGGCGCAGGCGATGTTCCAGTCGCTGTTCTTCGACGCCGAGCGCTACGACCTCTCCGCGGTCGGCCGCGTCAAGATGAACATGCGCCTCGAGCTCGATGCGCCCGATACCCATCGCACGCTGCGC
-## &gt;gi|145926551|[B._yuanmingense_strain_TAL760]    TCGGGCAAGCTGCTGTTCGCCGCCCGCGTCATCCCGTATCGCGGCTCCTGGCTCGACATCGAGTTCGACGCCAAGGACATCGTCTATGCGCGTATCGACCGTCGCCGCAAGATTCCGGTGACGTCGCTGATGTTCGCCCTCGGCCTCGACGGCGAGGCGATCCTGTCCACGTTCTACAAGAAGATTCTCTACAAGCGGACCAAGGAAGGCTGGCGCGTTCCGTTCGACGCCAACCGCTTCCGCGGCTACTCCACGGTCAACGACCTGATCGATGCCGACACCGGCAAGGTCGTGCTCGAGGCCGGCAAGAAGCTCACCGTCCGCGCCGCCCGCCAGCTCCAGGAAAAGGGGCTGAAGGCGCTGCGCATGGCCGATGAGGAGCTGGTCGGCAACTACGTCGCCGAGGATCTTGTCAACCCCAAGACCGGCGAGATCCACGCCGAGGCCGGTGAGGAGATCACCGACAAGCTGATGAAGGCGCTCAACGAGCAGGGCTACAAGGAGCTGCCGCTGCTCGACATCGACCACGTCAATGTCGGCCCCTACATCCGCAACACGCTCTCGGCCGACAAGAACATGACGCGCGAGGACGCGCTGTTCGACATCTACCGCGTGATGCGTCCAGGCGAGCCGCCGACGCTGGAATCGGCGCAGGCCATGTTCCAGTCGCTGTTCTTCGACGCCGAGCGCTACGACCTCTCCGCGGTCGGCCGCGTCAAGATGAACATGCGCCTCGACCTCGATGCGCCCGATACCCAGCGCACGCTGCGC
-## &gt;gi|145926547|[B._japonicum_strain_Nep1] TCGGGCAAGCTGCTGTTCGCCGCCCGCGTGATTCCGTATCGCGGCTCCTGGCTCGACATCGAGTTCGATGCCAAGGACATCGTCTATGCGCGTATCGACCGTCGCCGCAAGATTCCGGTGACGTCGCTGATGTTCGCGCTCGGCCTTGACGGCGAGGCGATCCTGTCCACGTTCTACAAGAAGATCCTCTACAAGCGGACCAAGGAAGGCTGGCGCGTTCCGTTCGACGCCAACCGTTTCCGCGGCTACTCGACCATCAACGACCTGATCGACGCCGACACCGGCAAGGTCGTGCTCGAGGCCGGCAAGAAGCTCACCGTCCGTGCCGCCCGTCAGCTCCAGGAGAAGGGGCTGAAGGCGCTGCGCCTGTCGGATGAGGAGCTCGTCGGCAACTACCTCGCCGAGGATCTCGTCAATCCGAAGACCGGCGAGATCCACGCCGAGGCCGGCGAGGAGATCACCGACAAGAACATGAAGGCCCTCAACGAGCAGGGCTACAAGGAACTGCCGCTGCTCGACATCGATCACGTCAATGTCGGCGCCTACATCCGCAACACGCTCTCGGCCGACAAGAACATGACGCGCGAGGACGCGCTGTTCGACATCTACCGCGTGATGCGTCCGGGCGAGCCGCCGACGCTGGATTCGGCGCAGGCGATGTTCCAGTCGCTGTTCTTCGACGCCGAGCGCTATGACCTCTCCGCGGTCGGCCGCGTCAAGATGAACATGCGCCTCGACCTCGATGCGCCGGACACCCAGCGCACGCTGCGC
-## &gt;gi|145926543|[B._liaoningense_strain_LMG_18230] TCGGGCAAGCTGCTGTTCGCCGCCCGCGTCATCCCGTATCGCGGCTCCTGGCTCGACATCGAGTTCGACGCCAAGGACATCGTCTATGCGCGTATCGACCGTCGCCGCAAGATTCCGGTGACGTCGCTGATGTTCGCCCTCGGTCTCGACGGCGAGGCGATCCTGTCCACGTTCTACAAGAAGATACTCTACAAGCGGACCAAGGAAGGCTGGCGCGTTCCGTTCGACGCCAACCGTTTCCGCGGCTACTCGACCGTCAACGACCTGATCGACGCCGACACCGGCAAGGTCGTGCTCGAGGCCGGCAAGAAGCTCACCGTCCGCGCCGCCCGCCAGCTCCAGGAGAAGGGGCTGAAGGCGCTGCGCATGGCCGACGAGGAGCTGGTCGGCAACTACGTCGCCGAGGATCTCGTCAACCCGAAGACCGGTGAGATCCACGCCGAGGCCGGTGAGGAAATCACCGACAAGCTGATGAAGGCGCTCAACGAGCAGGGTTACAAGGAGCTGCCGCTGCTCGACATCGACCACGTCAATGTCGGCCCCTACATCCGCAACACGCTGTCGGCCGACAAGAACATGACGCGTGAGGATGCGCTGTTCGACATCTACCGCGTGATGCGTCCGGGCGAGCCGCCGACGCTGGAATCGGCGCAGGCCATGTTCCAGTCGCTGTTCTTCGACGCCGAACGCTACGACCTGTCCGCGGTCGGCCGCGTCAAGATGAACATGCGCCTCGACCTCGATGCGCCCGACACCCAGCGCACGCTGCGC
-## &gt;gi|145926539|[B._sp._IRBG_131]  TCGGGCAAGCTGCTGTTCGCCGCGCGCGTCATTCCGTATCGCGGCTCCTGGCTCGACATCGAGTTCGACGCCAAGGACATCGTGTTCGCGCGCATCGACCGTCGCCGCAAGCTGCCGGTGACGTCGCTGATGTTCGCGCTCGGCCTCGACGGCGAGACCATCCTGTCGACCTTCTACAAGAAGCTGATCTACAAGCGCATCAAGGAAGGCTGGCGCGTTCCGTTCGACGCCAACCGCTTCCGCGGCTATTCGACCGTCAACGACCTGATCGACGCCGACACCGGCAAGGTCGTGCTCGAAGCCGGCAAGAAGCTCACCGTCCGTGCCGCCCGCCAGCTCCAGGAGAAGGGGCTGAAGGCGCTGCGCATGTCGGACGAGGAGCTGCTCGGCAACTACATCGCCGAGGATCTCGTCAACCCGAAGACCGGTGAAATCTACGCCGAGGCGGGCGAGGAGATCACCGACAAGCTGTTCAAGGTGCTGAACGAGCAGGGCTACAAGGACCTGCCGCTGCTCGACATCGACCACGTCAATGTCGGCCCCTACATCCGCAACACGCTGTCGGCCGACAAGAACATGACGCGTGAGGACGCGCTGTTCGACATCTACCGCGTGATGCGTCCGGGCGAGCCGCCGACGCTCGATTCCGCGCAGGCGATGTTCCAGTCGCTGTTCTTCGATGCCGAGCGCTACGACCTCTCCGCGGTCGGCCGCGTCAAGATGAACATGCGCCTCGAGCTCGATGCGCCGGACACCCAGCGCACGCTGCGC
-## &gt;gi|145926535|[B._japonicum_strain_FN13] TCGGGCAAGCTGCTGTTCGCCGCCCGCGTCATCCCGTATCGCGGCTCCTGGCTCGACATCGAGTTCGACGCCAAGGACATCGTCTATGCGCGTATCGACCGTCGCCGCAAGATTCCGGTGACGTCGCTGATGTTCGCGCTCGGCCTCGACGGCGAGGCGATCCTGTCCACGTTCTACAAGAAGATTCTCTACAAGCGGACCAAGGAAGGCTGGCGCGTTCCGTTCGACGCCAACCGTTTCCGCGGCTACTCGACCATCAACGACCTGATCGACGCCGACACCGGCAAGGTCGTGCTCGAGGCCGGCAAGAAGCTCACCGTGCGCGGTGCGCGTCAGATGCAGGAGAAGGGGCTGAAGGCGCTGCGGCTGTCCGATGAGGAGCTCGTCGGCAACTATCTCGCCGAGGACCTCGTCAACCCGAAGACCGGCGAGATCCACGCGGAAGCCGGTGAAGAGATCACCGACAAGTCGATGAAGGCCCTCAACGAGCAGGGCTACAAGGAACTGCCGCTGCTCGACATCGACCACGTCAATGTCGGCGCCTACATCCGCAATACGCTCTCGGCCGACAAGAACATGACGCGTGAGGACGCGCTGTTCGACATCTACCGCGTGATGCGTCCGGGCGAGCCGCCGACGCTGGATTCGGCGCAAGCGATGTTCCAGTCGCTGTTCTTCGACGCCGAGCGCTATGACCTGTCCGCGGTCGGCCGCGTCAAGATGAACATGCGCCTCGACCTCGATGCGCCCGACACCCAGCGTACGCTGCGC
-## &gt;gi|145926531|[B._sp._CIAT_3101] TCGGGCAAGCTGCTGTTCGCTGCCCGCGTGATCCCGTATCGCGGCTCCTGGCTCGACATCGAGTTCGACGCCAAGGACATCGTCTATGCGCGTATCGACCGTCGCCGCAAGATTCCGGTGACGTCGCTGATGTTCGCCCTCGGCCTCGACGGCGAGGCGATCCTGTCGACGTTCTACAAGAAGATCCTCTACAAGCGGACCAAGGAAGGCTGGCGCGTTCCGTTCGACGCCAACCGTTTCCGCGGTTACTCGACCATCAACGACCTGATCGACGCCGACACCGGCAAGGTCGTGCTCGAGGCCGGCAAGAAGCTCACCGTCCGCGCCGCCCGCCAGCTCCAGGAGAAGGGGCTCAAGGCTCTGCGCCTGTCGGATGAGGAGCTCGTCGGCAACTACCTCGCCGAGGACCTCGTCAACCCGAAGACGGGTGAAATCCACGCCGAAGCCGGTGAGGAAATCACCGACAAGTCGATGAAGGCCCTCAACGAGCACGGCTACAAGGAACTGCCGCTGCTCGACATCGACCACGTCAATGTCGGCGCCTACATCCGCAACACGCTCTCGGCCGACAAGAACATGACGCGTGAAGACGCGCTGTTCGACATCTACCGCGTGATGCGCCCGGGCGAGCCGCCGACGCTGGATTCGGCGCAGGCGATGTTCCAGTCGCTGTTCTTCGACGCCGAGCGTTACGACCTCTCCGCGGTCGGCCGCGTCAAGATGAACATGCGCCTCGACCTCGATGCGCCCGACACCCAGCGCACGCTGCGG</code></pre>
+## &gt;gi|190612137|[B.liaoningense_strain_ViHaR5] ATGAAGCTCGGCAAGAACGACCGGTCCATGGACATCGAGGCGGTGTCCTCCGGCTCGCTCGGGCTCGACATCGCGCTCGGCATCGGCGGCCTGCCCAAGGGGCGTATCGTCGAGATCTACGGGCCGGAATCCTCGGGCAAGACCACGCTGGCGCTGCATACGGTGGCGGAAGCGCAGAAGAAGGGCGGCATCTGCGCCTTCATCGACGCCGAGCACGCGCTCGACCCGGTCTATGCCCGCAAGCTCGGCGTCAACATCGACGAGCTCCTGATCTCGCAGCCCGACACCGGCGAGCAGGCGCTGGAGATCTGCGACACGCTGGTGCGCTCGGGCGCTGTCGATGTGCTGGTGATCGACTCGGTTGCGGCGCTGGTGCCGAAGGCCGAGCTCGAAGGCGAGATGGGCGATGCGCTGCCAGGCTTGCAGGCCCGTCTGATGAGCCAGGCGCTGCGCAAGCTGACGGCCTCCATCAACAAGTCCAACACCATGGTGATCTTCATCAACCAGATC
+## &gt;gi|190612135|[B.liaoningense_strain_ViHaR4] ATGAAGCTCGGCAAGAACGACCGGTCCATGGACATCGAGGCGGTGTCCTCCGGCTCGCTCGGGCTCGACATCGCGCTCGGCATCGGCGGCCTGCCCAAGGGGCGTATCGTCGAGATCTACGGGCCGGAATCCTCGGGCAAGACCACGCTGGCGCTGCATACGGTGGCGGAAGCGCAGAAGAAGGGCGGCATCTGCGCCTTCATCGACGCCGAGCACGCGCTCGACCCGGTCTATGCCCGCAAGCTCGGCGTCAACATCGACGAGCTCCTGATCTCGCAGCCCGACACCGGCGAGCAGGCGCTGGAGATCTGCGACACGCTGGTGCGCTCGGGCGCTGTCGATGTGCTGGTGATCGATTCGGTTGCGGCGCTGGTGCCGAAGGCCGAGCTCGAAGGCGAGATGGGCGATGCGCTGCCGGGCTTGCAGGCCCGTCTGATGAGCCAGGCGCTGCGCAAGCTGACGGCCTCCATCAACAAGTCCAACACCATGGTGATCTTCATCAACCAGATC
+## &gt;gi|190612133|[B.liaoningense_strain_ViHaR3] ATGAAGCTCGGCAAGAACGACCGGTCCATGGACATCGAGGCGGTGTCCTCCGGCTCGCTCGGGCTCGACATCGCGCTCGGCATCGGCGGCCTGCCCAAGGGGCGTATCGTCGAGATCTACGGGCCGGAATCCTCGGGCAAGACCACGCTGGCGCTGCATACGGTGGCGGAAGCGCAGAAGAAGGGCGGCATCTGCGCCTTCATCGACGCCGAGCACGCGCTCGACCCGGTCTATGCCCGCAAGCTCGGCGTCAACATCGACGAGCTCCTGATCTCGCAGCCCGACACCGGCGAGCAGGCGCTGGAGATCTGCGACACGCTGGTGCGCTCGGGCGCTGTCGATGTGCTGGTGATCGATTCGGTTGCGGCGCTGGTGCCGAAGGCCGAGCTCGAAGGCGAGATGGGCGATGCGCTGCCGGGCTTGCAGGCCCGTCTGATGAGCCAGGCGCTGCGCAAGCTGACGGCCTCCATCAACAAGTCCAACACCATGGTGATCTTCATCAACCAGATC
+## &gt;gi|190612131|[B.liaoningense_strain_ViHaR2] ATGAAGCTCGGCAAGAACGACCGGTCCATGGACATCGAGGCGGTGTCCTCCGGCTCGCTCGGGCTCGACATCGCGCTCGGCATCGGCGGCCTGCCCAAGGGGCGTATCGTCGAGATCTACGGGCCGGAATCCTCGGGCAAGACCACGCTGGCGCTGCATACGGTGGCGGAAGCGCAGAAGAAGGGCGGCATCTGCGCCTTCATCGACGCCGAGCACGCGCTCGACCCGGTCTATGCCCGCAAGCTCGGCGTCAACATCGACGAGCTCCTGATCTCGCAGCCCGACACCGGCGAGCAGGCGCTGGAGATCTGCGACACGCTGGTGCGCTCGGGCGCTGTCGATGTGCTGGTGATCGATTCGGTTGCGGCGCTGGTGCCGAAGGCCGAGCTCGAAGGCGAGATGGGCGATGCGCTGCCGGGCTTGCAGGCCCGTCTGATGAGCCAGGCGCTGCGCAAGCTGACGGCCTCCATCAACAAGTCCAACACCATGGTGATCTTCATCAACCAGATC
+## &gt;gi|190612129|[B.liaoningense_strain_ViHaR1] ATGAAGCTCGGCAAGAACGACCGGTCCATGGACATCGAGGCGGTGTCCTCCGGCTCGCTCGGGCTCGACATCGCGCTCGGCATCGGCGGCCTGCCCAAGGGGCGTATCGTCGAGATCTACGGGCCGGAATCCTCGGGCAAGACCACGCTGGCGCTGCATACGGTGGCGGAAGCGCAGAAGAAGGGCGGCATCTGCGCCTTCATCGACGCCGAGCACGCGCTCGACCCGGTCTATGCCCGCAAGCTCGGCGTCAACATCGACGAGCTCCTGATCTCGCAGCCCGACACCGGCGAGCAGGCGCTGGAGATCTGCGACACGCTGGTGCGCTCGGGCGCTGTCGATGTGCTGGTGATCGATTCGGTTGCGGCGCTGGTGCCGAAGGCCGAGCTCGAAGGCGAGATGGGCGATGCGCTGCCGGGCTTGCAGGCCCGTCTGATGAGCCAGGCGCTGCGCAAGCTGACGGCCTCCATCAACAAGTCCAACACCATGGTGATCTTCATCAACCAGATC
+## &gt;gi|190612127|[B.liaoningense_strain_ViHaG8] ATGAAGCTCGGCAAGAACGACCGGTCCATGGACATCGAGGCGGTGTCCTCCGGCTCGCTCGGGCTCGACATCGCGCTCGGCATCGGCGGCCTGCCCAAGGGGCGTATCGTCGAGATCTACGGGCCGGAATCCTCGGGCAAGACCACGCTGGCGCTGCATACGGTGGCGGAAGCGCAGAAGAAGGGCGGCATCTGCGCCTTCATCGACGCCGAGCACGCGCTCGACCCGGTCTATGCCCGCAAGCTCGGCGTCAACATCGACGAGCTCCTGATCTCGCAGCCCGACACCGGCGAGCAGGCGCTGGAGATCTGCGACACGCTGGTGCGCTCGGGCGCTGTCGATGTGCTGGTGATCGATTCGGTTGCGGCGCTGGTGCCGAAGGCCGAGCTCGAAGGCGAGATGGGCGATGCGCTGCCGGGCTTGCAGGCCCGTCTGATGAGCCAGGCGCTGCGCAAGCTGACGGCCTCCATCAACAAGTCCAACACCATGGTGATCTTCATCAACCAGATC
+## &gt;gi|190612125|[B.liaoningense_strain_ViHaG7] ATGAAGCTCGGCAAGAACGACCGGTCCATGGACATCGAGGCGGTGTCCTCCGGCTCGCTCGGGCTCGACATCGCGCTCGGCATCGGCGGCCTGCCCAAGGGGCGTATCGTCGAGATCTACGGGCCGGAATCCTCGGGCAAGACCACGCTGGCGCTGCATACGGTGGCGGAAGCGCAGAAGAAGGGCGGCATCTGCGCCTTCATCGACGCCGAGCACGCGCTCGACCCGGTCTATGCCCGCAAGCTCGGCGTCAACATCGACGAGCTCCTGATCTCGCAGCCCGACACCGGCGAGCAGGCGCTGGAGATCTGCGACACGCTGGTGCGCTCGGGCGCTGTCGATGTGCTGGTGATCGATTCGGTTGCGGCGCTGGTGCCGAAGGCCGAGCTCGAAGGCGAGATGGGCGATGCGCTGCCGGGCTTGCAGGCCCGTCTGATGAGCCAGGCGCTGCGCAAGCTGACGGCCTCCATCAACAAGTCCAACACCATGGTGATCTTCATCAACCAGATC
+## &gt;gi|190612123|[B.liaoningense_strain_ViHaG6] ATGAAGCTCGGCAAGAACGACCGGTCCATGGACATCGAGGCGGTGTCCTCCGGCTCGCTCGGGCTCGACATCGCGCTCGGCATCGGCGGCCTGCCCAAGGGGCGTATCGTCGAGATCTACGGGCCGGAATCCTCGGGCAAGACCACGCTGGCGCTGCATACGGTGGCGGAAGCGCAGAAGAAGGGCGGCATCTGCGCCTTCATCGACGCCGAGCACGCGCTCGACCCGGTCTATGCCCGCAAGCTCGGCGTCAACATCGACGAGCTCCTGATCTCGCAGCCCGACACCGGCGAGCAGGCGCTGGAGATCTGCGACACGCTGGTGCGCTCGGGCGCTGTCGATGTGCTGGTGATCGATTCGGTTGCGGCGCTGGTGCCGAAGGCCGAGCTCGAAGGCGAGATGGGCGATGCGCTGCCGGGCTTGCAGGCCCGTCTGATGAGCCAGGCGCTGCGCAAGCTGACGGCCTCCATCAACAAGTCCAACACCATGGTGATCTTCATCAACCAGATC
+## &gt;gi|190612121|[B.yuanmingense_strain_ViHaG5] ATGAAGCTCGGCAAGAACGACCGCTCCATGGACATCGAGGCGGTGTCCTCCGGCTCGCTCGGGCTCGATATCGCGCTCGGCATCGGCGGCTTGCCCAAGGGGCGCATCGTCGAGATCTACGGGCCGGAATCCTCGGGCAAGACCACGCTGGCGCTGCATACGGTGGCGGAAGCGCAGAAGAAGGGCGGCATCTGCGCCTTCATCGACGCCGAGCACGCGCTCGATCCGGTCTATGCCCGCAAGCTCGGCGTCAACATCGACGAGCTCCTGATCTCGCAGCCCGACACCGGCGAGCAGGCGCTGGAGATCTGCGACACCCTGGTGCGCTCGGGCGCCGTCGACGTTCTCGTGGTCGATTCGGTCGCGGCGCTGGTGCCGAAGGCCGAGCTCGAGGGCGAGATGGGCGATGCGCTGCCGGGACTTCAAGCACGGTTGATGAGCCAGGCGCTGCGCAAGCTCACGGCCTCCATCAACAAATCCAACACGATGGTGATCTTCATCAACCAGATC</code></pre>
 <pre class="bash"><code>perl -pe 'unless(/^&gt;/){s/\n//g}; if(/&gt;/){s/\n/\t/g}; s/&gt;/\n&gt;/' recA_Bradyrhizobium_vinuesa.fnaed &gt; recA_Bradyrhizobium_vinuesa.fnaedtab</code></pre>
 <ol start="10" style="list-style-type: decimal">
 <li>Filtrar el archivo fnaedtab generado en 9 para obtener solo las secuencias de B._yuanmingense del mismo, guardarlo en un archivo y convertirlo de nuevo a formato FASTA.</li>
 </ol>
 <pre class="bash"><code>grep yuanmingense recA_Bradyrhizobium_vinuesa.fnaedtab | head -5</code></pre>
-<pre><code>## &gt;gi|145926551|[B._yuanmingense_strain_TAL760]    TCGGGCAAGCTGCTGTTCGCCGCCCGCGTCATCCCGTATCGCGGCTCCTGGCTCGACATCGAGTTCGACGCCAAGGACATCGTCTATGCGCGTATCGACCGTCGCCGCAAGATTCCGGTGACGTCGCTGATGTTCGCCCTCGGCCTCGACGGCGAGGCGATCCTGTCCACGTTCTACAAGAAGATTCTCTACAAGCGGACCAAGGAAGGCTGGCGCGTTCCGTTCGACGCCAACCGCTTCCGCGGCTACTCCACGGTCAACGACCTGATCGATGCCGACACCGGCAAGGTCGTGCTCGAGGCCGGCAAGAAGCTCACCGTCCGCGCCGCCCGCCAGCTCCAGGAAAAGGGGCTGAAGGCGCTGCGCATGGCCGATGAGGAGCTGGTCGGCAACTACGTCGCCGAGGATCTTGTCAACCCCAAGACCGGCGAGATCCACGCCGAGGCCGGTGAGGAGATCACCGACAAGCTGATGAAGGCGCTCAACGAGCAGGGCTACAAGGAGCTGCCGCTGCTCGACATCGACCACGTCAATGTCGGCCCCTACATCCGCAACACGCTCTCGGCCGACAAGAACATGACGCGCGAGGACGCGCTGTTCGACATCTACCGCGTGATGCGTCCAGGCGAGCCGCCGACGCTGGAATCGGCGCAGGCCATGTTCCAGTCGCTGTTCTTCGACGCCGAGCGCTACGACCTCTCCGCGGTCGGCCGCGTCAAGATGAACATGCGCCTCGACCTCGATGCGCCCGATACCCAGCGCACGCTGCGC
-## &gt;gi|145926545|[B._yuanmingense_strain_LMTR28]    TCGGGCAAGCTGCTGTTCGCCGCCCGCGTCATCCCGTATCGCGGCTCCTGGCTCGACATCGAGTTCGACGCCAAGGACATCGTCTATGCGCGTATCGACCGTCGCCGCAAGATTCCGGTGACGTCGCTGATGTTCGCCCTCGGCCTCGACGGCGAGGCGATCCTCTCAACGTTCTACAAGAAGATTCTCTACAAGCGGACCAAGGAAGGCTGGCGCGTTCCGTTCGACGCCAACCGCTTCCGCGGCTACTCCACGGTCAACGACCTGATCGATGCCGACACCGGCAAGGTCGTGCTCGAGGCCGGCAAGAAGCTCACCGTCCGCGCCGCCCGCCAGCTCCAGGAGAAGGGGCTGAAGGCGCTGCGCATGGCCGACGAGGAGCTGGTCGGCAACTACGTCGCCGAGGATCTCGTCAACCCCAAGACCGGTGAGATCCACGCCGAGGCCGGTGAGGAGATCACCGACAAGCTGATGAAGGCGCTCAACGAGCAGGGCTACAAGGAGCTGCCGCTGCTCGACATCGACCACGTCAATGTCGGCCCCTACATCCGCAACACGCTCTCGGCCGACAAGAACATGACGCGCGAGGACGCGCTGTTCGACATCTACCGCGTGATGCGTCCGGGCGAGCCGCCGACGCTGGAATCGGCGCAGGCCATGTTCCAGTCGCTGTTCTTCGACGCCGAGCGCTACGACCTCTCCGCGGTCGGCCGCGTCAAGATGAACATGCGCCTCGACCTCGATGCGCCGGATACCCAGCGCACGCTGCGC
-## &gt;gi|145926529|[B._yuanmingense_strain_CCBAU10071]    TCGGGCAAGCTGCTGTTCGCCGCCCGCGTCATCCCGTATCGCGGTTCCTGGCTCGACATCGAGTTCGACGCCAAGGACATCGTCTATGCGCGTATCGACCGTCGCCGCAAGATTCCGGTGACGTCGCTGATGTTCGCCCTCGGCCTCGACGGCGAGGCGATCCTGTCCACGTTCTACAAGAAGATTCTCTACAAGCGGACCAAGGAAGGCTGGCGCGTTCCGTTCGACGCCAACCGCTTCCGCGGCTACTCCACGGTCAACGACCTGATCGATGCCGACACCGGCAAGGTCGTGCTCGAGGCCGGCAAGAAGCTCACCGTCCGCGCCGCCCGCCAGCTCCAGGAGAAGGGGCTGAAGGCGCTGCGCATGGCCGACGAGGAACTGGTCGGCAACTACGTCGCCGAGGATCTCGTCAACCCCAAGACCGGTGAGATCCACGCCGAGGCCGGTGAGGAGATCACCGACAAGCTGATGAAGGCGCTCAACGAGCAGGGCTACAAAGAACTGCCGCTGCTCGACATCGACCACGTCAATGTCGGCCCCTACATCCGCAACACGCTCTCGGCCGACAAGAACATGACGCGCGAGGACGCGCTGTTCGACATCTACCGCGTGATGCGTCCGGGCGAGCCGCCAACGCTGGAATCGGCGCAGGCCATGTTCCAGTCGCTGTTCTTCGACGCCGAGCGCTACGACCTCTCCGCGGTCGGCCGCGTCAAGATGAACATGCGCCTCGACCTCGATGCGCCCGACACCCAGCGCACGCTGCGC
-## &gt;gi|190612281|[B._yuanmingense_strain_ViHaG5]    TCGGGCAAGCTGCTGTTCGCCGCCCGCGTCATCCCGTATCGCGGCTCCTGGCTCGACATCGAGTTCGACGCCAAGGACATCGTCTATGCGCGTATCGACCGTCGCCGCAAGATTCCGGTGACGTCGCTGATGTTCGCCCTCGGCCTCGACGGCGAGGCGATCCTCTCAACGTTCTACAAGAAGATTCTCTACAAGCGGACCAAGGAAGGCTGGCGCGTTCCGTTCGACGCCAACCGCTTCCGCGGCTACTCCACGGTCAACGACCTGATCGATGCCGACACCGGCAAGGTCGTGCTCGAGGCCGGCAAGAAGCTCACCGTCCGCGCCGCCCGCCAGCTCCAGGAGAAGGGGTTGAAGGCGCTGCGCATGGCCGACGAGGAGCTGGTCGGCAACTACGTCGCCGAGGATCTCGTCAACCCCAAGACCGGTGAGATCCACGCCGAGGCCGGTGAGGAGATCACCGACAAGCTGATGAAGGCGCTCAACGAGCAGGGCTACAAAGAGCTGCCGCTGCTCGACATCGACCACGTCAATGTCGGCCCCTACATCCGCAACACGCTCTCGGCCGACAAGAACATGACGCGCGAGGACGCGCTGTTCGACATCTACCGCGTGATGCGTCCGGGCGAGCCGCCGACGCTGGAATCGGCGCAGGCCATGTTCCAGTCGCTGTTCTTCGACGCCGAGCGCTACGACCTCTCCGCGGTCGGCCGCGTCAAGATGAACATGCGCCTCGACCTCGATGCGCCCGACACCCAGCGCACGCTGCGC
-## &gt;gi|190612237|[B._yuanmingense_strain_InRo02]    TCGGGCAAGCTGCTGTTCGCCGCCCGCGTCATCCCGTATCGCGGCTCCTGGCTCGACATCGAGTTCGACGCCAAGGACATCGTCTATGCGCGTATCGACCGTCGCCGCAAGATTCCGGTGACGTCGCTGATGTTCGCCCTCGGTCTCGACGGCGAGGCGATCCTGTCCACGTTCTACAAGAAGATTCTCTACAAGCGGACCAAGGAAGGCTGGCGCGTTCCGTTCGACGCCAACCGCTTCCGCGGCTACTCCACGGTCAACGACCTGATCGATGCCGACACCGGCAAGGTCGTGCTCGAGGCCGGCAAGAAGCTCACCGTCCGCGCCGCCCGCCAGCTCCAGGAGAAGGGGCTGAAGGCTCTGCGCATGGCCGACGAGGAGCTGGTCGGCAACTACGTCGCCGAGGATCTCGTCAACCCCAAGACCGGCGAGATCCACGCCGAGGCCGGTGAGGAGATCACCGACAAGCTGATGAAGGCGCTCAACGAGCAGGGCTACAAGGAGCTGCCGCTGCTCGACATCGACCACGTCAATGTCGGCCCCTACATCCGCAACACGCTCTCGGCCGACAAGAACATGACGCGCGAGGACGCGCTGTTCGACATCTACCGCGTGATGCGTCCGGGCGAGCCGCCGACGCTGGAATCGGCGCAGGCCATGTTCCAGTCGCTGTTCTTCGACGCCGAGCGCTACGACCTCTCCGCGGTCGGCCGCGTCAAGATGAACATGCGCCTCGACCTCGATGCGCCCGATACCCAGCGCACGCTGCGC</code></pre>
+<pre><code>## &gt;gi|190612121|[B.yuanmingense_strain_ViHaG5] ATGAAGCTCGGCAAGAACGACCGCTCCATGGACATCGAGGCGGTGTCCTCCGGCTCGCTCGGGCTCGATATCGCGCTCGGCATCGGCGGCTTGCCCAAGGGGCGCATCGTCGAGATCTACGGGCCGGAATCCTCGGGCAAGACCACGCTGGCGCTGCATACGGTGGCGGAAGCGCAGAAGAAGGGCGGCATCTGCGCCTTCATCGACGCCGAGCACGCGCTCGATCCGGTCTATGCCCGCAAGCTCGGCGTCAACATCGACGAGCTCCTGATCTCGCAGCCCGACACCGGCGAGCAGGCGCTGGAGATCTGCGACACCCTGGTGCGCTCGGGCGCCGTCGACGTTCTCGTGGTCGATTCGGTCGCGGCGCTGGTGCCGAAGGCCGAGCTCGAGGGCGAGATGGGCGATGCGCTGCCGGGACTTCAAGCACGGTTGATGAGCCAGGCGCTGCGCAAGCTCACGGCCTCCATCAACAAATCCAACACGATGGTGATCTTCATCAACCAGATC
+## &gt;gi|190612119|[B.yuanmingense_strain_ViHaG4] ATGAAGCTCGGCAAGAACGACCGCTCCATGGACATCGAGGCGGTGTCCTCCGGCTCGCTCGGGCTCGATATCGCGCTCGGCATCGGCGGCTTGCCCAAGGGGCGCATCGTCGAGATCTACGGGCCGGAATCCTCGGGCAAGACCACGCTGGCGCTGCATACGGTGGCGGAAGCGCAGAAGAAGGGCGGCATCTGCGCCTTCATCGACGCCGAGCACGCGCTCGATCCGGTCTATGCCCGCAAGCTCGGCGTCAACATCGACGAGCTCCTGATCTCGCAGCCCGACACCGGCGAGCAGGCGCTGGAGATCTGCGACACCCTGGTGCGCTCGGGCGCCGTCGACGTTCTCGTGGTCGATTCGGTCGCGGCGCTGGTGCCGAAGGCCGAGCTCGAGGGCGAGATGGGCGATGCGCTGCCGGGACTTCAAGCACGGTTGATGAGCCAGGCGCTGCGCAAGCTCACGGCCTCCATCAACAAATCCAACACGATGGTGATCTTCATCAACCAGATC
+## &gt;gi|190612077|[B.yuanmingense_strain_InRo02] ATGAAGCTCGGCAAGAACGACCGCTCCATGGACATCGAGGCGGTGTCCTCCGGCTCGCTCGGGCTCGATATCGCGCTGGGCATCGGCGGCCTGCCCAAGGGACGCATCGTCGAGATCTACGGGCCGGAATCTTCGGGCAAGACCACGCTCGCGCTGCATACGGTGGCGGAAGCGCAGAAGAAGGGTGGCATCTGCGCCTTCATCGACGCCGAGCACGCGCTCGATCCGGTCTATGCCCGCAAGCTCGGCGTCAACATCGACGAGCTCCTGATCTCGCAGCCCGACACCGGCGAGCAGGCGCTGGAGATCTGCGACACCCTGGTGCGCTCGGGCGCCGTCGATGTTCTGGTGGTCGATTCGGTGGCGGCGCTGGTGCCGAAGGCCGAGCTCGAAGGCGAGATGGGTGACGCGCTGCCTGGCCTGCAGGCCCGCCTGATGAGCCAGGCGCTGCGCAAGCTGACGGCATCCATCAACAAGTCCAACACCATGGTGATCTTCATCAACCAGATC
+## &gt;gi|190612075|[B.yuanmingense_strain_InKo02] ATGAAGCTCGGCAAGAACGATCGCTCCATGGACATCGAGGCGGTCTCCTCCGGCTCGCTCGGGCTCGATATCGCGCTCGGCATCGGCGGCCTGCCCAAGGGACGCATCGTCGAGATCTACGGGCCGGAATCCTCCGGCAAGACCACGCTCGCGCTGCATACGGTGGCGGAGGCGCAGAAGAAGGGCGGCATCTGCGCCTTCATCGACGCCGAGCACGCGCTCGACCCGGTCTATGCCCGCAAGCTCGGCGTCAACATCGACGAGCTCCTGATCTCGCAGCCCGACACCGGCGAGCAGGCGCTGGAGATCTGCGACACCCTGGTGCGTTCGGGCGCCGTCGACGTTCTCGTGGTCGATTCGGTCGCGGCGCTGGTGCCGAAGGCCGAGCTCGAGGGCGAGATGGGCGATGCGCTGCCGGGCCTGCAGGCGCGGTTGATGAGCCAGGCGCTGCGCAAGCTGACGGCCTCCATCAACAAGTCCAACACCATGGTGATCTTCATCAACCAGATC
+## &gt;gi|190612073|[B.yuanmingense_strain_InKo01] ATGAAGCTCGGCAAGAACGATCGCTCCATGGACATCGAGGCGGTGTCCTCCGGCTCGCTCGGGCTCGATATCGCGCTCGGCATCGGCGGCCTGCCCAAGGGACGCATCGTCGAGATCTACGGGCCGGAATCCTCGGGCAAGACCACGCTGGCGCTGCATACGGTGGCGGAAGCGCAGAAGAAGGGCGGCATCTGCGCCTTCATCGACGCCGAGCACGCGCTCGATCCGGTCTATGCCCGCAAGCTCGGCGTCAACATCGACGAGCTCCTGATCTCGCAGCCCGACACCGGCGAGCAGGCCCTGGAGATCTGCGACACCCTGGTGCGCTCGGGCGCGGTCGATGTTCTCGTGGTCGATTCGGTGGCGGCGCTGGTGCCGAAGGCCGAGCTCGAGGGCGAGATGGGCGATGCGCTGCCGGGCTTGCAGGCCCGTCTGATGAGCCAGGCGCTGCGCAAGCTGACGGCCTCCATCAACAAGTCCAACACCATGGTGATCTTCATCAACCAGATC</code></pre>
 <pre class="bash"><code>grep yuanmingense recA_Bradyrhizobium_vinuesa.fnaedtab &gt; recA_Byuanmingense.fnaedtab</code></pre>
 <ol start="11" style="list-style-type: decimal">
 <li>Estas dos lineas no contienen nada nuevo en cuanto a sintaxis. Simplemente llamamos a perl para sustituir los tabuladores por saltos de linea y asi reconstituir el FASTA.</li>
 </ol>
 <pre class="bash"><code>perl -pe 'if(/&gt;/){s/\t/\n/}' recA_Byuanmingense.fnaedtab | head -5</code></pre>
-<pre><code>## &gt;gi|145926551|[B._yuanmingense_strain_TAL760]
-## TCGGGCAAGCTGCTGTTCGCCGCCCGCGTCATCCCGTATCGCGGCTCCTGGCTCGACATCGAGTTCGACGCCAAGGACATCGTCTATGCGCGTATCGACCGTCGCCGCAAGATTCCGGTGACGTCGCTGATGTTCGCCCTCGGCCTCGACGGCGAGGCGATCCTGTCCACGTTCTACAAGAAGATTCTCTACAAGCGGACCAAGGAAGGCTGGCGCGTTCCGTTCGACGCCAACCGCTTCCGCGGCTACTCCACGGTCAACGACCTGATCGATGCCGACACCGGCAAGGTCGTGCTCGAGGCCGGCAAGAAGCTCACCGTCCGCGCCGCCCGCCAGCTCCAGGAAAAGGGGCTGAAGGCGCTGCGCATGGCCGATGAGGAGCTGGTCGGCAACTACGTCGCCGAGGATCTTGTCAACCCCAAGACCGGCGAGATCCACGCCGAGGCCGGTGAGGAGATCACCGACAAGCTGATGAAGGCGCTCAACGAGCAGGGCTACAAGGAGCTGCCGCTGCTCGACATCGACCACGTCAATGTCGGCCCCTACATCCGCAACACGCTCTCGGCCGACAAGAACATGACGCGCGAGGACGCGCTGTTCGACATCTACCGCGTGATGCGTCCAGGCGAGCCGCCGACGCTGGAATCGGCGCAGGCCATGTTCCAGTCGCTGTTCTTCGACGCCGAGCGCTACGACCTCTCCGCGGTCGGCCGCGTCAAGATGAACATGCGCCTCGACCTCGATGCGCCCGATACCCAGCGCACGCTGCGC
-## &gt;gi|145926545|[B._yuanmingense_strain_LMTR28]
-## TCGGGCAAGCTGCTGTTCGCCGCCCGCGTCATCCCGTATCGCGGCTCCTGGCTCGACATCGAGTTCGACGCCAAGGACATCGTCTATGCGCGTATCGACCGTCGCCGCAAGATTCCGGTGACGTCGCTGATGTTCGCCCTCGGCCTCGACGGCGAGGCGATCCTCTCAACGTTCTACAAGAAGATTCTCTACAAGCGGACCAAGGAAGGCTGGCGCGTTCCGTTCGACGCCAACCGCTTCCGCGGCTACTCCACGGTCAACGACCTGATCGATGCCGACACCGGCAAGGTCGTGCTCGAGGCCGGCAAGAAGCTCACCGTCCGCGCCGCCCGCCAGCTCCAGGAGAAGGGGCTGAAGGCGCTGCGCATGGCCGACGAGGAGCTGGTCGGCAACTACGTCGCCGAGGATCTCGTCAACCCCAAGACCGGTGAGATCCACGCCGAGGCCGGTGAGGAGATCACCGACAAGCTGATGAAGGCGCTCAACGAGCAGGGCTACAAGGAGCTGCCGCTGCTCGACATCGACCACGTCAATGTCGGCCCCTACATCCGCAACACGCTCTCGGCCGACAAGAACATGACGCGCGAGGACGCGCTGTTCGACATCTACCGCGTGATGCGTCCGGGCGAGCCGCCGACGCTGGAATCGGCGCAGGCCATGTTCCAGTCGCTGTTCTTCGACGCCGAGCGCTACGACCTCTCCGCGGTCGGCCGCGTCAAGATGAACATGCGCCTCGACCTCGATGCGCCGGATACCCAGCGCACGCTGCGC
-## &gt;gi|145926529|[B._yuanmingense_strain_CCBAU10071]</code></pre>
+<pre><code>## &gt;gi|190612121|[B.yuanmingense_strain_ViHaG5]
+## ATGAAGCTCGGCAAGAACGACCGCTCCATGGACATCGAGGCGGTGTCCTCCGGCTCGCTCGGGCTCGATATCGCGCTCGGCATCGGCGGCTTGCCCAAGGGGCGCATCGTCGAGATCTACGGGCCGGAATCCTCGGGCAAGACCACGCTGGCGCTGCATACGGTGGCGGAAGCGCAGAAGAAGGGCGGCATCTGCGCCTTCATCGACGCCGAGCACGCGCTCGATCCGGTCTATGCCCGCAAGCTCGGCGTCAACATCGACGAGCTCCTGATCTCGCAGCCCGACACCGGCGAGCAGGCGCTGGAGATCTGCGACACCCTGGTGCGCTCGGGCGCCGTCGACGTTCTCGTGGTCGATTCGGTCGCGGCGCTGGTGCCGAAGGCCGAGCTCGAGGGCGAGATGGGCGATGCGCTGCCGGGACTTCAAGCACGGTTGATGAGCCAGGCGCTGCGCAAGCTCACGGCCTCCATCAACAAATCCAACACGATGGTGATCTTCATCAACCAGATC
+## &gt;gi|190612119|[B.yuanmingense_strain_ViHaG4]
+## ATGAAGCTCGGCAAGAACGACCGCTCCATGGACATCGAGGCGGTGTCCTCCGGCTCGCTCGGGCTCGATATCGCGCTCGGCATCGGCGGCTTGCCCAAGGGGCGCATCGTCGAGATCTACGGGCCGGAATCCTCGGGCAAGACCACGCTGGCGCTGCATACGGTGGCGGAAGCGCAGAAGAAGGGCGGCATCTGCGCCTTCATCGACGCCGAGCACGCGCTCGATCCGGTCTATGCCCGCAAGCTCGGCGTCAACATCGACGAGCTCCTGATCTCGCAGCCCGACACCGGCGAGCAGGCGCTGGAGATCTGCGACACCCTGGTGCGCTCGGGCGCCGTCGACGTTCTCGTGGTCGATTCGGTCGCGGCGCTGGTGCCGAAGGCCGAGCTCGAGGGCGAGATGGGCGATGCGCTGCCGGGACTTCAAGCACGGTTGATGAGCCAGGCGCTGCGCAAGCTCACGGCCTCCATCAACAAATCCAACACGATGGTGATCTTCATCAACCAGATC
+## &gt;gi|190612077|[B.yuanmingense_strain_InRo02]</code></pre>
 <pre class="bash"><code>perl -pe 'if(/&gt;/){s/\t/\n/}' recA_Byuanmingense.fnaedtab &gt; recA_Byuanmingense.fna</code></pre>
 <ol start="12" style="list-style-type: decimal">
 <li>Llamar a un bucle for de shell para generar archivos fastab para todas las especies</li>
@@ -284,19 +586,30 @@ done</code></pre>
 <pre class="bash"><code>ls *fnaedtab</code></pre>
 <pre><code>## recA_Balpha.fnaedtab
 ## recA_Bbeta.fnaedtab
+## recA_BBTAi1].fnaedtab
+## recA_BBuCeR1].fnaedtab
+## recA_BBuCeR2].fnaedtab
+## recA_BBuMiT10].fnaedtab
+## recA_BBuNoG5].fnaedtab
+## recA_Bbv..fnaedtab
 ## recA_Bcanariense.fnaedtab
+## recA_BCICS70].fnaedtab
 ## recA_Belkanii.fnaedtab
+## recA_Bgenosp.fnaedtab
+## recA_BIRBG127].fnaedtab
+## recA_BIRBG231].fnaedtab
 ## recA_Bjaponicum.fnaedtab
 ## recA_Bliaoningense.fnaedtab
 ## recA_Bradyrhizobium_vinuesa.fnaedtab
-## recA_Bsp..fnaedtab
+## recA_Bsp.fnaedtab
+## recA_Bstrain.fnaedtab
 ## recA_Byuanmingense.fnaedtab</code></pre>
 <pre class="bash"><code>head -5 recA_Bjaponicum.fnaedtab</code></pre>
-<pre><code>## &gt;gi|145926563|[B._japonicum_strain_X6-9] TCGGGCAAGCTGCTGTTCGCCGCCCGCGTCATCCCGTATCGCGGCTCCTGGCTCGACATCGAGTTCGACGCCAAGGACATCGTCTATGCGCGTATCGACCGCCGCCGCAAGATTCCGGTAACGTCGCTGATGTTCGCGCTCGGCCTCGACGGCGAGGCGATCCTGTCCACGTTCTACAAGAAGATTCTCTACAAGCGGACCAAGGAAGGCTGGCGCGTTCCGTTCGACGCCAACCGTTTCCGCGGCTACTCGACCATCAACGACCTGATCGACGCCGACACCGGCAAGGTCGTGCTCGAGGCCGGCAAGAAGCTCACCGTGCGCGGTGCGCGTCAGATGCAGGAGAAGGGCCTGAAGGCGCTGCGGCTGTCCGATGAGGAACTCGTTGGCAACTATCTCGCCGAGGACCTCGTCAACCCGAAGACGGGCGAGATCCACGCGGAGGCCGGTGAAGAGATCACCGACAAGTCGATGAAGGCCCTCAACGAGCAGGGCTACAAGGAGCTGCCGCTGCTCGACATCGACCACGTCAATGTCGGCGCCTACATCCGCAACACGCTCTCGGCCGACAAGAACATGACGCGCGAGGACGCGCTGTTCGACATCTACCGCGTGATGCGTCCGGGCGAGCCGCCGACGCTGGATTCGGCGCAGGCGATGTTCCAGTCGCTGTTCTTCGACGCCGAGCGCTACGACCTGTCCGCGGTCGGCCGCGTCAAGATGAACATGCGCCTCGACCTCGATGCGCCCGATACCCAGCGTACGCTGCGC
-## &gt;gi|145926547|[B._japonicum_strain_Nep1] TCGGGCAAGCTGCTGTTCGCCGCCCGCGTGATTCCGTATCGCGGCTCCTGGCTCGACATCGAGTTCGATGCCAAGGACATCGTCTATGCGCGTATCGACCGTCGCCGCAAGATTCCGGTGACGTCGCTGATGTTCGCGCTCGGCCTTGACGGCGAGGCGATCCTGTCCACGTTCTACAAGAAGATCCTCTACAAGCGGACCAAGGAAGGCTGGCGCGTTCCGTTCGACGCCAACCGTTTCCGCGGCTACTCGACCATCAACGACCTGATCGACGCCGACACCGGCAAGGTCGTGCTCGAGGCCGGCAAGAAGCTCACCGTCCGTGCCGCCCGTCAGCTCCAGGAGAAGGGGCTGAAGGCGCTGCGCCTGTCGGATGAGGAGCTCGTCGGCAACTACCTCGCCGAGGATCTCGTCAATCCGAAGACCGGCGAGATCCACGCCGAGGCCGGCGAGGAGATCACCGACAAGAACATGAAGGCCCTCAACGAGCAGGGCTACAAGGAACTGCCGCTGCTCGACATCGATCACGTCAATGTCGGCGCCTACATCCGCAACACGCTCTCGGCCGACAAGAACATGACGCGCGAGGACGCGCTGTTCGACATCTACCGCGTGATGCGTCCGGGCGAGCCGCCGACGCTGGATTCGGCGCAGGCGATGTTCCAGTCGCTGTTCTTCGACGCCGAGCGCTATGACCTCTCCGCGGTCGGCCGCGTCAAGATGAACATGCGCCTCGACCTCGATGCGCCGGACACCCAGCGCACGCTGCGC
-## &gt;gi|145926535|[B._japonicum_strain_FN13] TCGGGCAAGCTGCTGTTCGCCGCCCGCGTCATCCCGTATCGCGGCTCCTGGCTCGACATCGAGTTCGACGCCAAGGACATCGTCTATGCGCGTATCGACCGTCGCCGCAAGATTCCGGTGACGTCGCTGATGTTCGCGCTCGGCCTCGACGGCGAGGCGATCCTGTCCACGTTCTACAAGAAGATTCTCTACAAGCGGACCAAGGAAGGCTGGCGCGTTCCGTTCGACGCCAACCGTTTCCGCGGCTACTCGACCATCAACGACCTGATCGACGCCGACACCGGCAAGGTCGTGCTCGAGGCCGGCAAGAAGCTCACCGTGCGCGGTGCGCGTCAGATGCAGGAGAAGGGGCTGAAGGCGCTGCGGCTGTCCGATGAGGAGCTCGTCGGCAACTATCTCGCCGAGGACCTCGTCAACCCGAAGACCGGCGAGATCCACGCGGAAGCCGGTGAAGAGATCACCGACAAGTCGATGAAGGCCCTCAACGAGCAGGGCTACAAGGAACTGCCGCTGCTCGACATCGACCACGTCAATGTCGGCGCCTACATCCGCAATACGCTCTCGGCCGACAAGAACATGACGCGTGAGGACGCGCTGTTCGACATCTACCGCGTGATGCGTCCGGGCGAGCCGCCGACGCTGGATTCGGCGCAAGCGATGTTCCAGTCGCTGTTCTTCGACGCCGAGCGCTATGACCTGTCCGCGGTCGGCCGCGTCAAGATGAACATGCGCCTCGACCTCGATGCGCCCGACACCCAGCGTACGCTGCGC
-## &gt;gi|145926519|[B._japonicum_strain_BGA-1]    TCGGGCAAGCTGCTGTTCGCCGCCCGCGTCATCCCGTATCGCGGCTCCTGGCTCGACATCGAGTTCGACGCCAAGGACATCGTCTATGCGCGTATCGACCGTCGCCGCAAGATTCCGGTGACGTCGCTGATGTTCGCGCTTGGCCTCGACGGCGAGGCGATCCTGTCCACGTTCTACAAGAAGATTCTCTACAAGCGGACCAAGGAAGGCTGGCGCGTTCCGTTCGACGCCAACCGTTTCCGCGGCTACTCGACCATCAACGACCTGATCGACGCCGACACCGGCAAGGTCGTGCTCGAGGCCGGCAAGAAGCTCACGGTGCGCGGTGCGCGTCAGATGCAGGAGAAGGGCCTGAAGGCGCTGCGGCTGTCCGATGAGGAGCTCGTCGGCAACTATCTCGCCGAGGACCTCGTCAACCCGAAGACGGGCGAGATCCACGCGGAAGCCGGTGAAGAGATCACCGACAAGTCGATGAAGGCCCTCAACGAGCAGGGCTACAAGGAACTGCCGCTGCTCGACATCGACCACGTCAATGTCGGCGCCTACATCCGCAACACGCTCTCGGCCGACAAGAACATGACGCGTGAGGACGCGCTGTTCGACATCTACCGCGTGATGCGTCCGGGCGAGCCGCCGACGCTGGATTCGGCGCAGGCGATGTTCCAGTCGCTGTTCTTCGACGCCGAGCGCTACGACCTGTCCGCGGTCGGCCGCGTCAAGATGAACATGCGCCTCGACCTCGATGCGCCCGACACCCAGCGTACGCTGCGC
-## &gt;gi|145926561|[B._japonicum_strain_X3-1] TCGGGCAAGCTGCTGTTCGCCGCCCGCGTCATCCCGTATCGCGGCTCCTGGCTCGACATCGAGTTCGACGCCAAGGACATCGTCTATGCGCGTATCGACCGTCGCCGCAAGATTCCGGTGACGTCGCTGATGTTCGCGCTCGGCCTCGACGGCGAGGCGATCCTGTCCACGTTCTACAAGAAGATTCTCTACAAGCGGACCAAGGAAGGCTGGCGCGTTCCGTTCGACGCCAACCGTTTCCGCGGCTACTCGACCATCAACGACCTGATCGACGCCGACACCGGCAAGGTCGTGCTCGAGGCCGGCAAGAAGCTCACCGTGCGCGGTGCGCGTCAGATGCAGGAGAAGGGCCTGAAGGCGCTGCGGCTGTCCGATGAGGAGCTCGTCGGCAACTATCTCGCCGAGGACCTCGTCAACCCGAAGACCGGCGAGATCCACGCAGAAGCCGGTGAAGAGATCACCGACAAGTCGATGAAGGCCCTCAACGAGCAGGGCTACAAGGAACTGCCGCTGCTCGACATCGACCACGTCAATGTCGGCGCCTATATCCGCAACACGCTCTCGGCCGACAAGAACATGACGCGCGAGGACGCGCTGTTCGACATCTACCGCGTGATGCGTCCGGGCGAGCCGCCGACGCTGGATTCGGCGCAGGCGATGTTCCAGTCGCTGTTCTTCGACGCCGAGCGCTACGACCTGTCCGCGGTCGGCCGCGTCAAGATGAACATGCGCCTCGACCTCGATGCGCCCGACACCCAGCGTACGCTGCGC</code></pre>
+<pre><code>## &gt;gi|190612115|[B.japonicum_strain_NeRa16]    ATGAAGCTCGGCAAGAACGACCGGTCGATGGATGTCGAGGCGGTGTCCTCGGGTTCTCTCGGGCTCGACATTGCACTGGGGATCGGCGGTCTGCCCAAGGGGCGCGTCGTGGAAATCTACGGGCCGGAATCCTCGGGCAAGACCACGCTGGCGCTGCACACGGTGGCGGAAGCGCAGAAGAAGGGCGGCATCTGTGCCTTCATCGACGCCGAGCACGCGCTCGACCCGGTCTATGCACGCAAGCTCGGGGTCAATATCGACGAGCTGCTGATTTCGCAGCCGGACACCGGCGAGCAGGCGCTGGAAATCTGCGACACGCTGGTGCGCTCGGGTGCGGTGGACGTTCTGGTGGTCGATTCGGTCGCGGCGCTGGTGCCGAAGGCCGAACTCGAGGGCGAGATGGGCGATGCGCTGCCGGGTCTCCAGGCCCGCCTGATGAGCCAGGCGCTGCGCAAGCTGACGGCCTCCATCAACAAGTCCCACACCATGGTGATCTTCATCAACCAGATC
+## &gt;gi|190612113|[B.japonicum_strain_NeRa15]    ATGAAGCTCGGCAAGAACGACCGGTCGATGGATGTCGAGGCGGTGTCCTCCGGTTCTCTCGGGCTCGACATTGCACTGGGGATCGGCGGTCTGCCCAAGGGGCGCGTCGTGGAAATCTACGGGCCGGAATCCTCGGGCAAGACCACGCTGGCGCTGCACACGGTGGCGGAAGCGCAGAAGAAGGGCGGCATCTGTGCCTTCATCGACGCCGAGCACGCGCTCGACCCGGTCTATGCACGCAAGCTCGGGGTCAATATCGACGAGCTGCTGATTTCGCAGCCGGACACCGGCGAGCAGGCGCTGGAAATCTGCGACACGCTGGTGCGCTCGGGTGCGGTGGACGTTCTGGTGGTCGATTCGGTCGCGGCGCTGGTGCCGAAGGCCGAACTCGAGGGCGAGATGGGCGATGCGCTGCCGGGTCTCCAGGCCCGCCTGATGAGCCAGGCGCTGCGCAAGCTGACGGCCTCCATCAACAAGTCCCACACCATGGTGATCTTCATCAACCAGATC
+## &gt;gi|190612111|[B.japonicum_strain_NeRa14]    ATGAAGCTCGGCAAGAACGACCGGTCGATGGATGTCGAGGCGGTGTCCTCCGGTTCTCTCGGGCTCGACATTGCGCTGGGGATCGGCGGTCTGCCCAAGGGGCGCGTCGTGGAAATCTACGGGCCGGAATCCTCGGGCAAGACCACGCTGGCGCTGCACACGGTGGCGGAAGCGCAGAAGAAGGGCGGAATCTGTGCCTTCATCGACGCCGAGCACGCGCTCGACCCGGTCTATGCGCGCAAGCTGGGGGTCAATATCGACGAGCTGCTGATTTCGCAGCCGGACACGGGCGAGCAGGCGCTGGAAATCTGCGACACGCTGGTGCGCTCGGGTGCGGTGGACGTTCTGGTGGTCGATTCGGTCGCGGCGCTGGTGCCGAAGGCCGAACTCGAGGGCGAGATGGGCGATGCGCTGCCGGGTCTCCAGGCCCGYCTGATGAGCCAGGCGCTGCGCAAGCTGACGGCCTCCATCAACAAGTCCCACACCATGGTGATCTTCATCAACCAGATC
+## &gt;gi|190612109|[B.japonicum_strain_NeRa12]    ATGAAGCTCGGCAAGAACGACCGGTCGATGGATGTCGAGGCGGTGTCCTCCGGTTCTCTCGGGCTCGACATTGCACTGGGGATCGGCGGTCTGCCCAAGGGGCGCGTCGTGGAAATCTACGGGCCGGAATCCTCGGGCAAGACCACGCTGGCGCTGCACACGGTGGCGGAAGCGCAGAAGAAGGGCGGCATCTGTGCCTTCATCGACGCCGAGCACGCGCTCGACCCGGTCTATGCACGCAAGCTCGGGGTCAATATCGACGAGCTGCTGATTTCGCAGCCGGACACCGGCGAGCAGGCGCTGGAAATCTGCGACACGCTGGTGCGCTCGGGTGCGGTGGACGTTCTGGTGGTCGATTCGGTCGCGGCGCTGGTGCCGAAGGCCGAACTCGAGGGCGAGATGGGCGATGCGCTGCCGGGTCTCCAGGCCCGCCTGATGAGCCAGGCGCTGCGCAAGCTGACGGCCTCCATCAACAAGTCCCACACCATGGTGATCTTCATCAACCAGATC
+## &gt;gi|190612107|[B.japonicum_strain_NeRa11]    ATGAAGCTCGGCAAGAACGACCGGTCGATGGATGTCGAGGCGGTGTCCTCCGGTTCTCTCGGGCTCGACATTGCACTGGGGATCGGCGGTCTGCCCAAGGGGCGCGTCGTGGAAATCTACGGGCCGGAATCCTCGGGCAAGACCACGCTGGCGCTGCACACGGTGGCGGAAGCGCAGAAGAAGGGCGGCATCTGTGCCTTCATCGACGCCGAGCACGCGCTCGACCCGGTCTATGCACGCAAGCTCGGGGTCAATATCGACGAGCTGCTGATTTCGCAGCCGGACACCGGCGAGCAGGCGCTGGAAATCTGCGACACGCTGGTGCGCTCGGGTGCGGTGGACGTTCTGGTGGTCGATTCGGTCGCGGCGCTGGTGCCGAAGGCCGAACTCGAGGGCGAGATGGGCGATGCGCTGCCGGGTCTCCAGGCCCGCCTGATGAGCCAGGCGCTGCGCAAGCTGACGGCCTCCATCAACAAGTCCCACACCATGGTGATCTTCATCAACCAGATC</code></pre>
 <ol start="14" style="list-style-type: decimal">
 <li>Finalmente convertimos todos los archivos fnatabed a FASTA con el siguiente bucle for:</li>
 </ol>
@@ -305,21 +618,21 @@ done</code></pre>
 <li>Visualizemos las cabeceras de dos archivos FASTA especie-específicos</li>
 </ol>
 <pre class="bash"><code>grep '&gt;' recA_Bjaponicum.fna | head -5</code></pre>
-<pre><code>## &gt;gi|145926563|[B._japonicum_strain_X6-9]
-## &gt;gi|145926547|[B._japonicum_strain_Nep1]
-## &gt;gi|145926535|[B._japonicum_strain_FN13]
-## &gt;gi|145926519|[B._japonicum_strain_BGA-1]
-## &gt;gi|145926561|[B._japonicum_strain_X3-1]</code></pre>
+<pre><code>## &gt;gi|190612115|[B.japonicum_strain_NeRa16]
+## &gt;gi|190612113|[B.japonicum_strain_NeRa15]
+## &gt;gi|190612111|[B.japonicum_strain_NeRa14]
+## &gt;gi|190612109|[B.japonicum_strain_NeRa12]
+## &gt;gi|190612107|[B.japonicum_strain_NeRa11]</code></pre>
 <ol start="16" style="list-style-type: decimal">
 <li>y confirmemos que son fastas regulares</li>
 </ol>
 <pre class="bash"><code>head -6 recA_Bjaponicum.fna</code></pre>
-<pre><code>## &gt;gi|145926563|[B._japonicum_strain_X6-9]
-## TCGGGCAAGCTGCTGTTCGCCGCCCGCGTCATCCCGTATCGCGGCTCCTGGCTCGACATCGAGTTCGACGCCAAGGACATCGTCTATGCGCGTATCGACCGCCGCCGCAAGATTCCGGTAACGTCGCTGATGTTCGCGCTCGGCCTCGACGGCGAGGCGATCCTGTCCACGTTCTACAAGAAGATTCTCTACAAGCGGACCAAGGAAGGCTGGCGCGTTCCGTTCGACGCCAACCGTTTCCGCGGCTACTCGACCATCAACGACCTGATCGACGCCGACACCGGCAAGGTCGTGCTCGAGGCCGGCAAGAAGCTCACCGTGCGCGGTGCGCGTCAGATGCAGGAGAAGGGCCTGAAGGCGCTGCGGCTGTCCGATGAGGAACTCGTTGGCAACTATCTCGCCGAGGACCTCGTCAACCCGAAGACGGGCGAGATCCACGCGGAGGCCGGTGAAGAGATCACCGACAAGTCGATGAAGGCCCTCAACGAGCAGGGCTACAAGGAGCTGCCGCTGCTCGACATCGACCACGTCAATGTCGGCGCCTACATCCGCAACACGCTCTCGGCCGACAAGAACATGACGCGCGAGGACGCGCTGTTCGACATCTACCGCGTGATGCGTCCGGGCGAGCCGCCGACGCTGGATTCGGCGCAGGCGATGTTCCAGTCGCTGTTCTTCGACGCCGAGCGCTACGACCTGTCCGCGGTCGGCCGCGTCAAGATGAACATGCGCCTCGACCTCGATGCGCCCGATACCCAGCGTACGCTGCGC
-## &gt;gi|145926547|[B._japonicum_strain_Nep1]
-## TCGGGCAAGCTGCTGTTCGCCGCCCGCGTGATTCCGTATCGCGGCTCCTGGCTCGACATCGAGTTCGATGCCAAGGACATCGTCTATGCGCGTATCGACCGTCGCCGCAAGATTCCGGTGACGTCGCTGATGTTCGCGCTCGGCCTTGACGGCGAGGCGATCCTGTCCACGTTCTACAAGAAGATCCTCTACAAGCGGACCAAGGAAGGCTGGCGCGTTCCGTTCGACGCCAACCGTTTCCGCGGCTACTCGACCATCAACGACCTGATCGACGCCGACACCGGCAAGGTCGTGCTCGAGGCCGGCAAGAAGCTCACCGTCCGTGCCGCCCGTCAGCTCCAGGAGAAGGGGCTGAAGGCGCTGCGCCTGTCGGATGAGGAGCTCGTCGGCAACTACCTCGCCGAGGATCTCGTCAATCCGAAGACCGGCGAGATCCACGCCGAGGCCGGCGAGGAGATCACCGACAAGAACATGAAGGCCCTCAACGAGCAGGGCTACAAGGAACTGCCGCTGCTCGACATCGATCACGTCAATGTCGGCGCCTACATCCGCAACACGCTCTCGGCCGACAAGAACATGACGCGCGAGGACGCGCTGTTCGACATCTACCGCGTGATGCGTCCGGGCGAGCCGCCGACGCTGGATTCGGCGCAGGCGATGTTCCAGTCGCTGTTCTTCGACGCCGAGCGCTATGACCTCTCCGCGGTCGGCCGCGTCAAGATGAACATGCGCCTCGACCTCGATGCGCCGGACACCCAGCGCACGCTGCGC
-## &gt;gi|145926535|[B._japonicum_strain_FN13]
-## TCGGGCAAGCTGCTGTTCGCCGCCCGCGTCATCCCGTATCGCGGCTCCTGGCTCGACATCGAGTTCGACGCCAAGGACATCGTCTATGCGCGTATCGACCGTCGCCGCAAGATTCCGGTGACGTCGCTGATGTTCGCGCTCGGCCTCGACGGCGAGGCGATCCTGTCCACGTTCTACAAGAAGATTCTCTACAAGCGGACCAAGGAAGGCTGGCGCGTTCCGTTCGACGCCAACCGTTTCCGCGGCTACTCGACCATCAACGACCTGATCGACGCCGACACCGGCAAGGTCGTGCTCGAGGCCGGCAAGAAGCTCACCGTGCGCGGTGCGCGTCAGATGCAGGAGAAGGGGCTGAAGGCGCTGCGGCTGTCCGATGAGGAGCTCGTCGGCAACTATCTCGCCGAGGACCTCGTCAACCCGAAGACCGGCGAGATCCACGCGGAAGCCGGTGAAGAGATCACCGACAAGTCGATGAAGGCCCTCAACGAGCAGGGCTACAAGGAACTGCCGCTGCTCGACATCGACCACGTCAATGTCGGCGCCTACATCCGCAATACGCTCTCGGCCGACAAGAACATGACGCGTGAGGACGCGCTGTTCGACATCTACCGCGTGATGCGTCCGGGCGAGCCGCCGACGCTGGATTCGGCGCAAGCGATGTTCCAGTCGCTGTTCTTCGACGCCGAGCGCTATGACCTGTCCGCGGTCGGCCGCGTCAAGATGAACATGCGCCTCGACCTCGATGCGCCCGACACCCAGCGTACGCTGCGC</code></pre>
+<pre><code>## &gt;gi|190612115|[B.japonicum_strain_NeRa16]
+## ATGAAGCTCGGCAAGAACGACCGGTCGATGGATGTCGAGGCGGTGTCCTCGGGTTCTCTCGGGCTCGACATTGCACTGGGGATCGGCGGTCTGCCCAAGGGGCGCGTCGTGGAAATCTACGGGCCGGAATCCTCGGGCAAGACCACGCTGGCGCTGCACACGGTGGCGGAAGCGCAGAAGAAGGGCGGCATCTGTGCCTTCATCGACGCCGAGCACGCGCTCGACCCGGTCTATGCACGCAAGCTCGGGGTCAATATCGACGAGCTGCTGATTTCGCAGCCGGACACCGGCGAGCAGGCGCTGGAAATCTGCGACACGCTGGTGCGCTCGGGTGCGGTGGACGTTCTGGTGGTCGATTCGGTCGCGGCGCTGGTGCCGAAGGCCGAACTCGAGGGCGAGATGGGCGATGCGCTGCCGGGTCTCCAGGCCCGCCTGATGAGCCAGGCGCTGCGCAAGCTGACGGCCTCCATCAACAAGTCCCACACCATGGTGATCTTCATCAACCAGATC
+## &gt;gi|190612113|[B.japonicum_strain_NeRa15]
+## ATGAAGCTCGGCAAGAACGACCGGTCGATGGATGTCGAGGCGGTGTCCTCCGGTTCTCTCGGGCTCGACATTGCACTGGGGATCGGCGGTCTGCCCAAGGGGCGCGTCGTGGAAATCTACGGGCCGGAATCCTCGGGCAAGACCACGCTGGCGCTGCACACGGTGGCGGAAGCGCAGAAGAAGGGCGGCATCTGTGCCTTCATCGACGCCGAGCACGCGCTCGACCCGGTCTATGCACGCAAGCTCGGGGTCAATATCGACGAGCTGCTGATTTCGCAGCCGGACACCGGCGAGCAGGCGCTGGAAATCTGCGACACGCTGGTGCGCTCGGGTGCGGTGGACGTTCTGGTGGTCGATTCGGTCGCGGCGCTGGTGCCGAAGGCCGAACTCGAGGGCGAGATGGGCGATGCGCTGCCGGGTCTCCAGGCCCGCCTGATGAGCCAGGCGCTGCGCAAGCTGACGGCCTCCATCAACAAGTCCCACACCATGGTGATCTTCATCAACCAGATC
+## &gt;gi|190612111|[B.japonicum_strain_NeRa14]
+## ATGAAGCTCGGCAAGAACGACCGGTCGATGGATGTCGAGGCGGTGTCCTCCGGTTCTCTCGGGCTCGACATTGCGCTGGGGATCGGCGGTCTGCCCAAGGGGCGCGTCGTGGAAATCTACGGGCCGGAATCCTCGGGCAAGACCACGCTGGCGCTGCACACGGTGGCGGAAGCGCAGAAGAAGGGCGGAATCTGTGCCTTCATCGACGCCGAGCACGCGCTCGACCCGGTCTATGCGCGCAAGCTGGGGGTCAATATCGACGAGCTGCTGATTTCGCAGCCGGACACGGGCGAGCAGGCGCTGGAAATCTGCGACACGCTGGTGCGCTCGGGTGCGGTGGACGTTCTGGTGGTCGATTCGGTCGCGGCGCTGGTGCCGAAGGCCGAACTCGAGGGCGAGATGGGCGATGCGCTGCCGGGTCTCCAGGCCCGYCTGATGAGCCAGGCGCTGCGCAAGCTGACGGCCTCCATCAACAAGTCCCACACCATGGTGATCTTCATCAACCAGATC</code></pre>
 </div>
 </div>
 </div>
