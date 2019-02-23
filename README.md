@@ -1,14 +1,30 @@
-# Curso de OMICAS-UAEM, m&oacute;dulo de Gen&oacute;mica
+# Curso de OMICAS-UAEM-UNAM, m&oacute;dulo de Gen&oacute;mica
 
-## Ediciones del m&oacute;dulo de Gen&oacute;mica
+Este **minitaller sobre pan-genómica y filogenómica microbiana** lo imparto cada semestre en el [Centro de Ciencias Genómicas - UNAM](http://www.ccg.unam.mx) para alumnos de licenciatura, maestría y doctorado de la [Universidad Autómoma del Estado de Morelos (UAEM)](https://www.uaem.mx/) y de la [Universidad Nacional Autónoma de México (UNAM)](https://www.unam.mx/).
 
-- 1a. Octubre-Noviembre 2017
-- 2a. Febrero-Marzo 2018
-- 3a. Octubre-Noviembre 2018
-- 4a. Febrero-Marzo 2019
+## Ediciones del Curso
+- 1a. Febrero-Marzo 2017
+- 2a. Octubre-Noviembre 2017
+- 3a. Febrero-Marzo 2018
+- 4a. Octubre-Noviembre 2018
+- 5a. Febrero-Marzo 2019
 
-Esta es la segunda edición impartida, pero la primera con el matrial did&aacute;ctico 
-distributido p&uacute;blicamente a trav&eacute;s de GitHub.
+Es a partir de la segunda edición que distribuyo públicamente el matrial did&aacute;ctico asociado a trav&eacute;s de este respositorio GitHub.
+
+## Licencia y términos de uso
+Este material did&aacute;ctico lo distribuyo bajo la [**Licencia No Comercial Creative Commons 4.0**](https://creativecommons.org/licenses/by-nc/4.0/)
+
+<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons Licence" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 </a>
+
+### Clonaci&oacute;n del repositorio
+Si tienes instalado [git](https://git-scm.com/) en tu computadora, puedes clonar el repositorio con todo el material del curso con el comando:
+
+   <code>git clone https://github.com/vinuesa/OMICAS_UAEM.git</code>
+
+En [ubuntu](https://www.ubuntu.com/) es muy f&aacute;cil instalar git: 
+
+  <code>sudo apt install git</code>
+
 
 ***
  
@@ -17,13 +33,14 @@ distributido p&uacute;blicamente a trav&eacute;s de GitHub.
 ### El profesor
 Hola, me llamo [Pablo Vinuesa](http://www.ccg.unam.mx/~vinuesa/). Soy investigador titular del 
 [Centro de Ciencias Gen&oacute;micas](http://www.ccg.unam.mx) de la 
-[Universidad Nacional Aut&oacute;noma de M&eacute;xico - UNAM](http://www.unam.mx/).
+[Universidad Nacional Aut&oacute;noma de M&eacute;xico - UNAM](http://www.unam.mx/). 
+Puedes seguirme en twitter [\@pvinmex](https://twitter.com/pvinmex).
 
 Mis [l&iacute;neas de investigaci&oacute;n](http://www.ccg.unam.mx/~vinuesa/research.html) 
 integran la genómica y la bioinformática con la biología y genética molecular para entender 
 la evolución y emergencia de patógenos oportunistas a partir de microbios ambientales.
 
-### ¿Dónde se dan las clases?
+### ¿Dónde se imparten las clases?
 Las clases se imparten en el sal&oacute;n 3 de la [LCG-UNAM](http://www.lcg.unam.mx), de 14 a 18 hrs, en los d&iacute;as indicados abajo.
 
 ***
