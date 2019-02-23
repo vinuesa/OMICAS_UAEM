@@ -11,7 +11,7 @@
 
 <meta name="author" content="Pablo Vinuesa" />
 
-<meta name="date" content="2019-02-22" />
+<meta name="date" content="2019-02-23" />
 
 <title>Ejercicio de parseo de archivos FASTA</title>
 
@@ -187,19 +187,37 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">Ejercicio de parseo de archivos FASTA</h1>
 <h4 class="author"><em>Pablo Vinuesa</em></h4>
-<h4 class="date"><em>2019-02-22</em></h4>
+<h4 class="date"><em>2019-02-23</em></h4>
 
 </div>
 
 <div id="TOC">
 <ul>
 <li><a href="#presentacion"><span class="toc-section-number">1</span> Presentación</a><ul>
-<li><a href="#busqueda-y-descarga-de-secuencias-en-genbank-usando-el-sistema-entrez"><span class="toc-section-number">1.1</span> Búsqueda y descarga de secuencias en GenBank usando el sistema ENTREZ</a></li>
-<li><a href="#practica-de-parseo-de-archivos-fasta-descargados-de-ncbi-mediante-entrez"><span class="toc-section-number">1.2</span> Práctica de parseo de archivos FASTA descargados de NCBI mediante ENTREZ</a><ul>
-<li><a href="#acceso-a-las-secuencias"><span class="toc-section-number">1.2.1</span> Acceso a las secuencias</a></li>
-<li><a href="#inspeccion-y-estadisticas-basicas-de-las-secuencias-descargadas"><span class="toc-section-number">1.2.2</span> Inspección y estadísticas básicas de las secuencias descargadas</a></li>
-<li><a href="#edicion-de-las-cabeceras-fasta-mediante-herramientas-de-filtrado-de-unix"><span class="toc-section-number">1.2.3</span> Edición de las cabeceras FASTA mediante herramientas de filtrado de UNIX</a></li>
-<li><a href="#generacion-automatica-de-archivos-fasta-especie-especificos-avanzado"><span class="toc-section-number">1.2.4</span> Generación automática de archivos FASTA especie-específicos (avanzado)</a></li>
+<li><a href="#licencia-y-terminos-de-uso"><span class="toc-section-number">1.1</span> Licencia y términos de uso</a><ul>
+<li><a href="#clonacion-del-repositorio"><span class="toc-section-number">1.1.1</span> Clonación del repositorio</a></li>
+</ul></li>
+<li><a href="#datos-de-secuencia-para-la-practica"><span class="toc-section-number">1.2</span> Datos de secuencia para la práctica</a></li>
+<li><a href="#busqueda-y-descarga-de-secuencias-en-genbank-usando-el-sistema-entrez"><span class="toc-section-number">1.3</span> Búsqueda y descarga de secuencias en GenBank usando el sistema ENTREZ</a></li>
+<li><a href="#practica-de-parseo-de-archivos-fasta-descargados-de-ncbi-mediante-entrez"><span class="toc-section-number">1.4</span> Práctica de parseo de archivos FASTA descargados de NCBI mediante ENTREZ</a><ul>
+<li><a href="#acceso-a-las-secuencias"><span class="toc-section-number">1.4.1</span> Acceso a las secuencias</a></li>
+<li><a href="#inspeccion-del-formato-de-las-secuencias-descargadas"><span class="toc-section-number">1.4.2</span> Inspección del formato de las secuencias descargadas</a></li>
+<li><a href="#generacion-de-estadisticas-basicas-a-partir-de-la-informacion-disponible-en-las-cabeceras"><span class="toc-section-number">1.4.3</span> Generación de estadísticas básicas a partir de la información disponible en las cabeceras</a><ul>
+<li><a href="#cuantas-secuencias-hay-en-el-archivo-reca_bradyrhizobium_vinuesa.fna"><span class="toc-section-number">1.4.3.1</span> ¿Cuántas secuencias hay en el archivo recA_Bradyrhizobium_vinuesa.fna?</a></li>
+<li><a href="#veamos-las-5-primeras-lineas-de-cabeceras-fasta-usando-grep-y-head"><span class="toc-section-number">1.4.3.2</span> Veamos las 5 primeras lineas de cabeceras fasta usando <strong>grep</strong> y <strong>head</strong></a></li>
+<li><a href="#generacion-de-conteos-usando-el-idioma-grep-regex-archivo-sort-uniq--c"><span class="toc-section-number">1.4.3.3</span> Generación de conteos usando el idioma <strong>grep ‘REGEX’ archivo | sort | uniq -c</strong></a></li>
+<li><a href="#imprime-una-lista-ordenada-de-mayor-a-menor-del-numero-de-especies-que-contiene-el-archivo-fasta-usando-sort--nrkn"><span class="toc-section-number">1.4.3.4</span> Imprime una lista ordenada de mayor a menor, del número de especies que contiene el archivo FASTA usando <strong>sort -nrkN</strong></a></li>
+</ul></li>
+<li><a href="#edicion-de-las-cabeceras-fasta-mediante-herramientas-de-filtrado-de-unix"><span class="toc-section-number">1.4.4</span> Edición de las cabeceras FASTA mediante herramientas de filtrado de UNIX</a><ul>
+<li><a href="#exploremos-todas-las-cabeceras-fasta-del-archivo-reca_bradyrhizobium_vinuesa.fna-usando-grep"><span class="toc-section-number">1.4.4.1</span> Exploremos todas las cabeceras FASTA del archivo recA_Bradyrhizobium_vinuesa.fna usando <strong>grep</strong></a></li>
+<li><a href="#simplificacion-de-las-cabeceras-fasta-usando-sed-el-stream-editor"><span class="toc-section-number">1.4.4.2</span> Simplificación de las cabeceras FASTA usando <strong>sed</strong> (el <em>stream editor</em>)</a></li>
+</ul></li>
+<li><a href="#generacion-automatica-de-archivos-fasta-especie-especificos-avanzado"><span class="toc-section-number">1.4.5</span> Generación automática de archivos FASTA especie-específicos (avanzado)</a><ul>
+<li><a href="#conversion-de-archivos-fasta-a-formato-fastab-usando-perl-1-liners."><span class="toc-section-number">1.4.5.1</span> Conversión de archivos FASTA a formato “FASTAB” usando <strong>perl</strong> 1-liners.</a></li>
+<li><a href="#filtrado-del-archivo-en-formato-fastab-con-grep"><span class="toc-section-number">1.4.5.2</span> Filtrado del archivo en formato fastab con <strong>grep</strong></a></li>
+<li><a href="#regeneracion-del-formato-fasta-a-partir-de-fastab-con-un-perl-1-liner"><span class="toc-section-number">1.4.5.3</span> Regeneración del formato FASTA a partir de FASTAB con un Perl 1-liner</a></li>
+<li><a href="#llamada-a-un-bucle-for-para-repetir-operaciones-sobre-multiples-archivos"><span class="toc-section-number">1.4.5.4</span> Llamada a un bucle for para repetir operaciones sobre múltiples archivos</a></li>
+</ul></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -207,74 +225,64 @@ $(document).ready(function () {
 
 <div id="presentacion" class="section level1">
 <h1><span class="header-section-number">1</span> Presentación</h1>
-<p>Este código corresponde a unas prácticas escritas por <a href="http://www.ccg.unam.mx/~vinuesa/">Pablo Vinuesa</a> para el manual de Bioinformática y Sistemática Molecular de la Facultad de Ciencias - UNAM, Abril 2015.</p>
-<p>Para correr los ejercicios, asegúrate de tener el archivo recA_Bradyrhizobium_vinuesa.fna en el directorio actual de trabajo.</p>
+<p>El código presentado aquí corresponde a una adpatación de unas prácticas escritas por <a href="http://www.ccg.unam.mx/~vinuesa/">Pablo Vinuesa</a> para el libro <a href="https://tienda.fciencias.unam.mx/es/home/279-sistematica-molecular-y-bioinformatica-guia-practica.html">Sistemática Molecular y Bioinformática - guía práctica</a> editado por la Facultad de Ciencias - UNAM, 2018.</p>
+<div id="licencia-y-terminos-de-uso" class="section level2">
+<h2><span class="header-section-number">1.1</span> Licencia y términos de uso</h2>
+<p>Este material didáctico lo distribuyo bajo la <a href="https://creativecommons.org/licenses/by-nc/4.0/"><strong>Licencia No Comercial Creative Commons 4.0</strong></a></p>
+<p><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons Licence" style="border-width:0" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFgAAAAfCAYAAABjyArgAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAdnJLH8AAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAABitJREFUaN7tWktPG1cUZl0VxBZRKUhVK1i0glTpplWClP4AumpUKRWbVt0VJU3UqLShiCRKGwlZRFFSCajUXXkYMC8/sA228dtjQ8iWBT8A8QtO9J3hDHeG8Ws8RpXDla48nnvnjP3d737nMdNGRB1tbW102d3vRPg4/bIWWKWN0Dr5w5sU2g5SOBam7USUYqkY7WYSlMolKZ1PU7aQoZyWpVwxp3ctS1ktQ5l8mudgbjwV42sjsTDb8of9bBv38G2u0PLGEi2teWlxdYEWfPPc51fmaG75v5bpCtBn4AYiftraCVE0HqFYcofBSudTDGChlKfivkal10XaO9ij/Td6x3HpdYnHMCerZfkaXAsb0USEbcK2FWTv2qIBMgBuUZDbzOAmoszAZDbJbAVoAHXi0QTd/OomtXe0n9sKOIexiccTPLewV+BFAaPj6TizeWtnywTyyuYyLa17dZB9C1VZ/GD0AfX19Z27N85hrFEwmmHfABiyoIILYHLFLLPSM+Wh7u7umnUHcz3PPXwtJARsThgghwy5WPX7aGVDB7kSi6deTlFvX69hf3BwkEZGRrjjWM5jDubWC0Iz7RsAQychC2fg5piJQ18PmcDr7Oyk4eFhGhsbo0gkwh3HOIcxdS6ujSdjlC/pIIPJkAtdkzdpPbhmlgobFs/+O0MdHR26vaEhOjw8JGvDOYxhDubWA0Kz7RsAw6FBLyELYK4VXIAHII+Pj6lSm52dNQGNVQfIWDAsHO4BxxeMBmhza0OXChsWyw8UZmEB1aZ4adO95Z61AlDOvmdykr795lbD9g2AsX3hlKC52NoquP39/bYrW65hEXCNymTYhCbjHmdSobB4fYm8q4smmYDuCbPeHBxUBRhNmFaLZor9qwMD9PfLVyZwu7q6qP39drp/92c6OjpyZN8EcIylIcUODZqrgluNtbWADE2G42OpSMUoEtdZzFoc0LVYZEIAFodTz+Jirjiman9e7Pd+9DF9eKWHbnzxJf34/Q98Drv1yeMnfDw/N+fIvglgZq+WYWkQh4atrmkaOW0AWeQCNmEbIZywOLSts1iNKFSZEIdjbdjOsnDWrY0mjqmWP4+59+7cpV/u3WeQpQtzrTunHvsmgKGP+VKeQzH58VjFRpvoFjpCOOwQ0eLwadimyoQVYHhya7PJlkwN19QKsGo/lUwysKptfLeCXKt9E8DI0LR9jWNZYa8qDYgWoD9YPXQVfOvY5OSk6QcJi2EbWoyM75xM+H16NKHo8EUDLA3MBbADn3xqMBoOL+D3OwcYzg1bWJIIdesBQLt4F2B6vV7bMfV62dKwjYwPUpQ4DdmC0SBHE9BhCdcuWiLUdnJyQjPT03wM5qqyITrtSCJQT9g7KBk/XGWhOKuenh4WeQCOY2x/GZNIA4DLmJ1MIK3OmXQ4aArXVIArObly7HXi5FT7YCqABHvRRSbg6H7/dZSudH/gzMkh9kVdQX44QLT+GTtNrkWv1R2AeyAm3s3sVgVYDdNqBdhJmKbahzxM/DFuhGkI2cDqhsO0/yPA9SYaoo1uJBrP/vzrXKLhxH7dEgHHh9ANxwBVlQjrWKMS0VKpciUnV8mR1eLkZOV1J1fke9Xi5FQQ1GIMFhP2YVdNZpwWe5pp/1yYJikyQivrNi8XpgFkOW8dQwOj1TAtrYRpgUj5MK2lypWSaKhpsjWedTPR2DlNNFC6lESjXMGnJQruibR9qlxPHcDtVLmlAFaLPTP/TLtf7JnysG0Ue3AvKVmqhXdrsaelAEYffThqlCtvf3fbBHI9RR+w3rZcWcjQ+KPxd/Hp8tmXkTs/cRhVdFBwxxjmqAX3a59fY2lAnI0FfEcf35tP/PZwlJMBgKwy2ckjI4CbL+boxasXjb5fYJtkWOc0Yr/c93JFJscAGyBr+kNPaHLdDz2n5KFntmFw7f6w9bhBAMouXqUFbQhgkQv1sT1Aq/bYHk8u+LE93o8oZFyThWrlSrcWsNynqxKh9qufDZB3xcshHOJkzXjxpKS8eFLic+qLJ0s+L12/cd3NV5CaIg3VJKGpDFY7wHr67CmFoiHl1anTjlenChkewxw3gb1oBl+YBl92FzsRvXcJRPPernwLkwLeLRfSiugAAAAASUVORK5CYII=" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 </a></p>
+<p>y es parte del curso de <strong>OMICAS_UAEM_UNAM</strong> que imparto cada semestre en el <a href="http://www.ccg.unam.mx">Centro de Ciencias Genómicas - UNAM</a> para alumons de licenciatura, maestría y doctorado de la Universidad Autómoma del Estado de Morelos (UAEM) y de la Universidad Nacional Autónoma de México (UNAM).</p>
+<div id="clonacion-del-repositorio" class="section level3">
+<h3><span class="header-section-number">1.1.1</span> Clonación del repositorio</h3>
+<p>Si tienes instalado <a href="https://git-scm.com/">git</a> en tu computadora, puedes clonar el repositorio con todo el material del curso con el comando:</p>
+<p><code>git clone <a href="https://github.com/vinuesa/OMICAS_UAEM.git" class="uri">https://github.com/vinuesa/OMICAS_UAEM.git</a></code></p>
+<p>En <a href="https://www.ubuntu.com/">ubuntu</a> es muy fácil instalar git:</p>
+<p><code>sudo apt install git</code></p>
+</div>
+</div>
+<div id="datos-de-secuencia-para-la-practica" class="section level2">
+<h2><span class="header-section-number">1.2</span> Datos de secuencia para la práctica</h2>
+<p>Para correr los ejercicios, asegúrate de tener el archivo <a href="https://github.com/vinuesa/intro2phyloinfo/tree/master/docs/data/recA_Bradyrhizobium_vinuesa.fna">recA_Bradyrhizobium_vinuesa.fna</a> en el directorio actual de trabajo.</p>
+</div>
 <div id="busqueda-y-descarga-de-secuencias-en-genbank-usando-el-sistema-entrez" class="section level2">
-<h2><span class="header-section-number">1.1</span> Búsqueda y descarga de secuencias en GenBank usando el sistema ENTREZ</h2>
-<p>El archivo recA_Bradyrhizobium_vinuesa.fna contiene secuencias del gen <em>recA</em> de bacterias del género <em>Bradyrhizobium</em> depositadas en GenBank por P. Vinuesa. Este bloque muestra el comando usado para descargarlas. El comando debe pegarse en la ventana superior del sistema <a href="https://www.ncbi.nlm.nih.gov/nucleotide?cmd=search">ENTREZ</a>.</p>
-<pre><code># pega esta sentencia en la ventana de captura para interrogar la base de datos de nucleótidos
-# de NCBI mediante el sistema ENTREZ
-'Bradyrhizobium[orgn] AND vinuesa[auth] AND recA[gene]'</code></pre>
+<h2><span class="header-section-number">1.3</span> Búsqueda y descarga de secuencias en GenBank usando el sistema ENTREZ</h2>
+<p>El archivo recA_Bradyrhizobium_vinuesa.fna contiene secuencias del gen <em>recA</em> de bacterias del género <em>Bradyrhizobium</em> depositadas en GenBank por P. Vinuesa.</p>
+<p>El siguiente bloque muestra el comando usado para descargarlas desde <a href="https://www.ncbi.nlm.nih.gov/">NCBI</a>. El comando de filtrado debe pegarse en la ventana de captura de texto de la página que da acceso al sistema <a href="https://www.ncbi.nlm.nih.gov/nucleotide?cmd=search">ENTREZ</a>.</p>
+<pre><code># pega esta sentencia o filtro en la ventana de captura para interrogar la base de datos
+# de nucleótidos (nuccore) de NCBI mediante el sistema ENTREZ
+Bradyrhizobium[orgn] AND vinuesa[auth] AND recA[gene]</code></pre>
 </div>
 <div id="practica-de-parseo-de-archivos-fasta-descargados-de-ncbi-mediante-entrez" class="section level2">
-<h2><span class="header-section-number">1.2</span> Práctica de parseo de archivos FASTA descargados de NCBI mediante ENTREZ</h2>
+<h2><span class="header-section-number">1.4</span> Práctica de parseo de archivos FASTA descargados de NCBI mediante ENTREZ</h2>
 <div id="acceso-a-las-secuencias" class="section level3">
-<h3><span class="header-section-number">1.2.1</span> Acceso a las secuencias</h3>
-<pre><code>cd $HOME/intro2genomics
-
-mkdir sesion1_parseo_fastas
-
-cd sesion1_parseo_fastas
+<h3><span class="header-section-number">1.4.1</span> Acceso a las secuencias</h3>
+<pre><code>[ ! -d $HOME/intro2genomics ] &amp;&amp; mkdir -p $HOME/intro2genomics
+cd $HOME/intro2genomics
 
 cp -r /home/vinuesa/cursos/intro2genomics/sesion1_parseo_fastas .
+
+cd sesion1_parseo_fastas
 </code></pre>
 </div>
-<div id="inspeccion-y-estadisticas-basicas-de-las-secuencias-descargadas" class="section level3">
-<h3><span class="header-section-number">1.2.2</span> Inspección y estadísticas básicas de las secuencias descargadas</h3>
-<ol style="list-style-type: decimal">
-<li>¿Cuántas secuencias hay en el archivo recA_Bradyrhizobium_vinuesa.fna?</li>
-</ol>
-<pre class="bash"><code>grep -c '&gt;' recA_Bradyrhizobium_vinuesa.fna </code></pre>
-<pre><code>## 125</code></pre>
-<ol start="2" style="list-style-type: decimal">
-<li>Veamos las 5 primeras lineas de cabeceras fasta usando <strong>grep</strong> y <strong>head</strong></li>
-</ol>
-<pre class="bash"><code> grep '&gt;' recA_Bradyrhizobium_vinuesa.fna | head -5</code></pre>
+<div id="inspeccion-del-formato-de-las-secuencias-descargadas" class="section level3">
+<h3><span class="header-section-number">1.4.2</span> Inspección del formato de las secuencias descargadas</h3>
+<ul>
+<li>Visualiza la estructura del archivo fasta</li>
+</ul>
+<pre class="bash"><code>head recA_Bradyrhizobium_vinuesa.fna </code></pre>
 <pre><code>## &gt;EU574327.1 Bradyrhizobium liaoningense strain ViHaR5 recombination protein A (recA) gene, partial cds
-## &gt;EU574326.1 Bradyrhizobium liaoningense strain ViHaR4 recombination protein A (recA) gene, partial cds
-## &gt;EU574325.1 Bradyrhizobium liaoningense strain ViHaR3 recombination protein A (recA) gene, partial cds
-## &gt;EU574324.1 Bradyrhizobium liaoningense strain ViHaR2 recombination protein A (recA) gene, partial cds
-## &gt;EU574323.1 Bradyrhizobium liaoningense strain ViHaR1 recombination protein A (recA) gene, partial cds</code></pre>
-<ol start="3" style="list-style-type: decimal">
-<li>Cuenta el numero de generos y especies que contiene el archivo FASTA</li>
-</ol>
-<pre class="bash"><code>grep '&gt;' recA_Bradyrhizobium_vinuesa.fna | cut -d' ' -f3 | sort | uniq -c</code></pre>
-<pre><code>##      18 canariense
-##      18 elkanii
-##       6 genosp.
-##      28 japonicum
-##      15 liaoningense
-##       8 sp.
-##      32 yuanmingense</code></pre>
-<ol start="4" style="list-style-type: decimal">
-<li>Imprime una lista ordenada de mayor a menor, del numero de especies que contiene el archivo FASTA</li>
-</ol>
-<pre class="bash"><code>grep '&gt;' recA_Bradyrhizobium_vinuesa.fna | cut -d' ' -f2,3 | sort | uniq -c | sort -nrk1</code></pre>
-<pre><code>##      32 Bradyrhizobium yuanmingense
-##      28 Bradyrhizobium japonicum
-##      18 Bradyrhizobium elkanii
-##      18 Bradyrhizobium canariense
-##      15 Bradyrhizobium liaoningense
-##       8 Bradyrhizobium sp.
-##       6 Bradyrhizobium genosp.</code></pre>
-</div>
-<div id="edicion-de-las-cabeceras-fasta-mediante-herramientas-de-filtrado-de-unix" class="section level3">
-<h3><span class="header-section-number">1.2.3</span> Edición de las cabeceras FASTA mediante herramientas de filtrado de UNIX</h3>
-<ol start="5" style="list-style-type: decimal">
-<li>Exploremos todas las cabeceras FASTA del archivo recA_Bradyrhizobium_vinuesa.fna usando <strong>grep</strong></li>
-</ol>
-<pre class="bash"><code># grep '&gt;' recA_Bradyrhizobium_vinuesa.fna | less # para verlas por página 
-grep '&gt;' recA_Bradyrhizobium_vinuesa.fna  | head # para no hacer muy extensa la salida</code></pre>
+## ATGAAGCTCGGCAAGAACGACCGGTCCATGGACATCGAGGCGGTGTCCTCCGGCTCGCTCGGGCTCGACA
+## TCGCGCTCGGCATCGGCGGCCTGCCCAAGGGGCGTATCGTCGAGATCTACGGGCCGGAATCCTCGGGCAA
+## GACCACGCTGGCGCTGCATACGGTGGCGGAAGCGCAGAAGAAGGGCGGCATCTGCGCCTTCATCGACGCC
+## GAGCACGCGCTCGACCCGGTCTATGCCCGCAAGCTCGGCGTCAACATCGACGAGCTCCTGATCTCGCAGC
+## CCGACACCGGCGAGCAGGCGCTGGAGATCTGCGACACGCTGGTGCGCTCGGGCGCTGTCGATGTGCTGGT
+## GATCGACTCGGTTGCGGCGCTGGTGCCGAAGGCCGAGCTCGAAGGCGAGATGGGCGATGCGCTGCCAGGC
+## TTGCAGGCCCGTCTGATGAGCCAGGCGCTGCGCAAGCTGACGGCCTCCATCAACAAGTCCAACACCATGG
+## TGATCTTCATCAACCAGATC</code></pre>
+<ul>
+<li>Filtra el archivo con <strong>grep</strong> para desplegar sólo las 10 primeras cabeceras y analizar su estructura</li>
+</ul>
+<p>NOTAS MPORTANTES: 1. ¡Fíjate que vamo a usar la expresión <strong>grep ‘&gt;’ archivo.fasta</strong> y no grep &gt; archivo.fasta! ¿Sabes por qué? 2. Usamos grep con la <strong>expresión regular</strong> ‘^&gt;’ en vez de simplemente ‘&gt;’, para que busque específicamente las <em>líneas que inician con ‘&gt;’</em>. Este filtrado con grep es computacionalmente mucho más eficinte, ya que evita buscar en todas las líneas del archivo, saltándose aquellas que contienen sólo secuencias, ya que no inician con ‘&gt;’.</p>
+<pre class="bash"><code>grep '^&gt;' recA_Bradyrhizobium_vinuesa.fna | head</code></pre>
 <pre><code>## &gt;EU574327.1 Bradyrhizobium liaoningense strain ViHaR5 recombination protein A (recA) gene, partial cds
 ## &gt;EU574326.1 Bradyrhizobium liaoningense strain ViHaR4 recombination protein A (recA) gene, partial cds
 ## &gt;EU574325.1 Bradyrhizobium liaoningense strain ViHaR3 recombination protein A (recA) gene, partial cds
@@ -285,72 +293,136 @@ grep '&gt;' recA_Bradyrhizobium_vinuesa.fna  | head # para no hacer muy extensa 
 ## &gt;EU574320.1 Bradyrhizobium liaoningense strain ViHaG6 recombination protein A (recA) gene, partial cds
 ## &gt;EU574319.1 Bradyrhizobium yuanmingense strain ViHaG5 recombination protein A (recA) gene, partial cds
 ## &gt;EU574318.1 Bradyrhizobium yuanmingense strain ViHaG4 recombination protein A (recA) gene, partial cds</code></pre>
-<ol start="6" style="list-style-type: decimal">
-<li>simplifiquemos las cabeceras FASTA usando el comando <strong>sed</strong> (stream editor)</li>
-</ol>
-<p>El objetivo es eliminar redundancia y los campos gb|no.de.acceso, así como todos los caracteres ‘( , ; : )’ que impedirían el despliegue de un árbol filogenético, al tratarse de caracteres reservados del formato NEWICK. Dejar solo el numero GI, así como el género, especie y cepa indicados entre corchetes.</p>
+</div>
+<div id="generacion-de-estadisticas-basicas-a-partir-de-la-informacion-disponible-en-las-cabeceras" class="section level3">
+<h3><span class="header-section-number">1.4.3</span> Generación de estadísticas básicas a partir de la información disponible en las cabeceras</h3>
+<div id="cuantas-secuencias-hay-en-el-archivo-reca_bradyrhizobium_vinuesa.fna" class="section level4">
+<h4><span class="header-section-number">1.4.3.1</span> ¿Cuántas secuencias hay en el archivo recA_Bradyrhizobium_vinuesa.fna?</h4>
+<pre class="bash"><code>grep -c '^&gt;' recA_Bradyrhizobium_vinuesa.fna </code></pre>
+<pre><code>## 125</code></pre>
+</div>
+<div id="veamos-las-5-primeras-lineas-de-cabeceras-fasta-usando-grep-y-head" class="section level4">
+<h4><span class="header-section-number">1.4.3.2</span> Veamos las 5 primeras lineas de cabeceras fasta usando <strong>grep</strong> y <strong>head</strong></h4>
+<pre class="bash"><code> grep '^&gt;' recA_Bradyrhizobium_vinuesa.fna | head -5</code></pre>
+<pre><code>## &gt;EU574327.1 Bradyrhizobium liaoningense strain ViHaR5 recombination protein A (recA) gene, partial cds
+## &gt;EU574326.1 Bradyrhizobium liaoningense strain ViHaR4 recombination protein A (recA) gene, partial cds
+## &gt;EU574325.1 Bradyrhizobium liaoningense strain ViHaR3 recombination protein A (recA) gene, partial cds
+## &gt;EU574324.1 Bradyrhizobium liaoningense strain ViHaR2 recombination protein A (recA) gene, partial cds
+## &gt;EU574323.1 Bradyrhizobium liaoningense strain ViHaR1 recombination protein A (recA) gene, partial cds</code></pre>
+</div>
+<div id="generacion-de-conteos-usando-el-idioma-grep-regex-archivo-sort-uniq--c" class="section level4">
+<h4><span class="header-section-number">1.4.3.3</span> Generación de conteos usando el idioma <strong>grep ‘REGEX’ archivo | sort | uniq -c</strong></h4>
+<ul>
+<li>Cuenta el número de taxones que contiene el archivo FASTA</li>
+</ul>
+<pre class="bash"><code>grep '^&gt;' recA_Bradyrhizobium_vinuesa.fna | cut -d' ' -f2,3 | sort | uniq -c</code></pre>
+<pre><code>##      18 Bradyrhizobium canariense
+##      18 Bradyrhizobium elkanii
+##       6 Bradyrhizobium genosp.
+##      28 Bradyrhizobium japonicum
+##      15 Bradyrhizobium liaoningense
+##       8 Bradyrhizobium sp.
+##      32 Bradyrhizobium yuanmingense</code></pre>
+</div>
+<div id="imprime-una-lista-ordenada-de-mayor-a-menor-del-numero-de-especies-que-contiene-el-archivo-fasta-usando-sort--nrkn" class="section level4">
+<h4><span class="header-section-number">1.4.3.4</span> Imprime una lista ordenada de mayor a menor, del número de especies que contiene el archivo FASTA usando <strong>sort -nrkN</strong></h4>
+<pre class="bash"><code>grep '^&gt;' recA_Bradyrhizobium_vinuesa.fna | cut -d' ' -f2,3 | sort | uniq -c | sort -nrk1</code></pre>
+<pre><code>##      32 Bradyrhizobium yuanmingense
+##      28 Bradyrhizobium japonicum
+##      18 Bradyrhizobium elkanii
+##      18 Bradyrhizobium canariense
+##      15 Bradyrhizobium liaoningense
+##       8 Bradyrhizobium sp.
+##       6 Bradyrhizobium genosp.</code></pre>
+</div>
+</div>
+<div id="edicion-de-las-cabeceras-fasta-mediante-herramientas-de-filtrado-de-unix" class="section level3">
+<h3><span class="header-section-number">1.4.4</span> Edición de las cabeceras FASTA mediante herramientas de filtrado de UNIX</h3>
+<div id="exploremos-todas-las-cabeceras-fasta-del-archivo-reca_bradyrhizobium_vinuesa.fna-usando-grep" class="section level4">
+<h4><span class="header-section-number">1.4.4.1</span> Exploremos todas las cabeceras FASTA del archivo recA_Bradyrhizobium_vinuesa.fna usando <strong>grep</strong></h4>
+<pre class="bash"><code># grep '^&gt;' recA_Bradyrhizobium_vinuesa.fna | less # para verlas por página 
+grep '^&gt;' recA_Bradyrhizobium_vinuesa.fna  | head # para no hacer muy extensa la salida</code></pre>
+<pre><code>## &gt;EU574327.1 Bradyrhizobium liaoningense strain ViHaR5 recombination protein A (recA) gene, partial cds
+## &gt;EU574326.1 Bradyrhizobium liaoningense strain ViHaR4 recombination protein A (recA) gene, partial cds
+## &gt;EU574325.1 Bradyrhizobium liaoningense strain ViHaR3 recombination protein A (recA) gene, partial cds
+## &gt;EU574324.1 Bradyrhizobium liaoningense strain ViHaR2 recombination protein A (recA) gene, partial cds
+## &gt;EU574323.1 Bradyrhizobium liaoningense strain ViHaR1 recombination protein A (recA) gene, partial cds
+## &gt;EU574322.1 Bradyrhizobium liaoningense strain ViHaG8 recombination protein A (recA) gene, partial cds
+## &gt;EU574321.1 Bradyrhizobium liaoningense strain ViHaG7 recombination protein A (recA) gene, partial cds
+## &gt;EU574320.1 Bradyrhizobium liaoningense strain ViHaG6 recombination protein A (recA) gene, partial cds
+## &gt;EU574319.1 Bradyrhizobium yuanmingense strain ViHaG5 recombination protein A (recA) gene, partial cds
+## &gt;EU574318.1 Bradyrhizobium yuanmingense strain ViHaG4 recombination protein A (recA) gene, partial cds</code></pre>
+</div>
+<div id="simplificacion-de-las-cabeceras-fasta-usando-sed-el-stream-editor" class="section level4">
+<h4><span class="header-section-number">1.4.4.2</span> Simplificación de las cabeceras FASTA usando <strong>sed</strong> (el <em>stream editor</em>)</h4>
+<p>El objetivo es eliminar redundancia y los campos gb|no.de.acceso, así como todos los caracteres ‘( , ; : )’ que impedirían el despliegue de un árbol filogenético, al tratarse de caracteres reservados del formato NEWICK. Dejar solo el número GI, así como el género, especie y cepa indicados entre corchetes.</p>
 <p>Es decir vamos a: - reducir Bradyrhizobium a ‘B.’ - eliminar ‘RNA poly …’ y reemplazarlo por ‘]’ - eliminar ‘genosp.’ - sustituir espacios por guiones bajos</p>
-<p>Noten el uso de expresiones regulares como ’.*‘y’[[:space:]]’</p>
-<pre class="bash"><code>sed 's/ Bra/ [Bra/; s/|gb.*| /|/; s/Bradyrhizobium /B /; s/genosp\. //; s/ RNA.*/]/; s/[[:space:]]/_/g;' recA_Bradyrhizobium_vinuesa.fna | grep '&gt;' | head -5</code></pre>
-<pre><code>## &gt;EU574327.1_[B_liaoningense_strain_ViHaR5_recombination_protein_A_(recA)_gene,_partial_cds
-## &gt;EU574326.1_[B_liaoningense_strain_ViHaR4_recombination_protein_A_(recA)_gene,_partial_cds
-## &gt;EU574325.1_[B_liaoningense_strain_ViHaR3_recombination_protein_A_(recA)_gene,_partial_cds
-## &gt;EU574324.1_[B_liaoningense_strain_ViHaR2_recombination_protein_A_(recA)_gene,_partial_cds
-## &gt;EU574323.1_[B_liaoningense_strain_ViHaR1_recombination_protein_A_(recA)_gene,_partial_cds</code></pre>
-<ol start="8" style="list-style-type: decimal">
-<li>Cuando estamos satisfechos con el resultado, guardamos la salida del comando en un archivo usando ‘&gt;’ para redirigir el flujo de STDOUT a un archivo de texto</li>
-</ol>
-<pre class="bash"><code>sed 's/ recom.*cds//; s/ Bra/ Bra/; s/|gb.*| /|/; s/Bradyrhizobium /B. /; s/genosp\. //; s/ RNA.*//; s/[[:space:]]/_/g' recA_Bradyrhizobium_vinuesa.fna &gt; recA_Bradyrhizobium_vinuesa.fnaed
+<p>Noten el uso de <strong>expresiones regulares</strong> como ’.*‘y’[[:space:]]’</p>
+<pre class="bash"><code>sed 's/|gb.*| /|/; s/Bradyrhizobium /B./; s/genosp\. //; s/ RNA.*/]/; s/[[:space:]]/_/g;' recA_Bradyrhizobium_vinuesa.fna | grep '^&gt;' | head -5</code></pre>
+<pre><code>## &gt;EU574327.1_B.liaoningense_strain_ViHaR5_recombination_protein_A_(recA)_gene,_partial_cds
+## &gt;EU574326.1_B.liaoningense_strain_ViHaR4_recombination_protein_A_(recA)_gene,_partial_cds
+## &gt;EU574325.1_B.liaoningense_strain_ViHaR3_recombination_protein_A_(recA)_gene,_partial_cds
+## &gt;EU574324.1_B.liaoningense_strain_ViHaR2_recombination_protein_A_(recA)_gene,_partial_cds
+## &gt;EU574323.1_B.liaoningense_strain_ViHaR1_recombination_protein_A_(recA)_gene,_partial_cds</code></pre>
+<p>Cuando estamos satisfechos con el resultado, guardamos la salida del comando en un archivo usando ‘^&gt;’ para redirigir el flujo de STDOUT a un archivo de texto</p>
+<pre class="bash"><code>sed 's/ recom.*cds//; s/|gb.*| /|/; s/Bradyrhizobium /B /; s/genosp\. //; s/ RNA.*/\]/; s/[[:space:]]/_/g; s/strain_//' recA_Bradyrhizobium_vinuesa.fna &gt; recA_Bradyrhizobium_vinuesa.fnaed
 </code></pre>
 </div>
+</div>
 <div id="generacion-automatica-de-archivos-fasta-especie-especificos-avanzado" class="section level3">
-<h3><span class="header-section-number">1.2.4</span> Generación automática de archivos FASTA especie-específicos (avanzado)</h3>
-<ol start="9" style="list-style-type: decimal">
-<li>Convertir archivos FASTA a formato “FASTAB” usando <strong>perl</strong> 1-liners.</li>
-</ol>
+<h3><span class="header-section-number">1.4.5</span> Generación automática de archivos FASTA especie-específicos (avanzado)</h3>
+<div id="conversion-de-archivos-fasta-a-formato-fastab-usando-perl-1-liners." class="section level4">
+<h4><span class="header-section-number">1.4.5.1</span> Conversión de archivos FASTA a formato “FASTAB” usando <strong>perl</strong> 1-liners.</h4>
 <p>Vamos a transformar los FASTAS de tal manera que las secuencias queden en la misma línea que su cabecera, separada de ésta por un tabulador. Esto puede ser muy útil para filtrar el archivo resultante con grep. Veamos un ejemplo:</p>
 <pre class="bash"><code>perl -pe 'unless(/^&gt;/){s/\n//g}; if(/&gt;/){s/\n/\t/g}; s/&gt;/\n&gt;/' recA_Bradyrhizobium_vinuesa.fnaed | head
 </code></pre>
 <pre><code>## 
-## &gt;EU574327.1_B._liaoningense_strain_ViHaR5    ATGAAGCTCGGCAAGAACGACCGGTCCATGGACATCGAGGCGGTGTCCTCCGGCTCGCTCGGGCTCGACATCGCGCTCGGCATCGGCGGCCTGCCCAAGGGGCGTATCGTCGAGATCTACGGGCCGGAATCCTCGGGCAAGACCACGCTGGCGCTGCATACGGTGGCGGAAGCGCAGAAGAAGGGCGGCATCTGCGCCTTCATCGACGCCGAGCACGCGCTCGACCCGGTCTATGCCCGCAAGCTCGGCGTCAACATCGACGAGCTCCTGATCTCGCAGCCCGACACCGGCGAGCAGGCGCTGGAGATCTGCGACACGCTGGTGCGCTCGGGCGCTGTCGATGTGCTGGTGATCGACTCGGTTGCGGCGCTGGTGCCGAAGGCCGAGCTCGAAGGCGAGATGGGCGATGCGCTGCCAGGCTTGCAGGCCCGTCTGATGAGCCAGGCGCTGCGCAAGCTGACGGCCTCCATCAACAAGTCCAACACCATGGTGATCTTCATCAACCAGATC
-## &gt;EU574326.1_B._liaoningense_strain_ViHaR4    ATGAAGCTCGGCAAGAACGACCGGTCCATGGACATCGAGGCGGTGTCCTCCGGCTCGCTCGGGCTCGACATCGCGCTCGGCATCGGCGGCCTGCCCAAGGGGCGTATCGTCGAGATCTACGGGCCGGAATCCTCGGGCAAGACCACGCTGGCGCTGCATACGGTGGCGGAAGCGCAGAAGAAGGGCGGCATCTGCGCCTTCATCGACGCCGAGCACGCGCTCGACCCGGTCTATGCCCGCAAGCTCGGCGTCAACATCGACGAGCTCCTGATCTCGCAGCCCGACACCGGCGAGCAGGCGCTGGAGATCTGCGACACGCTGGTGCGCTCGGGCGCTGTCGATGTGCTGGTGATCGATTCGGTTGCGGCGCTGGTGCCGAAGGCCGAGCTCGAAGGCGAGATGGGCGATGCGCTGCCGGGCTTGCAGGCCCGTCTGATGAGCCAGGCGCTGCGCAAGCTGACGGCCTCCATCAACAAGTCCAACACCATGGTGATCTTCATCAACCAGATC
-## &gt;EU574325.1_B._liaoningense_strain_ViHaR3    ATGAAGCTCGGCAAGAACGACCGGTCCATGGACATCGAGGCGGTGTCCTCCGGCTCGCTCGGGCTCGACATCGCGCTCGGCATCGGCGGCCTGCCCAAGGGGCGTATCGTCGAGATCTACGGGCCGGAATCCTCGGGCAAGACCACGCTGGCGCTGCATACGGTGGCGGAAGCGCAGAAGAAGGGCGGCATCTGCGCCTTCATCGACGCCGAGCACGCGCTCGACCCGGTCTATGCCCGCAAGCTCGGCGTCAACATCGACGAGCTCCTGATCTCGCAGCCCGACACCGGCGAGCAGGCGCTGGAGATCTGCGACACGCTGGTGCGCTCGGGCGCTGTCGATGTGCTGGTGATCGATTCGGTTGCGGCGCTGGTGCCGAAGGCCGAGCTCGAAGGCGAGATGGGCGATGCGCTGCCGGGCTTGCAGGCCCGTCTGATGAGCCAGGCGCTGCGCAAGCTGACGGCCTCCATCAACAAGTCCAACACCATGGTGATCTTCATCAACCAGATC
-## &gt;EU574324.1_B._liaoningense_strain_ViHaR2    ATGAAGCTCGGCAAGAACGACCGGTCCATGGACATCGAGGCGGTGTCCTCCGGCTCGCTCGGGCTCGACATCGCGCTCGGCATCGGCGGCCTGCCCAAGGGGCGTATCGTCGAGATCTACGGGCCGGAATCCTCGGGCAAGACCACGCTGGCGCTGCATACGGTGGCGGAAGCGCAGAAGAAGGGCGGCATCTGCGCCTTCATCGACGCCGAGCACGCGCTCGACCCGGTCTATGCCCGCAAGCTCGGCGTCAACATCGACGAGCTCCTGATCTCGCAGCCCGACACCGGCGAGCAGGCGCTGGAGATCTGCGACACGCTGGTGCGCTCGGGCGCTGTCGATGTGCTGGTGATCGATTCGGTTGCGGCGCTGGTGCCGAAGGCCGAGCTCGAAGGCGAGATGGGCGATGCGCTGCCGGGCTTGCAGGCCCGTCTGATGAGCCAGGCGCTGCGCAAGCTGACGGCCTCCATCAACAAGTCCAACACCATGGTGATCTTCATCAACCAGATC
-## &gt;EU574323.1_B._liaoningense_strain_ViHaR1    ATGAAGCTCGGCAAGAACGACCGGTCCATGGACATCGAGGCGGTGTCCTCCGGCTCGCTCGGGCTCGACATCGCGCTCGGCATCGGCGGCCTGCCCAAGGGGCGTATCGTCGAGATCTACGGGCCGGAATCCTCGGGCAAGACCACGCTGGCGCTGCATACGGTGGCGGAAGCGCAGAAGAAGGGCGGCATCTGCGCCTTCATCGACGCCGAGCACGCGCTCGACCCGGTCTATGCCCGCAAGCTCGGCGTCAACATCGACGAGCTCCTGATCTCGCAGCCCGACACCGGCGAGCAGGCGCTGGAGATCTGCGACACGCTGGTGCGCTCGGGCGCTGTCGATGTGCTGGTGATCGATTCGGTTGCGGCGCTGGTGCCGAAGGCCGAGCTCGAAGGCGAGATGGGCGATGCGCTGCCGGGCTTGCAGGCCCGTCTGATGAGCCAGGCGCTGCGCAAGCTGACGGCCTCCATCAACAAGTCCAACACCATGGTGATCTTCATCAACCAGATC
-## &gt;EU574322.1_B._liaoningense_strain_ViHaG8    ATGAAGCTCGGCAAGAACGACCGGTCCATGGACATCGAGGCGGTGTCCTCCGGCTCGCTCGGGCTCGACATCGCGCTCGGCATCGGCGGCCTGCCCAAGGGGCGTATCGTCGAGATCTACGGGCCGGAATCCTCGGGCAAGACCACGCTGGCGCTGCATACGGTGGCGGAAGCGCAGAAGAAGGGCGGCATCTGCGCCTTCATCGACGCCGAGCACGCGCTCGACCCGGTCTATGCCCGCAAGCTCGGCGTCAACATCGACGAGCTCCTGATCTCGCAGCCCGACACCGGCGAGCAGGCGCTGGAGATCTGCGACACGCTGGTGCGCTCGGGCGCTGTCGATGTGCTGGTGATCGATTCGGTTGCGGCGCTGGTGCCGAAGGCCGAGCTCGAAGGCGAGATGGGCGATGCGCTGCCGGGCTTGCAGGCCCGTCTGATGAGCCAGGCGCTGCGCAAGCTGACGGCCTCCATCAACAAGTCCAACACCATGGTGATCTTCATCAACCAGATC
-## &gt;EU574321.1_B._liaoningense_strain_ViHaG7    ATGAAGCTCGGCAAGAACGACCGGTCCATGGACATCGAGGCGGTGTCCTCCGGCTCGCTCGGGCTCGACATCGCGCTCGGCATCGGCGGCCTGCCCAAGGGGCGTATCGTCGAGATCTACGGGCCGGAATCCTCGGGCAAGACCACGCTGGCGCTGCATACGGTGGCGGAAGCGCAGAAGAAGGGCGGCATCTGCGCCTTCATCGACGCCGAGCACGCGCTCGACCCGGTCTATGCCCGCAAGCTCGGCGTCAACATCGACGAGCTCCTGATCTCGCAGCCCGACACCGGCGAGCAGGCGCTGGAGATCTGCGACACGCTGGTGCGCTCGGGCGCTGTCGATGTGCTGGTGATCGATTCGGTTGCGGCGCTGGTGCCGAAGGCCGAGCTCGAAGGCGAGATGGGCGATGCGCTGCCGGGCTTGCAGGCCCGTCTGATGAGCCAGGCGCTGCGCAAGCTGACGGCCTCCATCAACAAGTCCAACACCATGGTGATCTTCATCAACCAGATC
-## &gt;EU574320.1_B._liaoningense_strain_ViHaG6    ATGAAGCTCGGCAAGAACGACCGGTCCATGGACATCGAGGCGGTGTCCTCCGGCTCGCTCGGGCTCGACATCGCGCTCGGCATCGGCGGCCTGCCCAAGGGGCGTATCGTCGAGATCTACGGGCCGGAATCCTCGGGCAAGACCACGCTGGCGCTGCATACGGTGGCGGAAGCGCAGAAGAAGGGCGGCATCTGCGCCTTCATCGACGCCGAGCACGCGCTCGACCCGGTCTATGCCCGCAAGCTCGGCGTCAACATCGACGAGCTCCTGATCTCGCAGCCCGACACCGGCGAGCAGGCGCTGGAGATCTGCGACACGCTGGTGCGCTCGGGCGCTGTCGATGTGCTGGTGATCGATTCGGTTGCGGCGCTGGTGCCGAAGGCCGAGCTCGAAGGCGAGATGGGCGATGCGCTGCCGGGCTTGCAGGCCCGTCTGATGAGCCAGGCGCTGCGCAAGCTGACGGCCTCCATCAACAAGTCCAACACCATGGTGATCTTCATCAACCAGATC
-## &gt;EU574319.1_B._yuanmingense_strain_ViHaG5    ATGAAGCTCGGCAAGAACGACCGCTCCATGGACATCGAGGCGGTGTCCTCCGGCTCGCTCGGGCTCGATATCGCGCTCGGCATCGGCGGCTTGCCCAAGGGGCGCATCGTCGAGATCTACGGGCCGGAATCCTCGGGCAAGACCACGCTGGCGCTGCATACGGTGGCGGAAGCGCAGAAGAAGGGCGGCATCTGCGCCTTCATCGACGCCGAGCACGCGCTCGATCCGGTCTATGCCCGCAAGCTCGGCGTCAACATCGACGAGCTCCTGATCTCGCAGCCCGACACCGGCGAGCAGGCGCTGGAGATCTGCGACACCCTGGTGCGCTCGGGCGCCGTCGACGTTCTCGTGGTCGATTCGGTCGCGGCGCTGGTGCCGAAGGCCGAGCTCGAGGGCGAGATGGGCGATGCGCTGCCGGGACTTCAAGCACGGTTGATGAGCCAGGCGCTGCGCAAGCTCACGGCCTCCATCAACAAATCCAACACGATGGTGATCTTCATCAACCAGATC</code></pre>
+## &gt;EU574327.1_B_liaoningense_ViHaR5    ATGAAGCTCGGCAAGAACGACCGGTCCATGGACATCGAGGCGGTGTCCTCCGGCTCGCTCGGGCTCGACATCGCGCTCGGCATCGGCGGCCTGCCCAAGGGGCGTATCGTCGAGATCTACGGGCCGGAATCCTCGGGCAAGACCACGCTGGCGCTGCATACGGTGGCGGAAGCGCAGAAGAAGGGCGGCATCTGCGCCTTCATCGACGCCGAGCACGCGCTCGACCCGGTCTATGCCCGCAAGCTCGGCGTCAACATCGACGAGCTCCTGATCTCGCAGCCCGACACCGGCGAGCAGGCGCTGGAGATCTGCGACACGCTGGTGCGCTCGGGCGCTGTCGATGTGCTGGTGATCGACTCGGTTGCGGCGCTGGTGCCGAAGGCCGAGCTCGAAGGCGAGATGGGCGATGCGCTGCCAGGCTTGCAGGCCCGTCTGATGAGCCAGGCGCTGCGCAAGCTGACGGCCTCCATCAACAAGTCCAACACCATGGTGATCTTCATCAACCAGATC
+## &gt;EU574326.1_B_liaoningense_ViHaR4    ATGAAGCTCGGCAAGAACGACCGGTCCATGGACATCGAGGCGGTGTCCTCCGGCTCGCTCGGGCTCGACATCGCGCTCGGCATCGGCGGCCTGCCCAAGGGGCGTATCGTCGAGATCTACGGGCCGGAATCCTCGGGCAAGACCACGCTGGCGCTGCATACGGTGGCGGAAGCGCAGAAGAAGGGCGGCATCTGCGCCTTCATCGACGCCGAGCACGCGCTCGACCCGGTCTATGCCCGCAAGCTCGGCGTCAACATCGACGAGCTCCTGATCTCGCAGCCCGACACCGGCGAGCAGGCGCTGGAGATCTGCGACACGCTGGTGCGCTCGGGCGCTGTCGATGTGCTGGTGATCGATTCGGTTGCGGCGCTGGTGCCGAAGGCCGAGCTCGAAGGCGAGATGGGCGATGCGCTGCCGGGCTTGCAGGCCCGTCTGATGAGCCAGGCGCTGCGCAAGCTGACGGCCTCCATCAACAAGTCCAACACCATGGTGATCTTCATCAACCAGATC
+## &gt;EU574325.1_B_liaoningense_ViHaR3    ATGAAGCTCGGCAAGAACGACCGGTCCATGGACATCGAGGCGGTGTCCTCCGGCTCGCTCGGGCTCGACATCGCGCTCGGCATCGGCGGCCTGCCCAAGGGGCGTATCGTCGAGATCTACGGGCCGGAATCCTCGGGCAAGACCACGCTGGCGCTGCATACGGTGGCGGAAGCGCAGAAGAAGGGCGGCATCTGCGCCTTCATCGACGCCGAGCACGCGCTCGACCCGGTCTATGCCCGCAAGCTCGGCGTCAACATCGACGAGCTCCTGATCTCGCAGCCCGACACCGGCGAGCAGGCGCTGGAGATCTGCGACACGCTGGTGCGCTCGGGCGCTGTCGATGTGCTGGTGATCGATTCGGTTGCGGCGCTGGTGCCGAAGGCCGAGCTCGAAGGCGAGATGGGCGATGCGCTGCCGGGCTTGCAGGCCCGTCTGATGAGCCAGGCGCTGCGCAAGCTGACGGCCTCCATCAACAAGTCCAACACCATGGTGATCTTCATCAACCAGATC
+## &gt;EU574324.1_B_liaoningense_ViHaR2    ATGAAGCTCGGCAAGAACGACCGGTCCATGGACATCGAGGCGGTGTCCTCCGGCTCGCTCGGGCTCGACATCGCGCTCGGCATCGGCGGCCTGCCCAAGGGGCGTATCGTCGAGATCTACGGGCCGGAATCCTCGGGCAAGACCACGCTGGCGCTGCATACGGTGGCGGAAGCGCAGAAGAAGGGCGGCATCTGCGCCTTCATCGACGCCGAGCACGCGCTCGACCCGGTCTATGCCCGCAAGCTCGGCGTCAACATCGACGAGCTCCTGATCTCGCAGCCCGACACCGGCGAGCAGGCGCTGGAGATCTGCGACACGCTGGTGCGCTCGGGCGCTGTCGATGTGCTGGTGATCGATTCGGTTGCGGCGCTGGTGCCGAAGGCCGAGCTCGAAGGCGAGATGGGCGATGCGCTGCCGGGCTTGCAGGCCCGTCTGATGAGCCAGGCGCTGCGCAAGCTGACGGCCTCCATCAACAAGTCCAACACCATGGTGATCTTCATCAACCAGATC
+## &gt;EU574323.1_B_liaoningense_ViHaR1    ATGAAGCTCGGCAAGAACGACCGGTCCATGGACATCGAGGCGGTGTCCTCCGGCTCGCTCGGGCTCGACATCGCGCTCGGCATCGGCGGCCTGCCCAAGGGGCGTATCGTCGAGATCTACGGGCCGGAATCCTCGGGCAAGACCACGCTGGCGCTGCATACGGTGGCGGAAGCGCAGAAGAAGGGCGGCATCTGCGCCTTCATCGACGCCGAGCACGCGCTCGACCCGGTCTATGCCCGCAAGCTCGGCGTCAACATCGACGAGCTCCTGATCTCGCAGCCCGACACCGGCGAGCAGGCGCTGGAGATCTGCGACACGCTGGTGCGCTCGGGCGCTGTCGATGTGCTGGTGATCGATTCGGTTGCGGCGCTGGTGCCGAAGGCCGAGCTCGAAGGCGAGATGGGCGATGCGCTGCCGGGCTTGCAGGCCCGTCTGATGAGCCAGGCGCTGCGCAAGCTGACGGCCTCCATCAACAAGTCCAACACCATGGTGATCTTCATCAACCAGATC
+## &gt;EU574322.1_B_liaoningense_ViHaG8    ATGAAGCTCGGCAAGAACGACCGGTCCATGGACATCGAGGCGGTGTCCTCCGGCTCGCTCGGGCTCGACATCGCGCTCGGCATCGGCGGCCTGCCCAAGGGGCGTATCGTCGAGATCTACGGGCCGGAATCCTCGGGCAAGACCACGCTGGCGCTGCATACGGTGGCGGAAGCGCAGAAGAAGGGCGGCATCTGCGCCTTCATCGACGCCGAGCACGCGCTCGACCCGGTCTATGCCCGCAAGCTCGGCGTCAACATCGACGAGCTCCTGATCTCGCAGCCCGACACCGGCGAGCAGGCGCTGGAGATCTGCGACACGCTGGTGCGCTCGGGCGCTGTCGATGTGCTGGTGATCGATTCGGTTGCGGCGCTGGTGCCGAAGGCCGAGCTCGAAGGCGAGATGGGCGATGCGCTGCCGGGCTTGCAGGCCCGTCTGATGAGCCAGGCGCTGCGCAAGCTGACGGCCTCCATCAACAAGTCCAACACCATGGTGATCTTCATCAACCAGATC
+## &gt;EU574321.1_B_liaoningense_ViHaG7    ATGAAGCTCGGCAAGAACGACCGGTCCATGGACATCGAGGCGGTGTCCTCCGGCTCGCTCGGGCTCGACATCGCGCTCGGCATCGGCGGCCTGCCCAAGGGGCGTATCGTCGAGATCTACGGGCCGGAATCCTCGGGCAAGACCACGCTGGCGCTGCATACGGTGGCGGAAGCGCAGAAGAAGGGCGGCATCTGCGCCTTCATCGACGCCGAGCACGCGCTCGACCCGGTCTATGCCCGCAAGCTCGGCGTCAACATCGACGAGCTCCTGATCTCGCAGCCCGACACCGGCGAGCAGGCGCTGGAGATCTGCGACACGCTGGTGCGCTCGGGCGCTGTCGATGTGCTGGTGATCGATTCGGTTGCGGCGCTGGTGCCGAAGGCCGAGCTCGAAGGCGAGATGGGCGATGCGCTGCCGGGCTTGCAGGCCCGTCTGATGAGCCAGGCGCTGCGCAAGCTGACGGCCTCCATCAACAAGTCCAACACCATGGTGATCTTCATCAACCAGATC
+## &gt;EU574320.1_B_liaoningense_ViHaG6    ATGAAGCTCGGCAAGAACGACCGGTCCATGGACATCGAGGCGGTGTCCTCCGGCTCGCTCGGGCTCGACATCGCGCTCGGCATCGGCGGCCTGCCCAAGGGGCGTATCGTCGAGATCTACGGGCCGGAATCCTCGGGCAAGACCACGCTGGCGCTGCATACGGTGGCGGAAGCGCAGAAGAAGGGCGGCATCTGCGCCTTCATCGACGCCGAGCACGCGCTCGACCCGGTCTATGCCCGCAAGCTCGGCGTCAACATCGACGAGCTCCTGATCTCGCAGCCCGACACCGGCGAGCAGGCGCTGGAGATCTGCGACACGCTGGTGCGCTCGGGCGCTGTCGATGTGCTGGTGATCGATTCGGTTGCGGCGCTGGTGCCGAAGGCCGAGCTCGAAGGCGAGATGGGCGATGCGCTGCCGGGCTTGCAGGCCCGTCTGATGAGCCAGGCGCTGCGCAAGCTGACGGCCTCCATCAACAAGTCCAACACCATGGTGATCTTCATCAACCAGATC
+## &gt;EU574319.1_B_yuanmingense_ViHaG5    ATGAAGCTCGGCAAGAACGACCGCTCCATGGACATCGAGGCGGTGTCCTCCGGCTCGCTCGGGCTCGATATCGCGCTCGGCATCGGCGGCTTGCCCAAGGGGCGCATCGTCGAGATCTACGGGCCGGAATCCTCGGGCAAGACCACGCTGGCGCTGCATACGGTGGCGGAAGCGCAGAAGAAGGGCGGCATCTGCGCCTTCATCGACGCCGAGCACGCGCTCGATCCGGTCTATGCCCGCAAGCTCGGCGTCAACATCGACGAGCTCCTGATCTCGCAGCCCGACACCGGCGAGCAGGCGCTGGAGATCTGCGACACCCTGGTGCGCTCGGGCGCCGTCGACGTTCTCGTGGTCGATTCGGTCGCGGCGCTGGTGCCGAAGGCCGAGCTCGAGGGCGAGATGGGCGATGCGCTGCCGGGACTTCAAGCACGGTTGATGAGCCAGGCGCTGCGCAAGCTCACGGCCTCCATCAACAAATCCAACACGATGGTGATCTTCATCAACCAGATC</code></pre>
 <pre class="bash"><code>perl -pe 'unless(/^&gt;/){s/\n//g}; if(/&gt;/){s/\n/\t/g}; s/&gt;/\n&gt;/' recA_Bradyrhizobium_vinuesa.fnaed &gt; recA_Bradyrhizobium_vinuesa.fnaedtab</code></pre>
-<ol start="10" style="list-style-type: decimal">
-<li>Filtrar el archivo fnaedtab generado en 9 para obtener solo las secuencias de B._yuanmingense del mismo, guardarlo en un archivo y convertirlo de nuevo a formato FASTA.</li>
-</ol>
+</div>
+<div id="filtrado-del-archivo-en-formato-fastab-con-grep" class="section level4">
+<h4><span class="header-section-number">1.4.5.2</span> Filtrado del archivo en formato fastab con <strong>grep</strong></h4>
+<p>Filtremos el archivo *fnaedtab (en formato “fastab”) generado en el punto anterior para obtener solo las secuencias de B._yuanmingense del mismo, guardarlo en un archivo y convertirlo de nuevo a formato FASTA.</p>
 <pre class="bash"><code>grep yuanmingense recA_Bradyrhizobium_vinuesa.fnaedtab | head -5</code></pre>
-<pre><code>## &gt;EU574319.1_B._yuanmingense_strain_ViHaG5    ATGAAGCTCGGCAAGAACGACCGCTCCATGGACATCGAGGCGGTGTCCTCCGGCTCGCTCGGGCTCGATATCGCGCTCGGCATCGGCGGCTTGCCCAAGGGGCGCATCGTCGAGATCTACGGGCCGGAATCCTCGGGCAAGACCACGCTGGCGCTGCATACGGTGGCGGAAGCGCAGAAGAAGGGCGGCATCTGCGCCTTCATCGACGCCGAGCACGCGCTCGATCCGGTCTATGCCCGCAAGCTCGGCGTCAACATCGACGAGCTCCTGATCTCGCAGCCCGACACCGGCGAGCAGGCGCTGGAGATCTGCGACACCCTGGTGCGCTCGGGCGCCGTCGACGTTCTCGTGGTCGATTCGGTCGCGGCGCTGGTGCCGAAGGCCGAGCTCGAGGGCGAGATGGGCGATGCGCTGCCGGGACTTCAAGCACGGTTGATGAGCCAGGCGCTGCGCAAGCTCACGGCCTCCATCAACAAATCCAACACGATGGTGATCTTCATCAACCAGATC
-## &gt;EU574318.1_B._yuanmingense_strain_ViHaG4    ATGAAGCTCGGCAAGAACGACCGCTCCATGGACATCGAGGCGGTGTCCTCCGGCTCGCTCGGGCTCGATATCGCGCTCGGCATCGGCGGCTTGCCCAAGGGGCGCATCGTCGAGATCTACGGGCCGGAATCCTCGGGCAAGACCACGCTGGCGCTGCATACGGTGGCGGAAGCGCAGAAGAAGGGCGGCATCTGCGCCTTCATCGACGCCGAGCACGCGCTCGATCCGGTCTATGCCCGCAAGCTCGGCGTCAACATCGACGAGCTCCTGATCTCGCAGCCCGACACCGGCGAGCAGGCGCTGGAGATCTGCGACACCCTGGTGCGCTCGGGCGCCGTCGACGTTCTCGTGGTCGATTCGGTCGCGGCGCTGGTGCCGAAGGCCGAGCTCGAGGGCGAGATGGGCGATGCGCTGCCGGGACTTCAAGCACGGTTGATGAGCCAGGCGCTGCGCAAGCTCACGGCCTCCATCAACAAATCCAACACGATGGTGATCTTCATCAACCAGATC
-## &gt;EU574297.1_B._yuanmingense_strain_InRo02    ATGAAGCTCGGCAAGAACGACCGCTCCATGGACATCGAGGCGGTGTCCTCCGGCTCGCTCGGGCTCGATATCGCGCTGGGCATCGGCGGCCTGCCCAAGGGACGCATCGTCGAGATCTACGGGCCGGAATCTTCGGGCAAGACCACGCTCGCGCTGCATACGGTGGCGGAAGCGCAGAAGAAGGGTGGCATCTGCGCCTTCATCGACGCCGAGCACGCGCTCGATCCGGTCTATGCCCGCAAGCTCGGCGTCAACATCGACGAGCTCCTGATCTCGCAGCCCGACACCGGCGAGCAGGCGCTGGAGATCTGCGACACCCTGGTGCGCTCGGGCGCCGTCGATGTTCTGGTGGTCGATTCGGTGGCGGCGCTGGTGCCGAAGGCCGAGCTCGAAGGCGAGATGGGTGACGCGCTGCCTGGCCTGCAGGCCCGCCTGATGAGCCAGGCGCTGCGCAAGCTGACGGCATCCATCAACAAGTCCAACACCATGGTGATCTTCATCAACCAGATC
-## &gt;EU574296.1_B._yuanmingense_strain_InKo02    ATGAAGCTCGGCAAGAACGATCGCTCCATGGACATCGAGGCGGTCTCCTCCGGCTCGCTCGGGCTCGATATCGCGCTCGGCATCGGCGGCCTGCCCAAGGGACGCATCGTCGAGATCTACGGGCCGGAATCCTCCGGCAAGACCACGCTCGCGCTGCATACGGTGGCGGAGGCGCAGAAGAAGGGCGGCATCTGCGCCTTCATCGACGCCGAGCACGCGCTCGACCCGGTCTATGCCCGCAAGCTCGGCGTCAACATCGACGAGCTCCTGATCTCGCAGCCCGACACCGGCGAGCAGGCGCTGGAGATCTGCGACACCCTGGTGCGTTCGGGCGCCGTCGACGTTCTCGTGGTCGATTCGGTCGCGGCGCTGGTGCCGAAGGCCGAGCTCGAGGGCGAGATGGGCGATGCGCTGCCGGGCCTGCAGGCGCGGTTGATGAGCCAGGCGCTGCGCAAGCTGACGGCCTCCATCAACAAGTCCAACACCATGGTGATCTTCATCAACCAGATC
-## &gt;EU574295.1_B._yuanmingense_strain_InKo01    ATGAAGCTCGGCAAGAACGATCGCTCCATGGACATCGAGGCGGTGTCCTCCGGCTCGCTCGGGCTCGATATCGCGCTCGGCATCGGCGGCCTGCCCAAGGGACGCATCGTCGAGATCTACGGGCCGGAATCCTCGGGCAAGACCACGCTGGCGCTGCATACGGTGGCGGAAGCGCAGAAGAAGGGCGGCATCTGCGCCTTCATCGACGCCGAGCACGCGCTCGATCCGGTCTATGCCCGCAAGCTCGGCGTCAACATCGACGAGCTCCTGATCTCGCAGCCCGACACCGGCGAGCAGGCCCTGGAGATCTGCGACACCCTGGTGCGCTCGGGCGCGGTCGATGTTCTCGTGGTCGATTCGGTGGCGGCGCTGGTGCCGAAGGCCGAGCTCGAGGGCGAGATGGGCGATGCGCTGCCGGGCTTGCAGGCCCGTCTGATGAGCCAGGCGCTGCGCAAGCTGACGGCCTCCATCAACAAGTCCAACACCATGGTGATCTTCATCAACCAGATC</code></pre>
+<pre><code>## &gt;EU574319.1_B_yuanmingense_ViHaG5    ATGAAGCTCGGCAAGAACGACCGCTCCATGGACATCGAGGCGGTGTCCTCCGGCTCGCTCGGGCTCGATATCGCGCTCGGCATCGGCGGCTTGCCCAAGGGGCGCATCGTCGAGATCTACGGGCCGGAATCCTCGGGCAAGACCACGCTGGCGCTGCATACGGTGGCGGAAGCGCAGAAGAAGGGCGGCATCTGCGCCTTCATCGACGCCGAGCACGCGCTCGATCCGGTCTATGCCCGCAAGCTCGGCGTCAACATCGACGAGCTCCTGATCTCGCAGCCCGACACCGGCGAGCAGGCGCTGGAGATCTGCGACACCCTGGTGCGCTCGGGCGCCGTCGACGTTCTCGTGGTCGATTCGGTCGCGGCGCTGGTGCCGAAGGCCGAGCTCGAGGGCGAGATGGGCGATGCGCTGCCGGGACTTCAAGCACGGTTGATGAGCCAGGCGCTGCGCAAGCTCACGGCCTCCATCAACAAATCCAACACGATGGTGATCTTCATCAACCAGATC
+## &gt;EU574318.1_B_yuanmingense_ViHaG4    ATGAAGCTCGGCAAGAACGACCGCTCCATGGACATCGAGGCGGTGTCCTCCGGCTCGCTCGGGCTCGATATCGCGCTCGGCATCGGCGGCTTGCCCAAGGGGCGCATCGTCGAGATCTACGGGCCGGAATCCTCGGGCAAGACCACGCTGGCGCTGCATACGGTGGCGGAAGCGCAGAAGAAGGGCGGCATCTGCGCCTTCATCGACGCCGAGCACGCGCTCGATCCGGTCTATGCCCGCAAGCTCGGCGTCAACATCGACGAGCTCCTGATCTCGCAGCCCGACACCGGCGAGCAGGCGCTGGAGATCTGCGACACCCTGGTGCGCTCGGGCGCCGTCGACGTTCTCGTGGTCGATTCGGTCGCGGCGCTGGTGCCGAAGGCCGAGCTCGAGGGCGAGATGGGCGATGCGCTGCCGGGACTTCAAGCACGGTTGATGAGCCAGGCGCTGCGCAAGCTCACGGCCTCCATCAACAAATCCAACACGATGGTGATCTTCATCAACCAGATC
+## &gt;EU574297.1_B_yuanmingense_InRo02    ATGAAGCTCGGCAAGAACGACCGCTCCATGGACATCGAGGCGGTGTCCTCCGGCTCGCTCGGGCTCGATATCGCGCTGGGCATCGGCGGCCTGCCCAAGGGACGCATCGTCGAGATCTACGGGCCGGAATCTTCGGGCAAGACCACGCTCGCGCTGCATACGGTGGCGGAAGCGCAGAAGAAGGGTGGCATCTGCGCCTTCATCGACGCCGAGCACGCGCTCGATCCGGTCTATGCCCGCAAGCTCGGCGTCAACATCGACGAGCTCCTGATCTCGCAGCCCGACACCGGCGAGCAGGCGCTGGAGATCTGCGACACCCTGGTGCGCTCGGGCGCCGTCGATGTTCTGGTGGTCGATTCGGTGGCGGCGCTGGTGCCGAAGGCCGAGCTCGAAGGCGAGATGGGTGACGCGCTGCCTGGCCTGCAGGCCCGCCTGATGAGCCAGGCGCTGCGCAAGCTGACGGCATCCATCAACAAGTCCAACACCATGGTGATCTTCATCAACCAGATC
+## &gt;EU574296.1_B_yuanmingense_InKo02    ATGAAGCTCGGCAAGAACGATCGCTCCATGGACATCGAGGCGGTCTCCTCCGGCTCGCTCGGGCTCGATATCGCGCTCGGCATCGGCGGCCTGCCCAAGGGACGCATCGTCGAGATCTACGGGCCGGAATCCTCCGGCAAGACCACGCTCGCGCTGCATACGGTGGCGGAGGCGCAGAAGAAGGGCGGCATCTGCGCCTTCATCGACGCCGAGCACGCGCTCGACCCGGTCTATGCCCGCAAGCTCGGCGTCAACATCGACGAGCTCCTGATCTCGCAGCCCGACACCGGCGAGCAGGCGCTGGAGATCTGCGACACCCTGGTGCGTTCGGGCGCCGTCGACGTTCTCGTGGTCGATTCGGTCGCGGCGCTGGTGCCGAAGGCCGAGCTCGAGGGCGAGATGGGCGATGCGCTGCCGGGCCTGCAGGCGCGGTTGATGAGCCAGGCGCTGCGCAAGCTGACGGCCTCCATCAACAAGTCCAACACCATGGTGATCTTCATCAACCAGATC
+## &gt;EU574295.1_B_yuanmingense_InKo01    ATGAAGCTCGGCAAGAACGATCGCTCCATGGACATCGAGGCGGTGTCCTCCGGCTCGCTCGGGCTCGATATCGCGCTCGGCATCGGCGGCCTGCCCAAGGGACGCATCGTCGAGATCTACGGGCCGGAATCCTCGGGCAAGACCACGCTGGCGCTGCATACGGTGGCGGAAGCGCAGAAGAAGGGCGGCATCTGCGCCTTCATCGACGCCGAGCACGCGCTCGATCCGGTCTATGCCCGCAAGCTCGGCGTCAACATCGACGAGCTCCTGATCTCGCAGCCCGACACCGGCGAGCAGGCCCTGGAGATCTGCGACACCCTGGTGCGCTCGGGCGCGGTCGATGTTCTCGTGGTCGATTCGGTGGCGGCGCTGGTGCCGAAGGCCGAGCTCGAGGGCGAGATGGGCGATGCGCTGCCGGGCTTGCAGGCCCGTCTGATGAGCCAGGCGCTGCGCAAGCTGACGGCCTCCATCAACAAGTCCAACACCATGGTGATCTTCATCAACCAGATC</code></pre>
 <pre class="bash"><code>grep yuanmingense recA_Bradyrhizobium_vinuesa.fnaedtab &gt; recA_Byuanmingense.fnaedtab</code></pre>
-<ol start="11" style="list-style-type: decimal">
+</div>
+<div id="regeneracion-del-formato-fasta-a-partir-de-fastab-con-un-perl-1-liner" class="section level4">
+<h4><span class="header-section-number">1.4.5.3</span> Regeneración del formato FASTA a partir de FASTAB con un Perl 1-liner</h4>
+<ul>
 <li>Estas dos lineas no contienen nada nuevo en cuanto a sintaxis. Simplemente llamamos a perl para sustituir los tabuladores por saltos de linea y asi reconstituir el FASTA.</li>
-</ol>
+</ul>
 <pre class="bash"><code>perl -pe 'if(/&gt;/){s/\t/\n/}' recA_Byuanmingense.fnaedtab | head -5</code></pre>
-<pre><code>## &gt;EU574319.1_B._yuanmingense_strain_ViHaG5
+<pre><code>## &gt;EU574319.1_B_yuanmingense_ViHaG5
 ## ATGAAGCTCGGCAAGAACGACCGCTCCATGGACATCGAGGCGGTGTCCTCCGGCTCGCTCGGGCTCGATATCGCGCTCGGCATCGGCGGCTTGCCCAAGGGGCGCATCGTCGAGATCTACGGGCCGGAATCCTCGGGCAAGACCACGCTGGCGCTGCATACGGTGGCGGAAGCGCAGAAGAAGGGCGGCATCTGCGCCTTCATCGACGCCGAGCACGCGCTCGATCCGGTCTATGCCCGCAAGCTCGGCGTCAACATCGACGAGCTCCTGATCTCGCAGCCCGACACCGGCGAGCAGGCGCTGGAGATCTGCGACACCCTGGTGCGCTCGGGCGCCGTCGACGTTCTCGTGGTCGATTCGGTCGCGGCGCTGGTGCCGAAGGCCGAGCTCGAGGGCGAGATGGGCGATGCGCTGCCGGGACTTCAAGCACGGTTGATGAGCCAGGCGCTGCGCAAGCTCACGGCCTCCATCAACAAATCCAACACGATGGTGATCTTCATCAACCAGATC
-## &gt;EU574318.1_B._yuanmingense_strain_ViHaG4
+## &gt;EU574318.1_B_yuanmingense_ViHaG4
 ## ATGAAGCTCGGCAAGAACGACCGCTCCATGGACATCGAGGCGGTGTCCTCCGGCTCGCTCGGGCTCGATATCGCGCTCGGCATCGGCGGCTTGCCCAAGGGGCGCATCGTCGAGATCTACGGGCCGGAATCCTCGGGCAAGACCACGCTGGCGCTGCATACGGTGGCGGAAGCGCAGAAGAAGGGCGGCATCTGCGCCTTCATCGACGCCGAGCACGCGCTCGATCCGGTCTATGCCCGCAAGCTCGGCGTCAACATCGACGAGCTCCTGATCTCGCAGCCCGACACCGGCGAGCAGGCGCTGGAGATCTGCGACACCCTGGTGCGCTCGGGCGCCGTCGACGTTCTCGTGGTCGATTCGGTCGCGGCGCTGGTGCCGAAGGCCGAGCTCGAGGGCGAGATGGGCGATGCGCTGCCGGGACTTCAAGCACGGTTGATGAGCCAGGCGCTGCGCAAGCTCACGGCCTCCATCAACAAATCCAACACGATGGTGATCTTCATCAACCAGATC
-## &gt;EU574297.1_B._yuanmingense_strain_InRo02</code></pre>
+## &gt;EU574297.1_B_yuanmingense_InRo02</code></pre>
 <pre class="bash"><code>perl -pe 'if(/&gt;/){s/\t/\n/}' recA_Byuanmingense.fnaedtab &gt; recA_Byuanmingense.fna</code></pre>
-<ol start="12" style="list-style-type: decimal">
+</div>
+<div id="llamada-a-un-bucle-for-para-repetir-operaciones-sobre-multiples-archivos" class="section level4">
+<h4><span class="header-section-number">1.4.5.4</span> Llamada a un bucle for para repetir operaciones sobre múltiples archivos</h4>
+<ul>
 <li>Llamar a un bucle for de shell para generar archivos fastab para todas las especies</li>
-</ol>
-<pre class="bash"><code>for sp in $(grep '&gt;' recA_Bradyrhizobium_vinuesa.fnaed | cut -d_ -f3); do 
+</ul>
+<pre class="bash"><code>for sp in $(grep '^&gt;' recA_Bradyrhizobium_vinuesa.fnaed | cut -d_ -f3); do 
    grep &quot;$sp&quot; recA_Bradyrhizobium_vinuesa.fnaedtab &gt; recA_B${sp}.fnaedtab
 done</code></pre>
-<ol start="13" style="list-style-type: decimal">
+<ul>
 <li>Veamos el resultado</li>
-</ol>
+</ul>
 <pre class="bash"><code>ls *fnaedtab</code></pre>
 <pre><code>## recA_Balpha.fnaedtab
 ## recA_Bbeta.fnaedtab
@@ -362,34 +434,35 @@ done</code></pre>
 ## recA_Bsp..fnaedtab
 ## recA_Byuanmingense.fnaedtab</code></pre>
 <pre class="bash"><code>head -5 recA_Bjaponicum.fnaedtab</code></pre>
-<pre><code>## &gt;EU574316.1_B._japonicum_strain_NeRa16   ATGAAGCTCGGCAAGAACGACCGGTCGATGGATGTCGAGGCGGTGTCCTCGGGTTCTCTCGGGCTCGACATTGCACTGGGGATCGGCGGTCTGCCCAAGGGGCGCGTCGTGGAAATCTACGGGCCGGAATCCTCGGGCAAGACCACGCTGGCGCTGCACACGGTGGCGGAAGCGCAGAAGAAGGGCGGCATCTGTGCCTTCATCGACGCCGAGCACGCGCTCGACCCGGTCTATGCACGCAAGCTCGGGGTCAATATCGACGAGCTGCTGATTTCGCAGCCGGACACCGGCGAGCAGGCGCTGGAAATCTGCGACACGCTGGTGCGCTCGGGTGCGGTGGACGTTCTGGTGGTCGATTCGGTCGCGGCGCTGGTGCCGAAGGCCGAACTCGAGGGCGAGATGGGCGATGCGCTGCCGGGTCTCCAGGCCCGCCTGATGAGCCAGGCGCTGCGCAAGCTGACGGCCTCCATCAACAAGTCCCACACCATGGTGATCTTCATCAACCAGATC
-## &gt;EU574315.1_B._japonicum_strain_NeRa15   ATGAAGCTCGGCAAGAACGACCGGTCGATGGATGTCGAGGCGGTGTCCTCCGGTTCTCTCGGGCTCGACATTGCACTGGGGATCGGCGGTCTGCCCAAGGGGCGCGTCGTGGAAATCTACGGGCCGGAATCCTCGGGCAAGACCACGCTGGCGCTGCACACGGTGGCGGAAGCGCAGAAGAAGGGCGGCATCTGTGCCTTCATCGACGCCGAGCACGCGCTCGACCCGGTCTATGCACGCAAGCTCGGGGTCAATATCGACGAGCTGCTGATTTCGCAGCCGGACACCGGCGAGCAGGCGCTGGAAATCTGCGACACGCTGGTGCGCTCGGGTGCGGTGGACGTTCTGGTGGTCGATTCGGTCGCGGCGCTGGTGCCGAAGGCCGAACTCGAGGGCGAGATGGGCGATGCGCTGCCGGGTCTCCAGGCCCGCCTGATGAGCCAGGCGCTGCGCAAGCTGACGGCCTCCATCAACAAGTCCCACACCATGGTGATCTTCATCAACCAGATC
-## &gt;EU574314.1_B._japonicum_strain_NeRa14   ATGAAGCTCGGCAAGAACGACCGGTCGATGGATGTCGAGGCGGTGTCCTCCGGTTCTCTCGGGCTCGACATTGCGCTGGGGATCGGCGGTCTGCCCAAGGGGCGCGTCGTGGAAATCTACGGGCCGGAATCCTCGGGCAAGACCACGCTGGCGCTGCACACGGTGGCGGAAGCGCAGAAGAAGGGCGGAATCTGTGCCTTCATCGACGCCGAGCACGCGCTCGACCCGGTCTATGCGCGCAAGCTGGGGGTCAATATCGACGAGCTGCTGATTTCGCAGCCGGACACGGGCGAGCAGGCGCTGGAAATCTGCGACACGCTGGTGCGCTCGGGTGCGGTGGACGTTCTGGTGGTCGATTCGGTCGCGGCGCTGGTGCCGAAGGCCGAACTCGAGGGCGAGATGGGCGATGCGCTGCCGGGTCTCCAGGCCCGYCTGATGAGCCAGGCGCTGCGCAAGCTGACGGCCTCCATCAACAAGTCCCACACCATGGTGATCTTCATCAACCAGATC
-## &gt;EU574313.1_B._japonicum_strain_NeRa12   ATGAAGCTCGGCAAGAACGACCGGTCGATGGATGTCGAGGCGGTGTCCTCCGGTTCTCTCGGGCTCGACATTGCACTGGGGATCGGCGGTCTGCCCAAGGGGCGCGTCGTGGAAATCTACGGGCCGGAATCCTCGGGCAAGACCACGCTGGCGCTGCACACGGTGGCGGAAGCGCAGAAGAAGGGCGGCATCTGTGCCTTCATCGACGCCGAGCACGCGCTCGACCCGGTCTATGCACGCAAGCTCGGGGTCAATATCGACGAGCTGCTGATTTCGCAGCCGGACACCGGCGAGCAGGCGCTGGAAATCTGCGACACGCTGGTGCGCTCGGGTGCGGTGGACGTTCTGGTGGTCGATTCGGTCGCGGCGCTGGTGCCGAAGGCCGAACTCGAGGGCGAGATGGGCGATGCGCTGCCGGGTCTCCAGGCCCGCCTGATGAGCCAGGCGCTGCGCAAGCTGACGGCCTCCATCAACAAGTCCCACACCATGGTGATCTTCATCAACCAGATC
-## &gt;EU574312.1_B._japonicum_strain_NeRa11   ATGAAGCTCGGCAAGAACGACCGGTCGATGGATGTCGAGGCGGTGTCCTCCGGTTCTCTCGGGCTCGACATTGCACTGGGGATCGGCGGTCTGCCCAAGGGGCGCGTCGTGGAAATCTACGGGCCGGAATCCTCGGGCAAGACCACGCTGGCGCTGCACACGGTGGCGGAAGCGCAGAAGAAGGGCGGCATCTGTGCCTTCATCGACGCCGAGCACGCGCTCGACCCGGTCTATGCACGCAAGCTCGGGGTCAATATCGACGAGCTGCTGATTTCGCAGCCGGACACCGGCGAGCAGGCGCTGGAAATCTGCGACACGCTGGTGCGCTCGGGTGCGGTGGACGTTCTGGTGGTCGATTCGGTCGCGGCGCTGGTGCCGAAGGCCGAACTCGAGGGCGAGATGGGCGATGCGCTGCCGGGTCTCCAGGCCCGCCTGATGAGCCAGGCGCTGCGCAAGCTGACGGCCTCCATCAACAAGTCCCACACCATGGTGATCTTCATCAACCAGATC</code></pre>
-<ol start="14" style="list-style-type: decimal">
+<pre><code>## &gt;EU574316.1_B_japonicum_NeRa16   ATGAAGCTCGGCAAGAACGACCGGTCGATGGATGTCGAGGCGGTGTCCTCGGGTTCTCTCGGGCTCGACATTGCACTGGGGATCGGCGGTCTGCCCAAGGGGCGCGTCGTGGAAATCTACGGGCCGGAATCCTCGGGCAAGACCACGCTGGCGCTGCACACGGTGGCGGAAGCGCAGAAGAAGGGCGGCATCTGTGCCTTCATCGACGCCGAGCACGCGCTCGACCCGGTCTATGCACGCAAGCTCGGGGTCAATATCGACGAGCTGCTGATTTCGCAGCCGGACACCGGCGAGCAGGCGCTGGAAATCTGCGACACGCTGGTGCGCTCGGGTGCGGTGGACGTTCTGGTGGTCGATTCGGTCGCGGCGCTGGTGCCGAAGGCCGAACTCGAGGGCGAGATGGGCGATGCGCTGCCGGGTCTCCAGGCCCGCCTGATGAGCCAGGCGCTGCGCAAGCTGACGGCCTCCATCAACAAGTCCCACACCATGGTGATCTTCATCAACCAGATC
+## &gt;EU574315.1_B_japonicum_NeRa15   ATGAAGCTCGGCAAGAACGACCGGTCGATGGATGTCGAGGCGGTGTCCTCCGGTTCTCTCGGGCTCGACATTGCACTGGGGATCGGCGGTCTGCCCAAGGGGCGCGTCGTGGAAATCTACGGGCCGGAATCCTCGGGCAAGACCACGCTGGCGCTGCACACGGTGGCGGAAGCGCAGAAGAAGGGCGGCATCTGTGCCTTCATCGACGCCGAGCACGCGCTCGACCCGGTCTATGCACGCAAGCTCGGGGTCAATATCGACGAGCTGCTGATTTCGCAGCCGGACACCGGCGAGCAGGCGCTGGAAATCTGCGACACGCTGGTGCGCTCGGGTGCGGTGGACGTTCTGGTGGTCGATTCGGTCGCGGCGCTGGTGCCGAAGGCCGAACTCGAGGGCGAGATGGGCGATGCGCTGCCGGGTCTCCAGGCCCGCCTGATGAGCCAGGCGCTGCGCAAGCTGACGGCCTCCATCAACAAGTCCCACACCATGGTGATCTTCATCAACCAGATC
+## &gt;EU574314.1_B_japonicum_NeRa14   ATGAAGCTCGGCAAGAACGACCGGTCGATGGATGTCGAGGCGGTGTCCTCCGGTTCTCTCGGGCTCGACATTGCGCTGGGGATCGGCGGTCTGCCCAAGGGGCGCGTCGTGGAAATCTACGGGCCGGAATCCTCGGGCAAGACCACGCTGGCGCTGCACACGGTGGCGGAAGCGCAGAAGAAGGGCGGAATCTGTGCCTTCATCGACGCCGAGCACGCGCTCGACCCGGTCTATGCGCGCAAGCTGGGGGTCAATATCGACGAGCTGCTGATTTCGCAGCCGGACACGGGCGAGCAGGCGCTGGAAATCTGCGACACGCTGGTGCGCTCGGGTGCGGTGGACGTTCTGGTGGTCGATTCGGTCGCGGCGCTGGTGCCGAAGGCCGAACTCGAGGGCGAGATGGGCGATGCGCTGCCGGGTCTCCAGGCCCGYCTGATGAGCCAGGCGCTGCGCAAGCTGACGGCCTCCATCAACAAGTCCCACACCATGGTGATCTTCATCAACCAGATC
+## &gt;EU574313.1_B_japonicum_NeRa12   ATGAAGCTCGGCAAGAACGACCGGTCGATGGATGTCGAGGCGGTGTCCTCCGGTTCTCTCGGGCTCGACATTGCACTGGGGATCGGCGGTCTGCCCAAGGGGCGCGTCGTGGAAATCTACGGGCCGGAATCCTCGGGCAAGACCACGCTGGCGCTGCACACGGTGGCGGAAGCGCAGAAGAAGGGCGGCATCTGTGCCTTCATCGACGCCGAGCACGCGCTCGACCCGGTCTATGCACGCAAGCTCGGGGTCAATATCGACGAGCTGCTGATTTCGCAGCCGGACACCGGCGAGCAGGCGCTGGAAATCTGCGACACGCTGGTGCGCTCGGGTGCGGTGGACGTTCTGGTGGTCGATTCGGTCGCGGCGCTGGTGCCGAAGGCCGAACTCGAGGGCGAGATGGGCGATGCGCTGCCGGGTCTCCAGGCCCGCCTGATGAGCCAGGCGCTGCGCAAGCTGACGGCCTCCATCAACAAGTCCCACACCATGGTGATCTTCATCAACCAGATC
+## &gt;EU574312.1_B_japonicum_NeRa11   ATGAAGCTCGGCAAGAACGACCGGTCGATGGATGTCGAGGCGGTGTCCTCCGGTTCTCTCGGGCTCGACATTGCACTGGGGATCGGCGGTCTGCCCAAGGGGCGCGTCGTGGAAATCTACGGGCCGGAATCCTCGGGCAAGACCACGCTGGCGCTGCACACGGTGGCGGAAGCGCAGAAGAAGGGCGGCATCTGTGCCTTCATCGACGCCGAGCACGCGCTCGACCCGGTCTATGCACGCAAGCTCGGGGTCAATATCGACGAGCTGCTGATTTCGCAGCCGGACACCGGCGAGCAGGCGCTGGAAATCTGCGACACGCTGGTGCGCTCGGGTGCGGTGGACGTTCTGGTGGTCGATTCGGTCGCGGCGCTGGTGCCGAAGGCCGAACTCGAGGGCGAGATGGGCGATGCGCTGCCGGGTCTCCAGGCCCGCCTGATGAGCCAGGCGCTGCGCAAGCTGACGGCCTCCATCAACAAGTCCCACACCATGGTGATCTTCATCAACCAGATC</code></pre>
+<ul>
 <li>Finalmente convertimos todos los archivos fnatabed a FASTA con el siguiente bucle for:</li>
-</ol>
+</ul>
 <pre class="bash"><code>for file in *fnaedtab; do perl -pe 'if(/&gt;/){s/\t/\n/}' $file &gt; ${file%.*}.fna; done</code></pre>
-<ol start="15" style="list-style-type: decimal">
+<ul>
 <li>Visualizemos las cabeceras de dos archivos FASTA especie-específicos</li>
-</ol>
-<pre class="bash"><code>grep '&gt;' recA_Bjaponicum.fna | head -5</code></pre>
-<pre><code>## &gt;EU574316.1_B._japonicum_strain_NeRa16
-## &gt;EU574315.1_B._japonicum_strain_NeRa15
-## &gt;EU574314.1_B._japonicum_strain_NeRa14
-## &gt;EU574313.1_B._japonicum_strain_NeRa12
-## &gt;EU574312.1_B._japonicum_strain_NeRa11</code></pre>
-<ol start="16" style="list-style-type: decimal">
-<li>y confirmemos que son fastas regulares</li>
-</ol>
+</ul>
+<pre class="bash"><code>grep '^&gt;' recA_Bjaponicum.fna | head -5</code></pre>
+<pre><code>## &gt;EU574316.1_B_japonicum_NeRa16
+## &gt;EU574315.1_B_japonicum_NeRa15
+## &gt;EU574314.1_B_japonicum_NeRa14
+## &gt;EU574313.1_B_japonicum_NeRa12
+## &gt;EU574312.1_B_japonicum_NeRa11</code></pre>
+<ul>
+<li>Confirmemos que son fastas regulares</li>
+</ul>
 <pre class="bash"><code>head -6 recA_Bjaponicum.fna</code></pre>
-<pre><code>## &gt;EU574316.1_B._japonicum_strain_NeRa16
+<pre><code>## &gt;EU574316.1_B_japonicum_NeRa16
 ## ATGAAGCTCGGCAAGAACGACCGGTCGATGGATGTCGAGGCGGTGTCCTCGGGTTCTCTCGGGCTCGACATTGCACTGGGGATCGGCGGTCTGCCCAAGGGGCGCGTCGTGGAAATCTACGGGCCGGAATCCTCGGGCAAGACCACGCTGGCGCTGCACACGGTGGCGGAAGCGCAGAAGAAGGGCGGCATCTGTGCCTTCATCGACGCCGAGCACGCGCTCGACCCGGTCTATGCACGCAAGCTCGGGGTCAATATCGACGAGCTGCTGATTTCGCAGCCGGACACCGGCGAGCAGGCGCTGGAAATCTGCGACACGCTGGTGCGCTCGGGTGCGGTGGACGTTCTGGTGGTCGATTCGGTCGCGGCGCTGGTGCCGAAGGCCGAACTCGAGGGCGAGATGGGCGATGCGCTGCCGGGTCTCCAGGCCCGCCTGATGAGCCAGGCGCTGCGCAAGCTGACGGCCTCCATCAACAAGTCCCACACCATGGTGATCTTCATCAACCAGATC
-## &gt;EU574315.1_B._japonicum_strain_NeRa15
+## &gt;EU574315.1_B_japonicum_NeRa15
 ## ATGAAGCTCGGCAAGAACGACCGGTCGATGGATGTCGAGGCGGTGTCCTCCGGTTCTCTCGGGCTCGACATTGCACTGGGGATCGGCGGTCTGCCCAAGGGGCGCGTCGTGGAAATCTACGGGCCGGAATCCTCGGGCAAGACCACGCTGGCGCTGCACACGGTGGCGGAAGCGCAGAAGAAGGGCGGCATCTGTGCCTTCATCGACGCCGAGCACGCGCTCGACCCGGTCTATGCACGCAAGCTCGGGGTCAATATCGACGAGCTGCTGATTTCGCAGCCGGACACCGGCGAGCAGGCGCTGGAAATCTGCGACACGCTGGTGCGCTCGGGTGCGGTGGACGTTCTGGTGGTCGATTCGGTCGCGGCGCTGGTGCCGAAGGCCGAACTCGAGGGCGAGATGGGCGATGCGCTGCCGGGTCTCCAGGCCCGCCTGATGAGCCAGGCGCTGCGCAAGCTGACGGCCTCCATCAACAAGTCCCACACCATGGTGATCTTCATCAACCAGATC
-## &gt;EU574314.1_B._japonicum_strain_NeRa14
+## &gt;EU574314.1_B_japonicum_NeRa14
 ## ATGAAGCTCGGCAAGAACGACCGGTCGATGGATGTCGAGGCGGTGTCCTCCGGTTCTCTCGGGCTCGACATTGCGCTGGGGATCGGCGGTCTGCCCAAGGGGCGCGTCGTGGAAATCTACGGGCCGGAATCCTCGGGCAAGACCACGCTGGCGCTGCACACGGTGGCGGAAGCGCAGAAGAAGGGCGGAATCTGTGCCTTCATCGACGCCGAGCACGCGCTCGACCCGGTCTATGCGCGCAAGCTGGGGGTCAATATCGACGAGCTGCTGATTTCGCAGCCGGACACGGGCGAGCAGGCGCTGGAAATCTGCGACACGCTGGTGCGCTCGGGTGCGGTGGACGTTCTGGTGGTCGATTCGGTCGCGGCGCTGGTGCCGAAGGCCGAACTCGAGGGCGAGATGGGCGATGCGCTGCCGGGTCTCCAGGCCCGYCTGATGAGCCAGGCGCTGCGCAAGCTGACGGCCTCCATCAACAAGTCCCACACCATGGTGATCTTCATCAACCAGATC</code></pre>
+</div>
 </div>
 </div>
 </div>
