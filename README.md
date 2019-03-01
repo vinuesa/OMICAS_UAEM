@@ -67,11 +67,11 @@ En consecuencia:
 - [pr&aacute;ctica2 - pdf](https://github.com/vinuesa/OMICAS_UAEM/tree/master/docs/practica2_parseo_fastas/ejercicio_parseo_fastas_ENTREZ.pdf)
 
 #### Lecturas recomendadas
+- Atma Ivancevic. The ten commandments for learning how to code. [Carrer Column, Nature, 20 Feb. 2019](https://www.nature.com/articles/d41586-019-00653-5)
 - Velez Rueda AJ, Benítez GI, Marchetti J, Hasenahuer MA, Fornasari MS, Palopoli
 N, Parisi G. Bioinformatics calls the school: Use of smartphones to introduce
 Python for bioinformatics in high schools. [PLoS Comput Biol. 2019 Feb
 14;15(2):e1006473.](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1006473)
-
 - Dudley JT, Butte AJ. A quick guide for developing effective bioinformatics
 programming skills. [PLoS Comput Biol. 2009 Dec;5(12):e1000589](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1000589)
 
