@@ -66,6 +66,15 @@ En consecuencia:
 - [pr&aacute;ctica2 - html](https://vinuesa.github.io/OMICAS_UAEM/practica2_parseo_fastas/)
 - [pr&aacute;ctica2 - pdf](https://github.com/vinuesa/OMICAS_UAEM/tree/master/docs/practica2_parseo_fastas/ejercicio_parseo_fastas_ENTREZ.pdf)
 
+#### Lecturas recomendadas
+- Velez Rueda AJ, Benítez GI, Marchetti J, Hasenahuer MA, Fornasari MS, Palopoli
+N, Parisi G. Bioinformatics calls the school: Use of smartphones to introduce
+Python for bioinformatics in high schools. [PLoS Comput Biol. 2019 Feb
+14;15(2):e1006473.](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1006473)
+
+- Dudley JT, Butte AJ. A quick guide for developing effective bioinformatics
+programming skills. [PLoS Comput Biol. 2009 Dec;5(12):e1000589](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1000589)
+
 ### Tema 2:  Cómputo de homólogos a escala genómica y análisis de pan-genomas microbianos con GET_HOMOLOGUES (01-03-2019)
 - [presentaci&oacute;n - PDF](https://github.com/vinuesa/OMICAS_UAEM/tree/master/docs/introduccion_a_la_pangenomica_microbiana_OMICAS-UAEM_Mar18.pdf)
 
@@ -73,7 +82,28 @@ En consecuencia:
 - [manual GET_HOMOLOGUES](https://github.com/eead-csic-compbio/get_homologues) 
 - [pr&aacute;ctica1 GET_HOMOLOGUES - html](https://vinuesa.github.io/get_phylomarkers/)
 
+#### Lecturas recomendadas
+- Tettelin H, Riley D, Cattuto C, Medini D. Comparative genomics: the bacterial 
+pan-genome. [Curr Opin Microbiol. 2008 Oct;11(5):472-7](https://www.sciencedirect.com/science/article/pii/S1369527414001830?via%3Dihub)
+- Contreras-Moreira B, Vinuesa P. GET_HOMOLOGUES, a versatile software package
+for scalable and robust microbial pangenome analysis. [Appl Environ Microbiol.
+2013 Dec;79(24):7696-701.](https://aem.asm.org/content/79/24/7696.long)
+- Vinuesa P, Contreras-Moreira B. Robust identification of orthologues and
+paralogues for microbial pan-genomics using GET_HOMOLOGUES: a case study of
+pIncA/C plasmids. [Methods Mol Biol. 2015;1231:203-32.](https://link.springer.com/protocol/10.1007%2F978-1-4939-1720-4_14)
+- Contreras-Moreira B, Cantalapiedra CP, García-Pereira MJ, Gordon SP, Vogel JP,
+Igartua E, Casas AM, Vinuesa P. Analysis of Plant Pan-Genomes and Transcriptomes 
+with GET_HOMOLOGUES-EST, a Clustering Solution for Sequences of the Same Species.
+[Front Plant Sci. 2017 Feb 14;8:184.](https://www.frontiersin.org/articles/10.3389/fpls.2017.00184/full)
+
+
 ### Tema 3: Aplicaciones de Filogenómica en el análisis evolutivo de fenotipos (resistencia, virulencia) y estima de filogenias genómicas con GET_PHYLOMARKERS (08-03-2019)
 
 #### Pr&aacute;ctica 3. Introducci&oacute;n a la inferencia filogen&oacute;mica usando GET_PHYLOMARKERS
 - [pr&aacute;ctica2 GET_PHYLOMARKERS - html](https://vinuesa.github.io/get_phylomarkers/)
+
+#### Lecturas recomendadas
+- Vinuesa P, Ochoa-Sánchez LE, Contreras-Moreira B. GET_PHYLOMARKERS, a Software
+Package to Select Optimal Orthologous Clusters for Phylogenomics and Inferring
+Pan-Genome Phylogenies, Used for a Critical Geno-Taxonomic Revision of the Genus 
+Stenotrophomonas. [Front Microbiol. 2018 May 1;9:771.](https://www.frontiersin.org/articles/10.3389/fmicb.2018.00771/full)
