@@ -80,7 +80,8 @@ programming skills. [PLoS Comput Biol. 2009 Dec;5(12):e1000589](https://journals
 
 #### Pr&aacute;ctica 2. Introducci&oacute;n a la pangenómica microbiana usando GET_HOMOLOGUES
 - [manual GET_HOMOLOGUES](https://github.com/eead-csic-compbio/get_homologues) 
-- [pr&aacute;ctica1 GET_HOMOLOGUES - html](https://vinuesa.github.io/get_phylomarkers/)
+- [tutorial básico de GET_HOMOLOGUES - html](https://vinuesa.github.io/get_phylomarkers/)
+- [código para práctica GET_HOMOLOGUES](https://github.com/vinuesa/OMICAS_UAEM/tree/master/docs/get_hom/code4_GET_HOMOLOGUES_OMICAS-UAEM-UNAM.txt)
 
 #### Lecturas recomendadas
 - Tettelin H, Riley D, Cattuto C, Medini D. Comparative genomics: the bacterial 
