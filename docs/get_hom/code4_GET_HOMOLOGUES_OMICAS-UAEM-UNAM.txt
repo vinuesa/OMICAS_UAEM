@@ -303,9 +303,10 @@ sed 's/\.gbk//; s/plasmid_//; s/_//; s/Salmonella/S/; s/Escherichia/E/; s/Aeromo
 sed 's/\.gbk//; s/plasmid_//; s/_//; s/Salmonella/S/; s/Escherichia/E/; s/Aeromonas/A/; s/Klebsiella/K/; s/strain_//' pangenome_matrix_t0.tabED > ed
 mv ed pangenome_matrix_t0.tabED
 
-# 6.4 >>>> Use hcluster_matrix.sh to compute a distance matrix from a pangenome_matrix.tab
-hcluster_matrix.sh
-hcluster_matrix.sh -i pangenome_matrix_t0.tabED -t "Pan-genome tree" -o pdf -X 1.3 -A '45,90'
+# 6.4 >>>> Use hcluster_pangenome_matrix.sh to compute a distance matrix from a pangenome_matrix.tab. 
+#           NOTE: requires the R package "dendextend" installed.
+hcluster_pangenome_matrix.sh
+hcluster_pangenome_matrix.sh -i pangenome_matrix_t0.tabED -t "Pan-genome tree" -o pdf -X 1.3 -A '45,90'
 
 
 # 6.5 >>> LETS VISUALIZE THE FULL PAN-GENOME MATRIX
