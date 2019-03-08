@@ -98,7 +98,11 @@ with GET_HOMOLOGUES-EST, a Clustering Solution for Sequences of the Same Species
 [Front Plant Sci. 2017 Feb 14;8:184.](https://www.frontiersin.org/articles/10.3389/fpls.2017.00184/full)
 
 
-### Tema 3: Aplicaciones de Filogenómica en el análisis evolutivo de fenotipos (resistencia, virulencia) y estima de filogenias genómicas con GET_PHYLOMARKERS (08-03-2019)
+### Tema 3: Estima de filogenias genómicas con GET_PHYLOMARKERS (08-03-2019)
+Finalizamos el curso con una sesión de introducción a [GET_PHYLOMARKERS - html](https://vinuesa.github.io/get_phylomarkers/), 
+un paquete de código fuente abierto para análisis filogenómico de genes del core genómico y de matrices pan-genómicas.
+
+- [presentación - PDF](https://github.com/vinuesa/OMICAS_UAEM/tree/master/docs/get_phylomarkers_handout_4slidespp.pdf)
 
 #### Pr&aacute;ctica 3. Introducci&oacute;n a la inferencia filogen&oacute;mica usando GET_PHYLOMARKERS
 - [pr&aacute;ctica2 GET_PHYLOMARKERS - html](https://vinuesa.github.io/get_phylomarkers/)
