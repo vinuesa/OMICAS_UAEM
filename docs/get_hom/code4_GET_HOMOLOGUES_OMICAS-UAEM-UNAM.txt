@@ -179,6 +179,10 @@ cd $blast_dir && find . -type d
 
 compare_clusters.pl -d KlebsiellapneumoniaeplasmidpNDM-KNNC019153_f0_alltaxa_algBDBH_e0_,KlebsiellapneumoniaeplasmidpNDM-KNNC019153_f0_0taxa_algCOG_e0_,KlebsiellapneumoniaeplasmidpNDM-KNNC019153_f0_0taxa_algOMCL_e0_ -o intersect_core_BCM_Dt12 -t 12
 
+# repeat with -n, to get also the nucleotide (fna) clusters
+compare_clusters.pl -d KlebsiellapneumoniaeplasmidpNDM-KNNC019153_f0_alltaxa_algBDBH_e0_,KlebsiellapneumoniaeplasmidpNDM-KNNC019153_f0_0taxa_algCOG_e0_,KlebsiellapneumoniaeplasmidpNDM-KNNC019153_f0_0taxa_algOMCL_e0_ -o intersect_core_BCM_Dt12 -t 12 -n
+
+
 # 4.2 explore the contents of the intersect_core_BCM_Dt12 directory
 cd intersect_core_BCM_Dt12  && ls && ls *faa | wc -l
       
