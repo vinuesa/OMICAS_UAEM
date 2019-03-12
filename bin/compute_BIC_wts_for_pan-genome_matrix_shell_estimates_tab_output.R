@@ -1,8 +1,17 @@
 #!/usr/bin/env R
 
-# AUTHOR:  Pablo Vinuesa, CCG-UNAM, March, 11th, 2019
-# AIM: select the best number of components among binomial models fitted to 
-#  pan-genome data with GET_HOMOLOGUES and parse_pangenome_matrix.pl
+#-----------------------------------------------------------------------------------------------
+# SCRIPT: compute_BIC_wts_for_pan-genome_matrix_shell_estimates_tab_output.R
+# AUTHOR: Pablo Vinuesa, CCG-UNAM, http://www.ccg.unam.mx/~vinuesa/, March, 11th, 2019
+# AIM: select the best binomial mixture model among those fitted to 
+#      pan-genome data with GET_HOMOLOGUES and parse_pangenome_matrix.pl
+# VERSION: 0.2 12Mar19
+#
+# HOW TO RUN:
+# Run the following line in the directory containing the angenome_matrix_t0__shell_estimates.tab
+#     produced by parse_pangenome_matrix.pl from the GET_HOMOLOGUES suite:
+# Rscript compute_BIC_wts_for_pan-genome_matrix_shell_estimates_tab_output.R
+#-----------------------------------------------------------------------------------------------
 
 # 1. Edit the header and other componentes of the pangenome_matrix_t0__shell_estimates.tab file,
 # computed with  parse_pangenome_matrix.pl -m pangenome_matrix_t0.tab -s, t
