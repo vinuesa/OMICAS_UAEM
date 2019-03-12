@@ -1,6 +1,6 @@
-##################################################################
-#>>>> Code for GET_HOMOLOGUES protocols v1.3, March 1st, 2019 <<<<#
-##################################################################
+####################################################################
+#>>>> Code for GET_HOMOLOGUES protocols v1.3, March 11th, 2019 <<<<#
+####################################################################
 #
 # Author: Pablo Vinuesa
 # Centro de Ciencias Genomicas UNAM, Cuernavaca, Mexico; http://www.ccg.unam.mx/~vinuesa/
@@ -435,25 +435,14 @@ egrep 'mob|tra|rep' pangenome_matrix_t0*txt | egrep -v 'transpo|trans'
 egrep 'bla|lactamase|tet|tetracycline' pangenome_matrix_t0__*_list.txt
 
 
-#>>>>> 10) ADVANCED; This is code to be typed into R, based on the binomial mixture model analysis
-#         found in the output file pan-genome_structure_analysis.out. 
-#         It will only work if the R package 'qpcR' has been previously installed
+#>>>>> 10) ADVANCED; 
+#  Select the best number of components among binomial models fitted to 
+#  pan-genome data with GET_HOMOLOGUES and parse_pangenome_matrix.pl,
+#  based on the binomial mixture model analysis found in the output file
+#   pangenome_matrix_t0__shell_estimates.tab
 #
-# R computation of Akaike weights
-# 10.1 Call R
-#R
-
-# Once you are in the R shell, type the commands below.
-# with the R package 'qpcR' it is very easy to compute akaike weights
-# see for example http://www.inside-r.org/packages/cran/qpcR/docs/akaike.weights
-# type the following into the R console
-#library(qpcR)
-
-# these are the AIC values for 3,4,5 components
-#AIC.list<-c(1600.53932337316, 1516.28702925272, 1528.05926969358)
-#akaike.weights(AIC.list)
-#q()
-
+# Call the script compute_BIC_wts_for_pan-genome_matrix_shell_estimates_tab_output.R
+Rscript compute_BIC_wts_for_pan-genome_matrix_shell_estimates_tab_output.R
 
 #>>>>> 11) Detection of lineage-specific genes using parse_pangenome_matrix.pl
 
