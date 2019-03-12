@@ -22,6 +22,9 @@ if( file.exists("pangenome_matrix_t0__shell_estimates.tabed") ) {
 cat(">>> Reading file pangenome_matrix_t0__shell_estimates.tabed into data frame ...", "\n")
 dfr <- read.table(file="pangenome_matrix_t0__shell_estimates.tabed", header = TRUE, sep ="\t")
 
+cat(">>> The data:", "\n")
+(dfr)
+
 # 3. print BICs by number of components. Note: the lower the BIC, the bettter
 # Interpretation of BICs, based on deltaBIC 
 # deltaBIC (difference respect to the BICmin model)
@@ -30,6 +33,19 @@ dfr <- read.table(file="pangenome_matrix_t0__shell_estimates.tabed", header = TR
 # 2 to 6  Positive
 # 6 to 10 	Strong
 # >10 	Very Strong 
+
+cat("\n# NOTE: Interpretation of BICs, based on deltaBIC 
+# deltaBIC (difference respect to the BICmin model)
+===================================================
+deltaBIC  Evidence against higher BIC 
+---------------------------------------------------
+0 - 2     Not worth more than a bare mention
+2 - 6     Positive
+6 - 10    Strong
+>10       Very Strong
+--------------------------------------------------\n\n")
+
+
 BICs <- dfr$BIC
 names(BICs) <- dfr$N.comp
 
